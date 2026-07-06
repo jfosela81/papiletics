@@ -210,23 +210,52 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </div>
 
+    <div class="meal-card">
+      <div class="meal-header">
+        <h3>🍉 F — Ensalada de sandía (verano)</h3>
+        <span class="meal-meta">~380 kcal · ~28 g prot</span>
+      </div>
+      <div class="meal-body">
+        <ul>
+          <li><span>Sandía</span><span>300 g · 90 kcal</span></li>
+          <li><span>Queso feta</span><span>40 g · 107 kcal · 6 g prot</span></li>
+          <li><span>Aceitunas negras</span><span>20 g · 52 kcal</span></li>
+          <li><span>Atún escurrido</span><span>80 g · 88 kcal · 20 g prot</span></li>
+          <li><span>Aceite de oliva (cucharita café) + vinagre + sal</span><span>45 kcal</span></li>
+        </ul>
+        <div class="callout" style="margin-top: 10px; margin-bottom: 0;">
+          Cena refrescante de verano. Mucho volumen, proteína decente. Puedes ampliar la sandía libremente si tienes hambre — cada 100 g extra solo son 30 kcal.
+        </div>
+      </div>
+    </div>
+
+    <div class="callout warning" style="margin-bottom: 4px;">
+      <strong>⚠️ Noches de cena ligera (B, D, E, F):</strong> la comida + cena puede quedarse en ~900–1.000 kcal. Con snacks llegas a ~1.300–1.400 kcal — un déficit demasiado agresivo que perjudica el músculo. <strong>Solución:</strong> añade fruta post-comida sin contar (en verano, sandía libre). Si aun así notas que comes poco, un segundo bowl de yogur por la noche no es trampa — es necesario.
+    </div>
+
+    <!-- Fruta de verano -->
+    <div class="callout" style="margin-bottom: 16px;">
+      🍉 <strong>Sandía en verano:</strong> 30 kcal/100 g. Puedes comer 400–500 g después de comer y solo sumas 120–150 kcal. Úsala para rellenar el hueco en noches de cena ligera. En invierno, mandarina o kiwi cumplen la misma función.
+    </div>
+
     <!-- Snacks -->
     <p style="font-size: 13px; color: var(--muted); margin: 16px 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Snack / post-entrenamiento</p>
 
     <div class="card">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-        <h3 style="margin: 0;">Batido simple</h3>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <h3 style="margin: 0;">Batido pre-comida (corta el hambre)</h3>
         <span class="badge badge-accent">120 kcal · 25 g prot</span>
       </div>
-      <p style="font-size: 13px; color: var(--muted); margin: 0;">30 g whey + 350 ml agua</p>
+      <p style="font-size: 13px; color: var(--muted); margin: 0;">30 g whey + 350 ml agua · 30 min antes de comer si llegas con mucha hambre</p>
     </div>
 
     <div class="card">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-        <h3 style="margin: 0;">Bowl proteico merienda</h3>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <h3 style="margin: 0;">Bowl proteico por la tarde (si tienes hambre)</h3>
         <span class="badge badge-green">~220 kcal · 32 g prot</span>
       </div>
       <p style="font-size: 13px; color: var(--muted); margin: 0;">Yogur griego 125 g + 20 g whey + frutos rojos + 100 ml leche</p>
+      <p style="font-size: 12px; color: var(--yellow); margin-top: 6px; margin-bottom: 0;">Si tomas el batido pre-comida <strong>y</strong> el bowl de tarde (~340 kcal total), la tarde está cerrada — sin picar más.</p>
     </div>
 
     <!-- Fruta -->
@@ -295,9 +324,9 @@ import Layout from '../layouts/Layout.astro';
     <div class="exercise-card">
       <h3>🎯 Pull-ups (dominadas) — PRIORIDAD 1</h3>
       <ul>
-        <li>4–5 series al fallo (AMRAP)</li>
+        <li><strong>Serie 1:</strong> para 1–2 reps <em>antes</em> del fallo (ej. 8–9 si puedes hacer 10+). Los tendones agradecen no ir al límite en frío.</li>
+        <li><strong>Series 2–5:</strong> sí al fallo real (AMRAP). Ya están calientes.</li>
         <li>Descanso 90 s entre series</li>
-        <li>Ir al fallo real — no series cortas con descanso largo</li>
         <li>Si no llegas a 3 reps limpias → <strong>dominadas negativas</strong> (sube con impulso, baja en 4–5 s)</li>
         <li>Progresión: cuando hagas 3 series de 8+ → añade lastre (mochila)</li>
       </ul>
@@ -404,13 +433,10 @@ import Layout from '../layouts/Layout.astro';
     <div class="day-card">
       <div class="day-header">
         <span class="day-name">Lunes</span>
-        <span class="day-tag tag-hard">Fuerza + Karate</span>
+        <span class="day-tag tag-medium">Karate intenso</span>
       </div>
       <div class="day-body">
-        <div class="block"><span class="blk-icon">🔥</span><span>Calentamiento — 5 min</span></div>
-        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups:</strong> 4–5 series al fallo · descanso 90 s</span></div>
-        <div class="block"><span class="blk-icon">💥</span><span><strong>Pushups:</strong> 3–4 series · calidad sobre volumen</span></div>
-        <div class="block"><span class="blk-icon">🥋</span><span><strong>Karate</strong> (solo) — sube la intensidad</span></div>
+        <div class="block"><span class="blk-icon">🥋</span><span><strong>Karate</strong> (solo) — entrena con intensidad, es suficiente para el día</span></div>
         <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces</span></div>
       </div>
     </div>
@@ -418,26 +444,25 @@ import Layout from '../layouts/Layout.astro';
     <div class="day-card">
       <div class="day-header">
         <span class="day-name">Martes</span>
-        <span class="day-tag tag-light">Karate moderado</span>
+        <span class="day-tag tag-hard">HIIT + Fuerza + Karate</span>
       </div>
       <div class="day-body">
-        <div class="block"><span class="blk-icon">🥋</span><span><strong>Karate con tus hijas</strong> — actividad moderada</span></div>
-        <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces</span></div>
-        <div class="block"><span class="blk-icon">🍱</span><span>Buen día para preparar el caldo + los tuppers de la semana</span></div>
+        <div class="block"><span class="blk-icon">🔥</span><span>Calentamiento — 5 min</span></div>
+        <div class="block"><span class="blk-icon">⚡</span><span><strong>HIIT:</strong> circuito completo (8 ejercicios × 45 s)</span></div>
+        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups:</strong> serie 1 → para 1–2 antes del fallo · series 2–5 → al fallo · descanso 90 s</span></div>
+        <div class="block"><span class="blk-icon">💥</span><span><strong>Pushups:</strong> 3–4 series · calidad sobre volumen</span></div>
+        <div class="block"><span class="blk-icon">🥋</span><span><strong>Karate con tus hijas</strong> — moderado, aguanta bien después del entreno</span></div>
+        <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces · buena noche para preparar el caldo</span></div>
       </div>
     </div>
 
     <div class="day-card">
       <div class="day-header">
         <span class="day-name">Miércoles</span>
-        <span class="day-tag tag-hard">HIIT + Fuerza + Karate</span>
+        <span class="day-tag tag-medium">Karate intenso</span>
       </div>
       <div class="day-body">
-        <div class="block"><span class="blk-icon">🔥</span><span>Calentamiento — 5 min</span></div>
-        <div class="block"><span class="blk-icon">⚡</span><span><strong>HIIT:</strong> circuito completo (8 ejercicios × 45 s)</span></div>
-        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups:</strong> 4–5 series al fallo · descanso 90 s</span></div>
-        <div class="block"><span class="blk-icon">💥</span><span><strong>Pushups:</strong> 3–4 series</span></div>
-        <div class="block"><span class="blk-icon">🥋</span><span><strong>Karate</strong> (solo) — sube la intensidad</span></div>
+        <div class="block"><span class="blk-icon">🥋</span><span><strong>Karate</strong> (solo) — sesión exigente, ahorra energía para mañana</span></div>
         <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces</span></div>
       </div>
     </div>
@@ -445,10 +470,14 @@ import Layout from '../layouts/Layout.astro';
     <div class="day-card">
       <div class="day-header">
         <span class="day-name">Jueves</span>
-        <span class="day-tag tag-light">Karate moderado</span>
+        <span class="day-tag tag-hard">HIIT + Fuerza + Karate</span>
       </div>
       <div class="day-body">
-        <div class="block"><span class="blk-icon">🥋</span><span><strong>Karate con tus hijas</strong> — actividad moderada</span></div>
+        <div class="block"><span class="blk-icon">🔥</span><span>Calentamiento — 5 min</span></div>
+        <div class="block"><span class="blk-icon">⚡</span><span><strong>HIIT:</strong> circuito completo (8 ejercicios × 45 s)</span></div>
+        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups:</strong> serie 1 → para 1–2 antes del fallo · series 2–5 → al fallo · descanso 90 s</span></div>
+        <div class="block"><span class="blk-icon">💥</span><span><strong>Pushups:</strong> 3–4 series</span></div>
+        <div class="block"><span class="blk-icon">🥋</span><span><strong>Karate con tus hijas</strong> — moderado, aguanta bien</span></div>
         <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces</span></div>
       </div>
     </div>
@@ -456,12 +485,11 @@ import Layout from '../layouts/Layout.astro';
     <div class="day-card">
       <div class="day-header">
         <span class="day-name">Viernes</span>
-        <span class="day-tag tag-hard">HIIT + Fuerza</span>
+        <span class="day-tag tag-medium">Solo fuerza</span>
       </div>
       <div class="day-body">
         <div class="block"><span class="blk-icon">🔥</span><span>Calentamiento — 5 min</span></div>
-        <div class="block"><span class="blk-icon">⚡</span><span><strong>HIIT:</strong> circuito completo (8 ejercicios × 45 s)</span></div>
-        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups:</strong> 4–5 series al fallo · descanso 90 s</span></div>
+        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups:</strong> serie 1 → para 1–2 antes del fallo · series 2–5 → al fallo</span></div>
         <div class="block"><span class="blk-icon">💥</span><span><strong>Pushups:</strong> 3–4 series</span></div>
         <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces</span></div>
       </div>
@@ -470,13 +498,13 @@ import Layout from '../layouts/Layout.astro';
     <div class="day-card">
       <div class="day-header">
         <span class="day-name">Sábado</span>
-        <span class="day-tag tag-medium">Solo fuerza</span>
+        <span class="day-tag tag-medium">Solo fuerza + parque</span>
       </div>
       <div class="day-body">
         <div class="block"><span class="blk-icon">🔥</span><span>Calentamiento — 5 min</span></div>
-        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups:</strong> 4–5 series al fallo · descanso 90 s</span></div>
+        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups:</strong> serie 1 → para 1–2 antes del fallo · series 2–5 → al fallo</span></div>
         <div class="block"><span class="blk-icon">💥</span><span><strong>Pushups:</strong> 3–4 series</span></div>
-        <div class="block"><span class="blk-icon">🌳</span><span>Parque de calistenia si tienes oportunidad — dips + dominadas australianas</span></div>
+        <div class="block"><span class="blk-icon">🌳</span><span>Parque de calistenia si puedes — dips + dominadas australianas</span></div>
         <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces</span></div>
       </div>
     </div>
@@ -494,7 +522,7 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <div class="callout" style="margin-top: 12px;">
-      <strong>Resumen:</strong> 2 días HIIT + fuerza (mié + vie) · 2 días solo fuerza (lun + sáb) · 4 días karate · escaleras todos los días.
+      <strong>Resumen:</strong> 2 días HIIT + fuerza (mar + jue) · 2 días solo fuerza (vie + sáb) · 4 días karate (lun, mar, mié, jue) · escaleras todos los días.
     </div>
   </section>
 
