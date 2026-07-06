@@ -180,16 +180,17 @@ import Layout from '../layouts/Layout.astro';
     <div class="meal-card">
       <div class="meal-header">
         <h3>🥚 D — ½ tortilla de patatas</h3>
-        <span class="meal-meta">~470 kcal · 22 g prot</span>
+        <span class="meal-meta">~375 kcal · ~19 g prot</span>
       </div>
       <div class="meal-body">
         <ul>
-          <li><span>Patata al microondas</span><span>350 g <span class="badge badge-yellow">no 500–600</span></span></li>
-          <li><span>Huevos</span><span>3 uds</span></li>
-          <li><span>Aceite en spray</span><span>máx. 1 cuch. café</span></li>
+          <li><span>Patata al microondas (haces 500–600 g, comes la mitad)</span><span>~300 g · 210 kcal · 6 g</span></li>
+          <li><span>Huevo entero</span><span>1,5 uds · 105 kcal · 9 g</span></li>
+          <li><span>Clara de huevo extra</span><span>1 ud · 17 kcal · 3,6 g</span></li>
+          <li><span>Aceite en spray</span><span>máx. 1 cuch. café · 45 kcal</span></li>
         </ul>
-        <div class="callout warning" style="margin-top: 10px; margin-bottom: 0;">
-          Reduce la patata: de 550 g a 350 g = <strong>~160 kcal menos</strong>.
+        <div class="callout" style="margin-top: 10px; margin-bottom: 0;">
+          Tu forma de hacerla (500–600 g → comes la mitad + claras extra) sale más ligera que la versión genérica. <strong>Bien así.</strong> Solo vigila no pasarte de la mitad cuando quede muy apetecible.
         </div>
       </div>
     </div>
@@ -355,6 +356,145 @@ import Layout from '../layouts/Layout.astro';
     <!-- Escaleras -->
     <div class="callout">
       🏠 <strong>Escaleras:</strong> 2–3 veces/día en 4º piso = 10–15 min de cardio bajo + ~80–100 kcal extra sin esfuerzo adicional.
+    </div>
+
+    <!-- Plan semanal -->
+    <p style="font-size: 13px; color: var(--muted); margin: 20px 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Plan semanal desglosado</p>
+
+    <style>
+      .day-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-bottom: 10px;
+      }
+      .day-card:last-child { margin-bottom: 0; }
+      .day-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 14px;
+        background: var(--surface2);
+      }
+      .day-name { font-size: 14px; font-weight: 700; }
+      .day-tag {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 99px;
+      }
+      .tag-hard { background: rgba(108,99,255,.2); color: var(--accent); }
+      .tag-medium { background: rgba(67,233,123,.15); color: var(--green); }
+      .tag-light { background: rgba(139,146,184,.15); color: var(--muted); }
+      .tag-rest { background: rgba(249,199,79,.1); color: var(--yellow); }
+      .day-body { padding: 10px 14px; }
+      .day-body .block {
+        font-size: 13px;
+        color: var(--muted);
+        padding: 5px 0;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 8px;
+      }
+      .day-body .block:last-child { border-bottom: none; }
+      .day-body .block .blk-icon { flex-shrink: 0; }
+    </style>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Lunes</span>
+        <span class="day-tag tag-hard">Fuerza + Karate</span>
+      </div>
+      <div class="day-body">
+        <div class="block"><span class="blk-icon">🔥</span><span>Calentamiento — 5 min</span></div>
+        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups:</strong> 4–5 series al fallo · descanso 90 s</span></div>
+        <div class="block"><span class="blk-icon">💥</span><span><strong>Pushups:</strong> 3–4 series · calidad sobre volumen</span></div>
+        <div class="block"><span class="blk-icon">🥋</span><span><strong>Karate</strong> (solo) — sube la intensidad</span></div>
+        <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Martes</span>
+        <span class="day-tag tag-light">Karate moderado</span>
+      </div>
+      <div class="day-body">
+        <div class="block"><span class="blk-icon">🥋</span><span><strong>Karate con tus hijas</strong> — actividad moderada</span></div>
+        <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces</span></div>
+        <div class="block"><span class="blk-icon">🍱</span><span>Buen día para preparar el caldo + los tuppers de la semana</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Miércoles</span>
+        <span class="day-tag tag-hard">HIIT + Fuerza + Karate</span>
+      </div>
+      <div class="day-body">
+        <div class="block"><span class="blk-icon">🔥</span><span>Calentamiento — 5 min</span></div>
+        <div class="block"><span class="blk-icon">⚡</span><span><strong>HIIT:</strong> circuito completo (8 ejercicios × 45 s)</span></div>
+        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups:</strong> 4–5 series al fallo · descanso 90 s</span></div>
+        <div class="block"><span class="blk-icon">💥</span><span><strong>Pushups:</strong> 3–4 series</span></div>
+        <div class="block"><span class="blk-icon">🥋</span><span><strong>Karate</strong> (solo) — sube la intensidad</span></div>
+        <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Jueves</span>
+        <span class="day-tag tag-light">Karate moderado</span>
+      </div>
+      <div class="day-body">
+        <div class="block"><span class="blk-icon">🥋</span><span><strong>Karate con tus hijas</strong> — actividad moderada</span></div>
+        <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Viernes</span>
+        <span class="day-tag tag-hard">HIIT + Fuerza</span>
+      </div>
+      <div class="day-body">
+        <div class="block"><span class="blk-icon">🔥</span><span>Calentamiento — 5 min</span></div>
+        <div class="block"><span class="blk-icon">⚡</span><span><strong>HIIT:</strong> circuito completo (8 ejercicios × 45 s)</span></div>
+        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups:</strong> 4–5 series al fallo · descanso 90 s</span></div>
+        <div class="block"><span class="blk-icon">💥</span><span><strong>Pushups:</strong> 3–4 series</span></div>
+        <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Sábado</span>
+        <span class="day-tag tag-medium">Solo fuerza</span>
+      </div>
+      <div class="day-body">
+        <div class="block"><span class="blk-icon">🔥</span><span>Calentamiento — 5 min</span></div>
+        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups:</strong> 4–5 series al fallo · descanso 90 s</span></div>
+        <div class="block"><span class="blk-icon">💥</span><span><strong>Pushups:</strong> 3–4 series</span></div>
+        <div class="block"><span class="blk-icon">🌳</span><span>Parque de calistenia si tienes oportunidad — dips + dominadas australianas</span></div>
+        <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Domingo</span>
+        <span class="day-tag tag-rest">Descanso activo</span>
+      </div>
+      <div class="day-body">
+        <div class="block"><span class="blk-icon">🏠</span><span>Escaleras — único "entreno" del día</span></div>
+        <div class="block"><span class="blk-icon">🍱</span><span>Preparar 5 raciones de tupper para la semana (40 min)</span></div>
+        <div class="block"><span class="blk-icon">😴</span><span>Recuperación — el músculo crece cuando descansas</span></div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 12px;">
+      <strong>Resumen:</strong> 2 días HIIT + fuerza (mié + vie) · 2 días solo fuerza (lun + sáb) · 4 días karate · escaleras todos los días.
     </div>
   </section>
 
