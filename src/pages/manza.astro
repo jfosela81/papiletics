@@ -1,0 +1,251 @@
+---
+import trackingManza from '../content/tracking-manza.json';
+
+const dias = [...trackingManza].reverse();
+
+function kcalColor(kcal: number) {
+  if (kcal < 1200) return 'var(--red)';
+  if (kcal <= 1450) return 'var(--green)';
+  return 'var(--yellow)';
+}
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manza — Plan personal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0f1117;
+      --surface:  #1a1d27;
+      --surface2: #22263a;
+      --border:   #2e3347;
+      --accent:   #ff6b9d;
+      --green:    #43e97b;
+      --yellow:   #f9c74f;
+      --red:      #ff6584;
+      --text:     #e8eaf6;
+      --muted:    #8b92b8;
+      --radius:   12px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      padding-bottom: 32px;
+    }
+
+    .site-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .site-header .logo { font-size: 20px; }
+    .site-header h1 { font-size: 17px; font-weight: 700; color: var(--text); }
+    .site-header p { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+    main { max-width: 680px; margin: 0 auto; padding: 0; }
+
+    .section { padding: 24px 20px; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+    .section-title {
+      font-size: 13px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--accent); margin-bottom: 16px;
+    }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px; margin-bottom: 12px;
+    }
+    .card:last-child { margin-bottom: 0; }
+    .card h4 { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; text-align: center; }
+    .stat .val { font-size: 22px; font-weight: 700; color: var(--accent); line-height: 1.1; }
+    .stat .lbl { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+    .callout {
+      background: rgba(255,107,157,.08); border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 12px 14px; font-size: 13px; color: var(--muted); margin: 12px 0;
+    }
+    .callout.warning { background: rgba(249,199,79,.08); border-color: var(--yellow); }
+    .callout strong { color: var(--text); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { background: var(--surface2); color: var(--muted); font-weight: 600; text-align: left; padding: 8px 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 8px 10px; border-top: 1px solid var(--border); }
+    td strong { color: var(--accent); }
+
+    /* Budget bars */
+    .budget-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .budget-item:last-child { margin-bottom: 0; }
+    .budget-label { font-size: 13px; color: var(--muted); min-width: 110px; }
+    .budget-bar { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .budget-bar-fill { height: 100%; border-radius: 4px; background: var(--accent); }
+    .budget-kcal { font-size: 13px; font-weight: 600; color: var(--text); min-width: 60px; text-align: right; }
+
+    /* Tracking log */
+    .log-day { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 8px; }
+    .log-day:last-child { margin-bottom: 0; }
+    .log-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .log-date { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .log-macros { display: flex; gap: 10px; align-items: center; }
+    .log-kcal { font-size: 16px; font-weight: 700; }
+    .log-prot { font-size: 12px; color: var(--green); font-weight: 600; }
+    .log-nota { font-size: 12px; color: var(--muted); }
+
+    .empty-state { text-align: center; padding: 32px 20px; color: var(--muted); font-size: 13px; }
+    .empty-state .icon { font-size: 32px; margin-bottom: 8px; }
+
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 13px; text-decoration: none; padding: 20px 20px 0; }
+    .back-link:hover { color: var(--text); }
+
+    strong { color: var(--text); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <span class="logo">🌸</span>
+    <div>
+      <h1>Manza</h1>
+      <p>Plan personal · Julio 2026</p>
+    </div>
+  </header>
+
+  <a href="/" class="back-link">← Plan de Jorge</a>
+
+  <main>
+
+    <!-- PERFIL -->
+    <section class="section">
+      <p class="section-title">Perfil</p>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="val">63 kg</div>
+          <div class="lbl">Peso actual</div>
+        </div>
+        <div class="stat">
+          <div class="val">1.64 m</div>
+          <div class="lbl">Altura</div>
+        </div>
+        <div class="stat">
+          <div class="val">44 años</div>
+          <div class="lbl">Edad</div>
+        </div>
+        <div class="stat">
+          <div class="val">23.4</div>
+          <div class="lbl">IMC (kg/m²)</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>Cálculos base</h4>
+        <table>
+          <tbody>
+            <tr><td>BMR (Mifflin-St Jeor)</td><td><strong>~1.274 kcal</strong></td></tr>
+            <tr><td>TDEE (actividad baja-ligera ×1.3)</td><td><strong>~1.656 kcal</strong></td></tr>
+            <tr><td>Objetivo calórico diario</td><td><strong>~1.350 kcal</strong></td></tr>
+            <tr><td>Déficit diario estimado</td><td><strong>~300 kcal</strong></td></tr>
+            <tr><td>Proteína objetivo</td><td><strong>100–120 g/día</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Pérdida esperada:</strong> ~0.3–0.5 kg de grasa/mes con déficit consistente. Lento pero sostenible — sin pasar hambre ni afectar al rendimiento en Pilates.
+      </div>
+
+      <div class="callout warning">
+        <strong>⚠️ No bajar de 1.200 kcal.</strong> Por debajo de ese umbral el cuerpo de una mujer activa entra en modo ahorro y el metabolismo se adapta a la baja.
+      </div>
+    </section>
+
+    <!-- PRESUPUESTO -->
+    <section class="section">
+      <p class="section-title">Presupuesto diario</p>
+
+      <div class="card">
+        <div class="budget-item">
+          <span class="budget-label">Comida principal</span>
+          <div class="budget-bar"><div class="budget-bar-fill" style="width: 38%"></div></div>
+          <span class="budget-kcal">~500 kcal</span>
+        </div>
+        <div class="budget-item">
+          <span class="budget-label">Cena</span>
+          <div class="budget-bar"><div class="budget-bar-fill" style="width: 28%; background: var(--green)"></div></div>
+          <span class="budget-kcal">~380 kcal</span>
+        </div>
+        <div class="budget-item">
+          <span class="budget-label">Snack / merienda</span>
+          <div class="budget-bar"><div class="budget-bar-fill" style="width: 16%; background: var(--yellow)"></div></div>
+          <span class="budget-kcal">~200 kcal</span>
+        </div>
+        <div class="budget-item">
+          <span class="budget-label">Desayuno / fruta</span>
+          <div class="budget-bar"><div class="budget-bar-fill" style="width: 18%; background: var(--border)"></div></div>
+          <span class="budget-kcal">~270 kcal</span>
+        </div>
+        <div style="border-top: 1px solid var(--border); margin-top: 12px; padding-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 13px; color: var(--muted);">TOTAL DIARIO</span>
+          <span style="font-size: 20px; font-weight: 700; color: var(--accent);">~1.350 kcal</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        El tracking aquí es solo de <strong>calorías consumidas</strong> — no contamos el ejercicio. Pilates y los pasos ya están incluidos en el TDEE estimado.
+      </div>
+    </section>
+
+    <!-- DIARIO -->
+    <section class="section">
+      <p class="section-title">Diario</p>
+
+      {dias.length === 0 ? (
+        <div class="empty-state">
+          <div class="icon">📋</div>
+          <p>Aquí irá apareciendo el registro diario.<br />Cuéntale a Jorge qué has comido y él lo apunta.</p>
+        </div>
+      ) : (
+        dias.map((d: any) => (
+          <div class="log-day">
+            <div class="log-top">
+              <span class="log-date">{new Date(d.fecha + 'T12:00:00').toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })}</span>
+              <div class="log-macros">
+                <span class="log-prot">{d.proteina}g prot</span>
+                <span class="log-kcal" style={`color: ${kcalColor(d.kcal)}`}>{d.kcal} kcal</span>
+              </div>
+            </div>
+            <div class="log-nota">{d.notas}</div>
+          </div>
+        ))
+      )}
+    </section>
+
+    <p style="font-size: 11px; color: var(--muted); text-align: center; margin-top: 20px; padding-bottom: 8px;">
+      Seguimiento personal · Papiletics · Julio 2026
+    </p>
+
+  </main>
+
+</body>
+</html>
