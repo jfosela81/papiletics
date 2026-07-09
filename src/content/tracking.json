@@ -1,0 +1,30 @@
+[
+  {
+    "fecha": "2026-07-06",
+    "kcal": 1490,
+    "proteina": 134,
+    "entreno": "Sin entreno",
+    "notas": "Partido España. Tortilla + ensalada mediodía. Nachos + salsa + pisto + yogur bowl noche."
+  },
+  {
+    "fecha": "2026-07-07",
+    "kcal": 1917,
+    "proteina": 163,
+    "entreno": "Warmup 5' · 54 pushups · 5×5 pike pushups",
+    "notas": "Fideos con pollo + priñaca. Ensalada atún+huevo. Batido con leche. Pan burger contabilizado."
+  },
+  {
+    "fecha": "2026-07-08",
+    "kcal": 2237,
+    "proteina": 121,
+    "entreno": "Escaleras 4 pisos ×3",
+    "notas": "Arroz+brócoli+priñaca+atún. Sándwich pavo+queso merienda. Burger food truck cena."
+  },
+  {
+    "fecha": "2026-07-09",
+    "kcal": 994,
+    "proteina": 75,
+    "entreno": "Warmup 5' · 100 pushups (34+20+20+16+10)",
+    "notas": "Día en curso. Ensalada garbanzos con salsa fit (aguacate+huevo+yogur)."
+  }
+]
