@@ -569,6 +569,48 @@ function kcalColor(kcal: number) {
   <section class="section" id="seguimiento">
     <p class="section-title">Seguimiento</p>
 
+    <!-- Diario de tracking -->
+    <p style="font-size: 13px; color: var(--muted); margin: 0 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Diario reciente</p>
+
+    <style>
+      .log-day {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 12px 14px;
+        margin-bottom: 8px;
+      }
+      .log-day:last-child { margin-bottom: 0; }
+      .log-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+      }
+      .log-date { font-size: 12px; color: var(--muted); font-weight: 500; }
+      .log-macros { display: flex; gap: 10px; align-items: center; }
+      .log-kcal { font-size: 16px; font-weight: 700; }
+      .log-prot { font-size: 12px; color: var(--green); font-weight: 600; }
+      .log-entreno { font-size: 12px; color: var(--accent); margin-bottom: 4px; }
+      .log-nota { font-size: 12px; color: var(--muted); }
+    </style>
+
+    {dias.map((d) => (
+      <div class="log-day">
+        <div class="log-top">
+          <span class="log-date">{new Date(d.fecha + 'T12:00:00').toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })}</span>
+          <div class="log-macros">
+            <span class="log-prot">{d.proteina}g prot</span>
+            <span class="log-kcal" style={`color: ${kcalColor(d.kcal)}`}>{d.kcal} kcal</span>
+          </div>
+        </div>
+        {d.entreno && <div class="log-entreno">💪 {d.entreno}</div>}
+        <div class="log-nota">{d.notas}</div>
+      </div>
+    ))}
+
+    <p style="font-size: 13px; color: var(--muted); margin: 20px 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Métricas</p>
+
     <!-- Métricas -->
     <div class="metric-grid" style="margin-bottom: 16px;">
       <div class="metric-card">
@@ -646,45 +688,6 @@ function kcalColor(kcal: number) {
       </ol>
     </div>
 
-    <!-- Diario de tracking -->
-    <p style="font-size: 13px; color: var(--muted); margin: 24px 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Diario reciente</p>
-
-    <style>
-      .log-day {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 12px 14px;
-        margin-bottom: 8px;
-      }
-      .log-day:last-child { margin-bottom: 0; }
-      .log-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 6px;
-      }
-      .log-date { font-size: 12px; color: var(--muted); font-weight: 500; }
-      .log-macros { display: flex; gap: 10px; align-items: center; }
-      .log-kcal { font-size: 16px; font-weight: 700; }
-      .log-prot { font-size: 12px; color: var(--green); font-weight: 600; }
-      .log-entreno { font-size: 12px; color: var(--accent); margin-bottom: 4px; }
-      .log-nota { font-size: 12px; color: var(--muted); }
-    </style>
-
-    {dias.map((d) => (
-      <div class="log-day">
-        <div class="log-top">
-          <span class="log-date">{new Date(d.fecha + 'T12:00:00').toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })}</span>
-          <div class="log-macros">
-            <span class="log-prot">{d.proteina}g prot</span>
-            <span class="log-kcal" style={`color: ${kcalColor(d.kcal)}`}>{d.kcal} kcal</span>
-          </div>
-        </div>
-        <div class="log-entreno">💪 {d.entreno}</div>
-        <div class="log-nota">{d.notas}</div>
-      </div>
-    ))}
 
     <p style="font-size: 11px; color: var(--muted); text-align: center; margin-top: 20px; padding-bottom: 8px;">
       Plan generado con Claude · Actualizado julio 2026
