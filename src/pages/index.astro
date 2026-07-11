@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import WeeklyChart from '../components/WeeklyChart.astro';
 import tracking from '../content/tracking.json';
 
 const dias = [...tracking].reverse();
@@ -568,6 +569,8 @@ function kcalColor(kcal: number) {
   <!-- ╚══════════════════════════════╝ -->
   <section class="section" id="seguimiento">
     <p class="section-title">Seguimiento</p>
+
+    <WeeklyChart entries={tracking} tdee={2400} />
 
     <!-- Diario de tracking -->
     <p style="font-size: 13px; color: var(--muted); margin: 0 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Diario reciente</p>

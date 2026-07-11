@@ -1,4 +1,5 @@
 ---
+import WeeklyChart from '../components/WeeklyChart.astro';
 import trackingManza from '../content/tracking-manza.json';
 
 const dias = [...trackingManza].reverse();
@@ -119,6 +120,12 @@ function kcalColor(kcal: number) {
     .back-link:hover { color: var(--text); }
 
     strong { color: var(--text); font-weight: 600; }
+
+    .weekly-chart-spacer { margin-bottom: 16px; }
+    .weekly-chart-notice {
+      background: rgba(255,107,157,.08) !important;
+      color: var(--accent) !important;
+    }
   </style>
 </head>
 <body>
@@ -219,6 +226,16 @@ function kcalColor(kcal: number) {
     <!-- DIARIO -->
     <section class="section">
       <p class="section-title">Diario</p>
+
+      <WeeklyChart
+        entries={trackingManza}
+        tdee={1656}
+        accent="var(--accent)"
+        deficitColor="var(--green)"
+        surplusColor="var(--yellow)"
+      />
+
+      <div class="weekly-chart-spacer"></div>
 
       {dias.length === 0 ? (
         <div class="empty-state">

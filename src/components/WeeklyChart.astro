@@ -1,0 +1,226 @@
+---
+import {
+  aggregateWeeklyBalance,
+  getChartMode,
+  type TrackingEntry,
+} from '../utils/weeklyBalance';
+
+interface Props {
+  entries: TrackingEntry[];
+  tdee: number;
+  accent?: string;
+  deficitColor?: string;
+  surplusColor?: string;
+}
+
+const {
+  entries,
+  tdee,
+  accent = 'var(--accent)',
+  deficitColor = 'var(--green)',
+  surplusColor = 'var(--yellow)',
+} = Astro.props;
+
+const totalDays = entries.length;
+const mode = getChartMode(totalDays);
+const weeks = aggregateWeeklyBalance(entries, tdee);
+
+const maxAbs = weeks.length
+  ? Math.max(...weeks.map((w) => Math.abs(w.balance)), 500)
+  : 500;
+
+const chartH = 120;
+const barW = 36;
+const gap = 16;
+const padX = 12;
+const zeroY = chartH / 2;
+const svgW = Math.max(weeks.length * (barW + gap) + padX * 2, 280);
+const scale = (zeroY - 8) / maxAbs;
+
+function barHeight(balance: number): number {
+  return Math.max(Math.abs(balance) * scale, balance !== 0 ? 4 : 0);
+}
+
+function formatBalance(n: number): string {
+  if (n === 0) return '0';
+  if (n > 0) return `−${Math.abs(n).toLocaleString('es-ES')}`;
+  return `+${Math.abs(n).toLocaleString('es-ES')}`;
+}
+---
+
+<div class="weekly-chart">
+  <p class="weekly-chart-title">Balance semanal</p>
+  <p class="weekly-chart-sub">
+    TDEE estimado: {tdee.toLocaleString('es-ES')} kcal/día · verde = déficit · ámbar = superávit
+  </p>
+
+  {mode === 'empty' ? (
+    <div class="weekly-chart-empty">
+      <span class="weekly-chart-empty-icon">📊</span>
+      <p>
+        Registra <strong>{7 - totalDays}</strong> día{7 - totalDays === 1 ? '' : 's'} más para ver la primera gráfica.
+        <br />
+        <span class="weekly-chart-muted">({totalDays}/7 días registrados)</span>
+      </p>
+    </div>
+  ) : (
+    <>
+      {mode === 'preview' && (
+        <div class="weekly-chart-notice">
+          Vista previa — gráfica completa a partir de 2 semanas ({totalDays}/14 días)
+        </div>
+      )}
+
+      <div class="weekly-chart-scroll">
+        <svg
+          viewBox={`0 0 ${svgW} ${chartH + 44}`}
+          width="100%"
+          height={chartH + 44}
+          role="img"
+          aria-label="Gráfica de balance calórico semanal"
+        >
+          <line
+            x1={padX}
+            y1={zeroY}
+            x2={svgW - padX}
+            y2={zeroY}
+            stroke="var(--border)"
+            stroke-width="1"
+          />
+
+          {weeks.map((week, i) => {
+            const x = padX + i * (barW + gap);
+            const h = barHeight(week.balance);
+            const isDeficit = week.balance >= 0;
+            const y = isDeficit ? zeroY - h : zeroY;
+            const color = isDeficit ? deficitColor : surplusColor;
+            const labelY = chartH + 18;
+            const valueY = isDeficit ? y - 4 : y + h + 12;
+
+            return (
+              <g key={week.weekStart}>
+                <rect
+                  x={x}
+                  y={y}
+                  width={barW}
+                  height={h}
+                  rx="4"
+                  fill={color}
+                  opacity={week.incomplete ? 0.45 : 1}
+                />
+                <text
+                  x={x + barW / 2}
+                  y={valueY}
+                  text-anchor="middle"
+                  fill={color}
+                  font-size="10"
+                  font-weight="600"
+                >
+                  {formatBalance(week.balance)}
+                </text>
+                <text
+                  x={x + barW / 2}
+                  y={labelY}
+                  text-anchor="middle"
+                  fill="var(--muted)"
+                  font-size="9"
+                >
+                  {week.weekLabel}
+                </text>
+                {week.incomplete && (
+                  <text
+                    x={x + barW / 2}
+                    y={labelY + 11}
+                    text-anchor="middle"
+                    fill="var(--muted)"
+                    font-size="8"
+                  >
+                    {week.daysLogged}d{week.daysLogged < 7 ? '*' : ''}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      {weeks.length > 0 && (
+        <div class="weekly-chart-summary">
+          <span>
+            Última semana: <strong style={`color: ${weeks[weeks.length - 1].balance >= 0 ? deficitColor : surplusColor}`}>
+              {weeks[weeks.length - 1].balance >= 0 ? 'déficit' : 'superávit'}{' '}
+              {Math.abs(weeks[weeks.length - 1].balance).toLocaleString('es-ES')} kcal
+            </strong>
+            {' '}({weeks[weeks.length - 1].daysLogged} días · media {weeks[weeks.length - 1].avgKcal} kcal/d)
+          </span>
+        </div>
+      )}
+
+      <p class="weekly-chart-foot">* Semana incompleta o en curso</p>
+    </>
+  )}
+</div>
+
+<style>
+  .weekly-chart {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+  .weekly-chart-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 4px;
+  }
+  .weekly-chart-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin: 0 0 12px;
+    line-height: 1.4;
+  }
+  .weekly-chart-empty {
+    text-align: center;
+    padding: 20px 12px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .weekly-chart-empty-icon {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .weekly-chart-muted {
+    font-size: 11px;
+    opacity: 0.8;
+  }
+  .weekly-chart-notice {
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(99, 102, 241, 0.08);
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+  }
+  .weekly-chart-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -4px;
+    padding: 0 4px;
+  }
+  .weekly-chart-summary {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+    line-height: 1.45;
+  }
+  .weekly-chart-foot {
+    font-size: 10px;
+    color: var(--muted);
+    margin: 6px 0 0;
+    opacity: 0.7;
+  }
+</style>
