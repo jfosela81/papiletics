@@ -29,13 +29,14 @@ const maxAbs = weeks.length
   ? Math.max(...weeks.map((w) => Math.abs(w.balance)), 500)
   : 500;
 
-const chartH = 120;
+const chartH = 140;
+const labelPad = 16;
 const barW = 36;
 const gap = 16;
 const padX = 12;
 const zeroY = chartH / 2;
 const svgW = Math.max(weeks.length * (barW + gap) + padX * 2, 280);
-const scale = (zeroY - 8) / maxAbs;
+const scale = (zeroY - labelPad) / maxAbs;
 
 function barHeight(balance: number): number {
   return Math.max(Math.abs(balance) * scale, balance !== 0 ? 4 : 0);
@@ -73,9 +74,9 @@ function formatBalance(n: number): string {
 
       <div class="weekly-chart-scroll">
         <svg
-          viewBox={`0 0 ${svgW} ${chartH + 44}`}
+          viewBox={`0 0 ${svgW} ${chartH + 48}`}
           width="100%"
-          height={chartH + 44}
+          height={chartH + 48}
           role="img"
           aria-label="Gráfica de balance calórico semanal"
         >
@@ -95,7 +96,12 @@ function formatBalance(n: number): string {
             const y = isDeficit ? zeroY - h : zeroY;
             const color = isDeficit ? deficitColor : surplusColor;
             const labelY = chartH + 18;
-            const valueY = isDeficit ? y - 4 : y + h + 12;
+            // Si la barra es muy alta, poner el número dentro; si no, fuera
+            const insideBar = h > 24;
+            const valueY = isDeficit
+              ? (insideBar ? y + 14 : y - 4)
+              : (insideBar ? y + h - 5 : y + h + 12);
+            const valueFill = insideBar ? 'var(--bg)' : color;
 
             return (
               <g key={week.weekStart}>
@@ -112,7 +118,7 @@ function formatBalance(n: number): string {
                   x={x + barW / 2}
                   y={valueY}
                   text-anchor="middle"
-                  fill={color}
+                  fill={valueFill}
                   font-size="10"
                   font-weight="600"
                 >
