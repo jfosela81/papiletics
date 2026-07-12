@@ -7,27 +7,6 @@
     "notas": "BK: 2 Crispy Chicken + 3 chili cheese bites + ketchup. Cena: pisto 260g + 2 huevos revueltos + pan burger 40g + bowl yogur 130g+arándanos 55g+whey+145ml leche. Sin patatas en BK ✅"
   },
   {
-    "fecha": "2026-07-06",
-    "kcal": 1490,
-    "proteina": 134,
-    "entreno": "Sin entreno",
-    "notas": "Partido España. Tortilla + ensalada mediodía. Nachos + salsa + pisto + yogur bowl noche."
-  },
-  {
-    "fecha": "2026-07-07",
-    "kcal": 1917,
-    "proteina": 163,
-    "entreno": "Warmup 5' · 54 pushups · 5×5 pike pushups",
-    "notas": "Fideos con pollo + priñaca. Ensalada atún+huevo. Batido con leche. Pan burger contabilizado."
-  },
-  {
-    "fecha": "2026-07-08",
-    "kcal": 2237,
-    "proteina": 121,
-    "entreno": "Escaleras 4 pisos ×3",
-    "notas": "Arroz+brócoli+priñaca+atún. Sándwich pavo+queso merienda. Burger food truck cena."
-  },
-  {
     "fecha": "2026-07-10",
     "kcal": 1945,
     "proteina": 133,
@@ -40,5 +19,26 @@
     "proteina": 154,
     "entreno": "Warmup 5' · 100 pushups (34+20+20+16+10) · Escaleras ×3",
     "notas": "Ensalada garbanzos con salsa fit (75% batch). Cena: bowl yogur+whey+leche+arándanos + brócoli + tomate frito Hacendado 100g + mozzarella rallada 100g. Sándwich pavo+queso cierre de noche."
+  },
+  {
+    "fecha": "2026-07-08",
+    "kcal": 2237,
+    "proteina": 121,
+    "entreno": "Escaleras 4 pisos ×3",
+    "notas": "Arroz+brócoli+priñaca+atún. Sándwich pavo+queso merienda. Burger food truck cena."
+  },
+  {
+    "fecha": "2026-07-07",
+    "kcal": 1917,
+    "proteina": 163,
+    "entreno": "Warmup 5' · 54 pushups · 5×5 pike pushups",
+    "notas": "Fideos con pollo + priñaca. Ensalada atún+huevo. Batido con leche. Pan burger contabilizado."
+  },
+  {
+    "fecha": "2026-07-06",
+    "kcal": 1490,
+    "proteina": 134,
+    "entreno": "Sin entreno",
+    "notas": "Partido España. Tortilla + ensalada mediodía. Nachos + salsa + pisto + yogur bowl noche."
   }
 ]

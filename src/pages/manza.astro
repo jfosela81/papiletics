@@ -1,8 +1,9 @@
 ---
 import WeeklyChart from '../components/WeeklyChart.astro';
 import trackingManza from '../content/tracking-manza.json';
+import { sortByDateDesc } from '../utils/weeklyBalance';
 
-const dias = [...trackingManza].reverse();
+const dias = sortByDateDesc(trackingManza);
 
 function kcalColor(kcal: number) {
   if (kcal < 1200) return 'var(--red)';

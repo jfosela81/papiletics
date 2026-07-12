@@ -85,3 +85,7 @@ export function getChartMode(totalDays: number): ChartMode {
   if (totalDays < 14) return 'preview';
   return 'full';
 }
+
+export function sortByDateDesc<T extends { fecha: string }>(entries: T[]): T[] {
+  return [...entries].sort((a, b) => b.fecha.localeCompare(a.fecha));
+}

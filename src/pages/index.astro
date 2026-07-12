@@ -2,8 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import WeeklyChart from '../components/WeeklyChart.astro';
 import tracking from '../content/tracking.json';
+import metrics from '../content/metrics.json';
+import { sortByDateDesc } from '../utils/weeklyBalance';
 
-const dias = [...tracking].reverse();
+const dias = sortByDateDesc(tracking);
+const metricas = sortByDateDesc(metrics);
+const ultimaMetrica = metricas[0];
 
 function kcalColor(kcal: number) {
   if (kcal < 1700) return 'var(--accent2)';
@@ -21,7 +25,7 @@ function kcalColor(kcal: number) {
 
     <div class="stats">
       <div class="stat">
-        <div class="val">86 kg</div>
+        <div class="val">85,9 kg</div>
         <div class="lbl">Peso actual</div>
       </div>
       <div class="stat">
@@ -29,11 +33,11 @@ function kcalColor(kcal: number) {
         <div class="lbl">Objetivo</div>
       </div>
       <div class="stat">
-        <div class="val">97–98 cm</div>
+        <div class="val">99 cm</div>
         <div class="lbl">Cintura actual</div>
       </div>
       <div class="stat">
-        <div class="val">25.1</div>
+        <div class="val">25,1</div>
         <div class="lbl">IMC (kg/m²)</div>
       </div>
     </div>
@@ -405,7 +409,7 @@ function kcalColor(kcal: number) {
     <p style="font-size: 13px; color: var(--muted); margin: 0 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">☀️ Plan semanal — modo verano (sin karate)</p>
 
     <div class="callout warning" style="margin-bottom: 12px;">
-      <strong>Objetivo realista: 3 sesiones/semana.</strong> Sal por las mañanas para evitar el calor. Si logras 4–5 días, bien — pero planifica sobre 3 para no frustrarte. La consistencia bate a la intensidad.
+      <strong>Objetivo realista: 3 sesiones/semana · 15–25 min de fuerza.</strong> Prioridad: empuje/tirón al fallo con descansos cortos (60–90 s). HIIT opcional — no necesario para perder grasa. Bici estática suave aparte (Z2) mientras estudias.
     </div>
 
     <style>
@@ -451,16 +455,15 @@ function kcalColor(kcal: number) {
     <div class="day-card">
       <div class="day-header">
         <span class="day-name">Lunes · Miércoles · Viernes</span>
-        <span class="day-tag tag-hard">Sesión completa</span>
+        <span class="day-tag tag-hard">Fuerza 15–25 min</span>
       </div>
       <div class="day-body">
         <div class="block"><span class="blk-icon">⏰</span><span>Por la mañana, antes de que apriete el calor</span></div>
         <div class="block"><span class="blk-icon">🔥</span><span><strong>Calentamiento</strong> — 5 min</span></div>
-        <div class="block"><span class="blk-icon">⚡</span><span><strong>HIIT</strong> — circuito completo (8 ejercicios × 45 s)</span></div>
-        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups</strong> — serie 1: para 1–2 antes del fallo · series 2–5: al fallo · descanso 90 s</span></div>
-        <div class="block"><span class="blk-icon">💥</span><span><strong>Pushups</strong> — 3–4 series</span></div>
-        <div class="block"><span class="blk-icon">🌳</span><span>Parque de calistenia si coincide la ruta (dips + australianas)</span></div>
-        <div class="block"><span class="blk-icon">🏠</span><span>Escaleras 2–3 veces el resto del día</span></div>
+        <div class="block"><span class="blk-icon">🔁</span><span><strong>Alternar:</strong> sesión tirón (pull-ups + australianas) · sesión empuje (pushups + pike pushups)</span></div>
+        <div class="block"><span class="blk-icon">🎯</span><span><strong>Pull-ups</strong> — serie 1: para 1–2 antes del fallo · series 2–4: al fallo · descanso 60–90 s</span></div>
+        <div class="block"><span class="blk-icon">💥</span><span><strong>Pushups</strong> — 3–4 series al fallo · descanso 60 s</span></div>
+        <div class="block"><span class="blk-icon">🚴</span><span><strong>Bici estática</strong> (opcional, otro momento) — 20–30 min suave mientras japonés/inglés</span></div>
       </div>
     </div>
 
@@ -501,7 +504,7 @@ function kcalColor(kcal: number) {
     </div>
 
     <div class="callout" style="margin-top: 12px;">
-      <strong>Si un día no puedes salir:</strong> haz el bloque de fuerza en casa (pull-ups + pushups) sin HIIT — cuenta como media sesión y es mejor que nada. Recupera el HIIT en la siguiente sesión completa.
+      <strong>HIIT:</strong> resérvalo solo si quieres empujar capacidad aeróbica (pre-karate). Para recomposición, el déficit + proteína + fuerza al fallo es suficiente. Descansos de 60 s no impiden mantener músculo en déficit — la hipertrofia no es el objetivo ahora.
     </div>
   </section>
 
@@ -614,7 +617,24 @@ function kcalColor(kcal: number) {
 
     <p style="font-size: 13px; color: var(--muted); margin: 20px 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Métricas</p>
 
-    <!-- Métricas -->
+    {ultimaMetrica && (
+      <div class="card" style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <div>
+            <div style="font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">
+              Última medición · {new Date(ultimaMetrica.fecha + 'T12:00:00').toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })}
+            </div>
+            <div style="display: flex; gap: 20px;">
+              <span><strong style="font-size: 20px; color: var(--accent);">{ultimaMetrica.peso} kg</strong> <span style="font-size: 12px; color: var(--muted);">peso</span></span>
+              <span><strong style="font-size: 20px; color: var(--accent);">{ultimaMetrica.cintura} cm</strong> <span style="font-size: 12px; color: var(--muted);">cintura</span></span>
+            </div>
+          </div>
+        </div>
+        {ultimaMetrica.notas && <p style="font-size: 12px; color: var(--muted); margin-top: 8px; margin-bottom: 0;">{ultimaMetrica.notas}</p>}
+      </div>
+    )}
+
+    <!-- Métricas guía -->
     <div class="metric-grid" style="margin-bottom: 16px;">
       <div class="metric-card">
         <div class="icon">⚖️</div>
