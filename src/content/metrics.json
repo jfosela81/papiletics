@@ -1,8 +1,14 @@
 [
   {
+    "fecha": "2026-07-13",
+    "peso": 86.9,
+    "cintura": 99.5,
+    "notas": "Lunes en ayunas — referencia semanal oficial. +1kg vs domingo por rehidratación tras deshidratación del examen karate."
+  },
+  {
     "fecha": "2026-07-12",
     "peso": 85.9,
     "cintura": 99,
-    "notas": "Domingo mañana, post-vuelta vacaciones. Repetir peso lunes."
+    "notas": "Domingo mañana post-vuelta vacaciones. Medición irregular — llegó muy deshidratado."
   }
 ]
