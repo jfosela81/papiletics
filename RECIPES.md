@@ -221,7 +221,24 @@ Puedes ampliar la sandía libremente — cada 100g extra solo son 30 kcal.
 
 ---
 
-## REFERENCIA RÁPIDA GAZPACHO (pendiente calibrar)
-- Receta base: 3 litros aprox · 50g aceite · 3 rebanadas pan molde
-- Estimado por vaso 300ml: ~100–130 kcal
-- ⚠️ Calibrar con receta exacta cuando Jorge la prepare (previsto miércoles)
+## GAZPACHO (calibrado)
+**~593 kcal batch · ~30 kcal/100ml · ~2 litros**
+
+| Ingrediente | Cantidad |
+|---|---|
+| Tomate | 1 kg |
+| Pepino | ~112g (1 pepino mediano) |
+| Cebolla | 50g (¼ cebolla) |
+| Ajo | 2 dientes (~10g) |
+| Pimiento verde | 100g |
+| Pan molde | 2 rebanadas (~50g) |
+| Aceite de oliva | **25g** (clave — no más) |
+| Agua, vinagre, sal | al gusto |
+
+| Cantidad | Kcal |
+|---|---|
+| Vaso 250ml | ~75 kcal |
+| Vaso 300ml | ~90 kcal |
+| Vaso 400ml | ~120 kcal |
+
+Libre hasta 400–500ml en un día caluroso. El aceite es el único item relevante — no superar 25g.
