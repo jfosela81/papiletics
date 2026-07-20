@@ -9,6 +9,12 @@ import { sortByDateDesc } from '../utils/weeklyBalance';
 const dias = sortByDateDesc(tracking);
 const metricas = sortByDateDesc(metrics);
 const ultimaMetrica = metricas[0];
+const ultimaCintura = metricas.find(m => m.cintura != null);
+
+const ALTURA = 1.85;
+const pesoActual = ultimaMetrica?.peso ?? null;
+const cinturaActual = ultimaCintura?.cintura ?? null;
+const imc = pesoActual ? (pesoActual / (ALTURA * ALTURA)).toFixed(1) : '—';
 
 function kcalColor(kcal: number) {
   if (kcal < 1700) return 'var(--accent2)';
@@ -26,7 +32,7 @@ function kcalColor(kcal: number) {
 
     <div class="stats">
       <div class="stat">
-        <div class="val">85,9 kg</div>
+        <div class="val">{pesoActual != null ? pesoActual.toLocaleString('es-ES') + ' kg' : '—'}</div>
         <div class="lbl">Peso actual</div>
       </div>
       <div class="stat">
@@ -34,11 +40,11 @@ function kcalColor(kcal: number) {
         <div class="lbl">Objetivo</div>
       </div>
       <div class="stat">
-        <div class="val">99 cm</div>
+        <div class="val">{cinturaActual != null ? cinturaActual.toLocaleString('es-ES') + ' cm' : '—'}</div>
         <div class="lbl">Cintura actual</div>
       </div>
       <div class="stat">
-        <div class="val">25,1</div>
+        <div class="val">{imc}</div>
         <div class="lbl">IMC (kg/m²)</div>
       </div>
     </div>
