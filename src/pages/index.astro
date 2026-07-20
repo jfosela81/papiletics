@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import WeeklyChart from '../components/WeeklyChart.astro';
+import WeightChart from '../components/WeightChart.astro';
 import tracking from '../content/tracking.json';
 import metrics from '../content/metrics.json';
 import { sortByDateDesc } from '../utils/weeklyBalance';
@@ -120,28 +121,31 @@ function kcalColor(kcal: number) {
     </div>
 
     <!-- Tupper fijo -->
-    <div class="meal-card">
-      <div class="meal-header">
-        <h3>🍱 Tupper fijo (L–V)</h3>
-        <span class="meal-meta">~600 kcal · ~49 g prot</span>
-      </div>
-      <div class="meal-body">
-        <h4>Pollo con pisto y quinoa</h4>
-        <ul>
-          <li><span>Pechuga de pollo (crudo)</span><span>200 g · 220 kcal · 42 g</span></li>
-          <li><span>Cebolla + pimiento + calabacín</span><span>150 g · 60 kcal</span></li>
-          <li><span>Tomate triturado</span><span>150 ml · 40 kcal</span></li>
-          <li><span>Quinoa en seco (o arroz blanco)</span><span>65 g · 235 kcal · 7 g</span></li>
-          <li><span>Aceite de oliva (cucharita de café)</span><span>5 ml · 45 kcal</span></li>
-        </ul>
-        <div class="callout" style="margin-top: 12px; margin-bottom: 0;">
-          <strong>Logística:</strong> Prepara 5 raciones el domingo. Refrigera 3, congela 2. En 40 minutos tienes la semana resuelta. Los martes cuando preparas el caldo de tus hijas es buen momento.
+    <details class="recipe-group" open>
+      <summary>🍱 Comida fija — Tupper (L–V) <span class="recipe-meta">~600 kcal · ~49 g prot</span></summary>
+      <div class="recipe-group-body">
+        <div class="meal-card" style="margin-bottom:0">
+          <div class="meal-body">
+            <h4>Pollo con pisto y quinoa</h4>
+            <ul>
+              <li><span>Pechuga de pollo (crudo)</span><span>200 g · 220 kcal · 42 g</span></li>
+              <li><span>Cebolla + pimiento + calabacín</span><span>150 g · 60 kcal</span></li>
+              <li><span>Tomate triturado</span><span>150 ml · 40 kcal</span></li>
+              <li><span>Quinoa en seco (o arroz blanco)</span><span>65 g · 235 kcal · 7 g</span></li>
+              <li><span>Aceite de oliva (cucharita de café)</span><span>5 ml · 45 kcal</span></li>
+            </ul>
+            <div class="callout" style="margin-top: 12px; margin-bottom: 0;">
+              <strong>Logística:</strong> Prepara 5 raciones el domingo. Refrigera 3, congela 2. En 40 minutos tienes la semana resuelta. Los martes cuando preparas el caldo de tus hijas es buen momento.
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </details>
 
     <!-- Cenas -->
-    <p style="font-size: 13px; color: var(--muted); margin: 16px 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Cenas rotativas (elige una)</p>
+    <details class="recipe-group">
+      <summary>🌙 Cenas rotativas — elige una</summary>
+      <div class="recipe-group-body">
 
     <div class="meal-card">
       <div class="meal-header">
@@ -264,6 +268,9 @@ function kcalColor(kcal: number) {
         </div>
       </div>
     </div>
+
+      </div>
+    </details>
 
     <div class="callout warning" style="margin-bottom: 10px;">
       <strong>⚠️ Regla del suelo: nunca bajes de 1.700 kcal.</strong> Un déficit mayor de ~700 kcal/día pone al cuerpo en modo alarma — pierde músculo, baja el metabolismo y el rendimiento en el entreno cae. El objetivo es ~2.000 kcal, con un déficit suave de 300–400 kcal respecto al TDEE.
@@ -544,65 +551,6 @@ function kcalColor(kcal: number) {
   </section>
 
   <!-- ╔══════════════════════════════╗ -->
-  <!-- ║  SABOTEADORES                ║ -->
-  <!-- ╚══════════════════════════════╝ -->
-  <section class="section" id="saboteadores">
-    <p class="section-title">Saboteadores</p>
-
-    <p style="font-size: 13px; color: var(--muted); margin: 0 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Los que ya conocías</p>
-
-    <div class="saboteador">
-      <h3>🍗 Picar mientras cocinas</h3>
-      <p class="damage">⚡ 100–300 kcal los días que cocinas</p>
-      <p class="fix">Ten pepino/zanahoria en rodajas delante. O chicle sin azúcar. Si llegas con hambre, tómate el batido 30 min antes de cocinar.</p>
-    </div>
-
-    <div class="saboteador">
-      <h3>😤 Llegar con hambre al mediodía (efecto ayuno)</h3>
-      <p class="damage">⚡ El hambre extrema lleva a raciones más grandes y a repetir</p>
-      <p class="fix">Batido de whey 30 min antes si sabes que vas a cocinar con hambre. Corta el hambre sin romper el déficit.</p>
-    </div>
-
-    <div class="saboteador">
-      <h3>📅 Fines de semana sin estructura</h3>
-      <p class="damage">⚡ Pueden anular el déficit de 3–4 días de semana</p>
-      <p class="fix">Regla fija (ver sección Nutrición). No restricción, solo compensación automática.</p>
-    </div>
-
-    <div class="saboteador">
-      <h3>🧀 Queso curado</h3>
-      <p class="damage">⚡ 30 g = ~120 kcal. Fácil de picar sin darse cuenta</p>
-      <p class="fix">Si entra en casa, porciónalo en bolsitas de 30 g el mismo día que lo abres.</p>
-    </div>
-
-    <p style="font-size: 13px; color: var(--muted); margin: 20px 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Los que probablemente no calculabas</p>
-
-    <div class="saboteador">
-      <h3>🫒 Aceite de oliva sin medir ⚠️</h3>
-      <p class="damage">⚡ 1 cuchara sopera = 120 kcal. Si entra en 2–3 momentos del día sin medir → 300–400 kcal invisibles</p>
-      <p class="fix">Usa spray de aceite para cocinar. Sin spray → mide con cucharita de café (5 ml = 45 kcal).</p>
-    </div>
-
-    <div class="saboteador">
-      <h3>🍲 3 platos de lentejas "sin chorizo"</h3>
-      <p class="damage">⚡ 1 plato = ~260 kcal · Tres platos = ~780 kcal solo de legumbre</p>
-      <p class="fix">Máximo 2 platos. El segundo, más pequeño que el primero.</p>
-    </div>
-
-    <div class="saboteador">
-      <h3>🍳 Porciones de tortilla sin pesarla</h3>
-      <p class="damage">⚡ 150 g = ~250 kcal · Una porción "generosa" de 250 g = ~420 kcal</p>
-      <p class="fix">Cuando la prepares, córtala en 4–5 porciones iguales y guarda las que no son para esa noche.</p>
-    </div>
-
-    <div class="saboteador">
-      <h3>🧀 Picar mozzarella montando la lasaña</h3>
-      <p class="damage">⚡ 30–50 g = ~100–150 kcal. Suma silenciosamente</p>
-      <p class="fix">Pesa los 200 g y ponlos directamente sobre la fuente antes de empezar a montar.</p>
-    </div>
-  </section>
-
-  <!-- ╔══════════════════════════════╗ -->
   <!-- ║  SEGUIMIENTO                 ║ -->
   <!-- ╚══════════════════════════════╝ -->
   <section class="section" id="seguimiento">
@@ -651,6 +599,8 @@ function kcalColor(kcal: number) {
     ))}
 
     <p style="font-size: 13px; color: var(--muted); margin: 20px 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Métricas</p>
+
+    <WeightChart metrics={metricas} />
 
     {ultimaMetrica && (
       <div class="card" style="margin-bottom: 12px;">

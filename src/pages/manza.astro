@@ -1,6 +1,8 @@
 ---
 import WeeklyChart from '../components/WeeklyChart.astro';
+import WeightChart from '../components/WeightChart.astro';
 import trackingManza from '../content/tracking-manza.json';
+import metricsManza from '../content/metrics-manza.json';
 import { sortByDateDesc } from '../utils/weeklyBalance';
 
 const dias = sortByDateDesc(trackingManza);
@@ -235,6 +237,8 @@ function kcalColor(kcal: number) {
         deficitColor="var(--green)"
         surplusColor="var(--yellow)"
       />
+
+      <WeightChart metrics={metricsManza} lineColor="var(--accent)" />
 
       <div class="weekly-chart-spacer"></div>
 

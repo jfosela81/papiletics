@@ -1,0 +1,260 @@
+---
+interface MetricEntry {
+  fecha: string;
+  peso: number | null;
+  cintura?: number | null;
+  notas?: string | null;
+}
+
+interface Props {
+  metrics: MetricEntry[];
+  lineColor?: string;
+}
+
+const { metrics, lineColor = 'var(--accent)' } = Astro.props;
+
+const withWeight = metrics
+  .filter((m): m is MetricEntry & { peso: number } => m.peso != null)
+  .sort((a, b) => a.fecha.localeCompare(b.fecha));
+
+const n = withWeight.length;
+const weights = withWeight.map(m => m.peso);
+
+// SVG layout
+const svgH = 180;
+const padTop = 30;
+const padBottom = 36;
+const padLeft = 44;
+const padRight = 16;
+const chartH = svgH - padTop - padBottom;
+const ptSpacing = 80;
+const svgW = n <= 1
+  ? 280
+  : Math.max(padLeft + padRight + (n - 1) * ptSpacing, 280);
+const chartW = svgW - padLeft - padRight;
+
+// Y scale
+const minW = n > 0 ? Math.min(...weights) : 75;
+const maxW = n > 0 ? Math.max(...weights) : 90;
+const rawRange = maxW - minW;
+const yPad = rawRange < 1 ? 1 : rawRange * 0.35;
+const yMin = minW - yPad;
+const yMax = maxW + yPad;
+const yRange = yMax - yMin;
+
+function toY(w: number): number {
+  return padTop + chartH * (1 - (w - yMin) / yRange);
+}
+
+function toX(i: number): number {
+  if (n <= 1) return padLeft + chartW / 2;
+  return padLeft + (i / (n - 1)) * chartW;
+}
+
+// Horizontal grid reference values
+const gridVals = n > 0
+  ? [
+      +(minW - yPad * 0.1 + yRange * 0.15).toFixed(1),
+      +(minW - yPad * 0.1 + yRange * 0.5).toFixed(1),
+      +(minW - yPad * 0.1 + yRange * 0.85).toFixed(1),
+    ]
+  : [];
+
+// Polyline points string
+const linePoints = withWeight
+  .map((m, i) => `${toX(i).toFixed(1)},${toY(m.peso).toFixed(1)}`)
+  .join(' ');
+
+// Linear regression trend line
+let trendX1 = 0, trendY1 = 0, trendX2 = 0, trendY2 = 0;
+let showTrend = false;
+let trendSlope = 0;
+
+if (n >= 2) {
+  const xs = withWeight.map((_, i) => i);
+  const ys = weights;
+  const sx = xs.reduce((a, b) => a + b, 0);
+  const sy = ys.reduce((a, b) => a + b, 0);
+  const sxy = xs.reduce((s, x, i) => s + x * ys[i], 0);
+  const sxx = xs.reduce((s, x) => s + x * x, 0);
+  const denom = n * sxx - sx * sx;
+  if (denom !== 0) {
+    trendSlope = (n * sxy - sx * sy) / denom;
+    const intercept = (sy - trendSlope * sx) / n;
+    trendX1 = toX(0);
+    trendY1 = toY(intercept);
+    trendX2 = toX(n - 1);
+    trendY2 = toY(intercept + trendSlope * (n - 1));
+    showTrend = true;
+  }
+}
+
+const trendColor = trendSlope <= 0 ? 'var(--green)' : 'var(--accent2)';
+const trendLabel = trendSlope <= 0 ? '↓ bajando' : '↑ subiendo';
+
+function dateLabel(fecha: string): string {
+  const d = new Date(fecha + 'T12:00:00');
+  return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+}
+
+const firstW = n > 0 ? weights[0] : null;
+const lastW = n > 0 ? weights[n - 1] : null;
+const delta = firstW != null && lastW != null ? +(lastW - firstW).toFixed(1) : null;
+---
+
+<div class="wc">
+  <p class="wc-title">Evolución del peso</p>
+
+  {n < 2 ? (
+    <div class="wc-empty">
+      <span>📉</span>
+      {n === 0
+        ? <p>Registra el peso cada lunes para ver la tendencia.</p>
+        : <p>Solo 1 medición — añade otra el próximo lunes para ver la gráfica.</p>
+      }
+    </div>
+  ) : (
+    <>
+      <div class="wc-scroll">
+        <svg
+          viewBox={`0 0 ${svgW} ${svgH}`}
+          width="100%"
+          height={svgH}
+          aria-label="Gráfica de evolución de peso"
+          role="img"
+        >
+          {/* Grid lines */}
+          {gridVals.map(v => (
+            <g>
+              <line
+                x1={padLeft} y1={toY(v).toFixed(1)}
+                x2={svgW - padRight} y2={toY(v).toFixed(1)}
+                stroke="var(--border)" stroke-width="1"
+              />
+              <text
+                x={padLeft - 5} y={+toY(v).toFixed(1) + 4}
+                text-anchor="end"
+                fill="var(--muted)"
+                font-size="9"
+              >{v.toFixed(1)}</text>
+            </g>
+          ))}
+
+          {/* Trend line (dashed) */}
+          {showTrend && (
+            <line
+              x1={trendX1.toFixed(1)} y1={trendY1.toFixed(1)}
+              x2={trendX2.toFixed(1)} y2={trendY2.toFixed(1)}
+              stroke={trendColor}
+              stroke-width="1.5"
+              stroke-dasharray="5,3"
+              opacity="0.55"
+            />
+          )}
+
+          {/* Main line */}
+          <polyline
+            points={linePoints}
+            fill="none"
+            stroke={lineColor}
+            stroke-width="2"
+            stroke-linejoin="round"
+            stroke-linecap="round"
+          />
+
+          {/* Points + labels */}
+          {withWeight.map((m, i) => {
+            const cx = +toX(i).toFixed(1);
+            const cy = +toY(m.peso).toFixed(1);
+            return (
+              <g>
+                <text
+                  x={cx} y={cy - 11}
+                  text-anchor="middle"
+                  fill={lineColor}
+                  font-size="10"
+                  font-weight="700"
+                >{m.peso.toFixed(1)}</text>
+                <circle
+                  cx={cx} cy={cy}
+                  r="5"
+                  fill="var(--bg)"
+                  stroke={lineColor}
+                  stroke-width="2.5"
+                />
+                <text
+                  x={cx} y={svgH - padBottom + 14}
+                  text-anchor="middle"
+                  fill="var(--muted)"
+                  font-size="9"
+                >{dateLabel(m.fecha)}</text>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      <div class="wc-summary">
+        <span>Inicio: <strong>{firstW?.toFixed(1)} kg</strong></span>
+        <span class="sep">·</span>
+        <span>Ahora: <strong>{lastW?.toFixed(1)} kg</strong></span>
+        {delta !== null && (
+          <>
+            <span class="sep">·</span>
+            <span style={`color: ${delta <= 0 ? 'var(--green)' : 'var(--accent2)'}`}>
+              <strong>{delta > 0 ? '+' : ''}{delta} kg</strong>
+            </span>
+          </>
+        )}
+        {showTrend && (
+          <>
+            <span class="sep">·</span>
+            <span class="wc-trend" style={`color: ${trendColor}`}>{trendLabel}</span>
+          </>
+        )}
+      </div>
+    </>
+  )}
+</div>
+
+<style>
+  .wc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+  .wc-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .wc-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .wc-empty {
+    text-align: center;
+    padding: 24px 16px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .wc-empty span { font-size: 28px; display: block; margin-bottom: 8px; }
+  .wc-empty p { margin: 0; }
+  .wc-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 6px;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+    align-items: center;
+  }
+  .wc-summary strong { color: var(--text); }
+  .wc-summary .sep { color: var(--border); }
+  .wc-trend { font-size: 11px; font-weight: 600; }
+</style>
