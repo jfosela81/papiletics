@@ -21,6 +21,36 @@ function kcalColor(kcal: number) {
   if (kcal <= 2100) return 'var(--green)';
   return 'var(--yellow)';
 }
+
+// Progresión de fuerza
+function parseTotal(text: string, keyword: string): number | null {
+  const re = new RegExp(keyword.replace('-', '\\-') + '[^=]+=([0-9]+)');
+  const m = text.match(re);
+  return m ? parseInt(m[1]) : null;
+}
+
+const trackingSorted = [...tracking].sort((a, b) => a.fecha.localeCompare(b.fecha));
+
+const progTiron = trackingSorted
+  .filter(e => (e.entreno ?? '').includes('pull-ups'))
+  .slice(-5)
+  .map(e => ({
+    fecha: e.fecha,
+    pullups: parseTotal(e.entreno ?? '', 'pull-ups'),
+    chinups: parseTotal(e.entreno ?? '', 'chin-ups'),
+  }));
+
+const progEmpuje = trackingSorted
+  .filter(e => (e.entreno ?? '').includes('pushups'))
+  .slice(-5)
+  .map(e => ({
+    fecha: e.fecha,
+    pushups: parseTotal(e.entreno ?? '', 'pushups'),
+  }));
+
+// Diario: 7 recientes + resto
+const diasRecientes = dias.slice(0, 7);
+const diasAnteriores = dias.slice(7);
 ---
 <Layout title="Papiletics — Plan de recomposición corporal">
 
@@ -70,25 +100,6 @@ function kcalColor(kcal: number) {
       <strong>Pérdida esperada:</strong> 0.5–1 kg de grasa/mes si el déficit es consistente. La cintura es mejor indicador que el peso a corto plazo.
     </div>
 
-    <div class="card">
-      <h4>Lo que ya tienes correcto</h4>
-      <ul style="list-style: none; padding: 0;">
-        <li style="padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted);">✅ <strong>IF 16/8 natural</strong> — no rompas lo que funciona</li>
-        <li style="padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted);">✅ <strong>Sin alcohol ni refrescos</strong> — ventaja de ~300–500 kcal/día</li>
-        <li style="padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted);">✅ <strong>Déficit ligero</strong> — protege el músculo y el metabolismo</li>
-        <li style="padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted);">✅ <strong>Base de proteína alta</strong> — pollo, atún, huevo, whey, yogur griego</li>
-        <li style="padding: 7px 0; font-size: 13px; color: var(--muted);">✅ <strong>Fuerza + HIIT + karate</strong> — más inteligente que solo cardio</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h4>Suplementación</h4>
-      <ul style="list-style: none; padding: 0;">
-        <li style="padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted);">💊 <strong>Creatina:</strong> 3–5 g/día en ayunas. Correcto.</li>
-        <li style="padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted);">🥛 <strong>Whey:</strong> 20–30 g post-entreno o como snack. Bien integrada.</li>
-        <li style="padding: 7px 0; font-size: 13px; color: var(--muted);">🚫 <strong>Nada más necesario</strong> a este nivel de actividad.</li>
-      </ul>
-    </div>
   </section>
 
   <!-- ╔══════════════════════════════╗ -->
@@ -101,24 +112,19 @@ function kcalColor(kcal: number) {
     <div class="card" style="margin-bottom: 16px;">
       <h3>Presupuesto calórico diario</h3>
       <div class="budget-item">
-        <span class="budget-label">Comida (tupper)</span>
-        <div class="budget-bar"><div class="budget-bar-fill" style="width: 32%"></div></div>
-        <span class="budget-kcal">640 kcal</span>
+        <span class="budget-label">Comida principal</span>
+        <div class="budget-bar"><div class="budget-bar-fill" style="width: 37%"></div></div>
+        <span class="budget-kcal">750 kcal</span>
       </div>
       <div class="budget-item">
         <span class="budget-label">Cena</span>
-        <div class="budget-bar"><div class="budget-bar-fill" style="width: 24%; background: var(--green)"></div></div>
-        <span class="budget-kcal">480 kcal</span>
+        <div class="budget-bar"><div class="budget-bar-fill" style="width: 30%; background: var(--green)"></div></div>
+        <span class="budget-kcal">600 kcal</span>
       </div>
       <div class="budget-item">
-        <span class="budget-label">Snack proteico</span>
-        <div class="budget-bar"><div class="budget-bar-fill" style="width: 12%; background: var(--yellow)"></div></div>
-        <span class="budget-kcal">240 kcal</span>
-      </div>
-      <div class="budget-item">
-        <span class="budget-label">Margen errores</span>
-        <div class="budget-bar"><div class="budget-bar-fill" style="width: 32%; background: var(--border)"></div></div>
-        <span class="budget-kcal">640 kcal</span>
+        <span class="budget-label">Snack + merienda</span>
+        <div class="budget-bar"><div class="budget-bar-fill" style="width: 33%; background: var(--yellow)"></div></div>
+        <span class="budget-kcal">650 kcal</span>
       </div>
       <div style="border-top: 1px solid var(--border); margin-top: 12px; padding-top: 10px; display: flex; justify-content: space-between; align-items: center;">
         <span style="font-size: 13px; color: var(--muted);">TOTAL DIARIO</span>
@@ -282,69 +288,36 @@ function kcalColor(kcal: number) {
       <strong>⚠️ Regla del suelo: nunca bajes de 1.700 kcal.</strong> Un déficit mayor de ~700 kcal/día pone al cuerpo en modo alarma — pierde músculo, baja el metabolismo y el rendimiento en el entreno cae. El objetivo es ~2.000 kcal, con un déficit suave de 300–400 kcal respecto al TDEE.
     </div>
 
-    <div class="card" style="margin-bottom: 16px;">
-      <h4>Cómo llegar a 2.000 kcal en noches de cena ligera</h4>
-      <p style="font-size: 13px; color: var(--muted); margin-bottom: 10px;">Con tupper (600) + cena B o E (260–310) + snacks (340) solo llegas a ~1.300 kcal. Rellena el hueco así:</p>
-      <ul style="list-style: none; padding: 0;">
-        <li style="padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted);">🍉 <strong>Sandía post-comida (verano):</strong> 400–500 g = 120–150 kcal. Coste casi nulo.</li>
-        <li style="padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted);">🥛 <strong>Yogur griego solo (noche):</strong> 125 g desnatado = 70 kcal · o 125 g 2% = 90 kcal.</li>
-        <li style="padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted);">🍞 <strong>2 tostadas con pavo y queso tierno:</strong> pan integral + 2 lonchas pavo + 1 loncha queso tierno (~20 g) → ~215 kcal · 14 g prot. Saciante y dentro del plan.</li>
-        <li style="padding: 7px 0; font-size: 13px; color: var(--muted);">🧀 <strong>30 g queso en bolsita (ya porcionado):</strong> 120 kcal. Solo si no has picado de más antes.</li>
-      </ul>
-      <p style="font-size: 12px; color: var(--green); margin-top: 10px; margin-bottom: 0;">Con sandía + yogur de noche ya sumas ~200–240 kcal extra → total del día ~1.550–1.600 kcal. Con el aceite real (no en spray) y algún mordisco más llegas cómodamente a 1.700–1.800 kcal. <strong>Eso sí es un déficit suave.</strong></p>
-    </div>
-
-    <!-- Fruta de verano -->
-    <div class="callout" style="margin-bottom: 16px;">
-      🍉 <strong>Sandía en verano:</strong> 30 kcal/100 g — la fruta más eficiente. Puedes comer 400–500 g después de comer y solo sumas 120–150 kcal. En invierno: mandarina (~35 kcal), kiwi (~45 kcal), melocotón (~45 kcal).
-    </div>
-
-    <!-- Snacks -->
-    <p style="font-size: 13px; color: var(--muted); margin: 16px 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Snack / post-entrenamiento</p>
-
-    <div class="card">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-        <h3 style="margin: 0;">Batido pre-comida (corta el hambre)</h3>
-        <span class="badge badge-accent">120 kcal · 25 g prot</span>
+    <!-- Snacks colapsable -->
+    <details class="recipe-group">
+      <summary>🥛 Snack y merienda</summary>
+      <div class="recipe-group-body">
+        <div class="card" style="margin-bottom:0">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <h3 style="margin: 0;">Batido pre-comida</h3>
+            <span class="badge badge-accent">120 kcal · 25 g prot</span>
+          </div>
+          <p style="font-size: 13px; color: var(--muted); margin: 0;">30 g whey + 350 ml agua · 30 min antes de comer si llegas con mucha hambre</p>
+        </div>
+        <div class="card" style="margin-bottom:0">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <h3 style="margin: 0;">Bowl proteico (merienda)</h3>
+            <span class="badge badge-green">~220 kcal · 32 g prot</span>
+          </div>
+          <p style="font-size: 13px; color: var(--muted); margin: 0;">Yogur griego 125 g + 20–30 g whey + frutos rojos + 100 ml leche</p>
+        </div>
+        <div class="card" style="margin-bottom:0">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <h3 style="margin: 0;">Sándwich pavo + queso</h3>
+            <span class="badge badge-yellow">~215 kcal · 14 g prot</span>
+          </div>
+          <p style="font-size: 13px; color: var(--muted); margin: 0;">2 rebanadas pan molde · 4 lonchas pavo · 1 loncha queso tierno</p>
+        </div>
+        <div class="callout" style="margin: 0;">
+          🍉 <strong>Sandía:</strong> 30 kcal/100 g — libre en verano. Fruta en invierno: mandarina (~35 kcal), kiwi (~45 kcal).
+        </div>
       </div>
-      <p style="font-size: 13px; color: var(--muted); margin: 0;">30 g whey + 350 ml agua · 30 min antes de comer si llegas con mucha hambre</p>
-    </div>
-
-    <div class="card">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-        <h3 style="margin: 0;">Bowl proteico por la tarde (si tienes hambre)</h3>
-        <span class="badge badge-green">~220 kcal · 32 g prot</span>
-      </div>
-      <p style="font-size: 13px; color: var(--muted); margin: 0;">Yogur griego 125 g + 20 g whey + frutos rojos + 100 ml leche</p>
-      <p style="font-size: 12px; color: var(--yellow); margin-top: 6px; margin-bottom: 0;">Si tomas el batido pre-comida <strong>y</strong> el bowl de tarde (~340 kcal total), la tarde está cerrada — sin picar más.</p>
-    </div>
-
-    <!-- Fruta -->
-    <div class="callout">
-      🍊 <strong>Fruta:</strong> 2 piezas/día está perfecto (mandarina, kiwi, melocotón, sandía en verano) — ~100 kcal. No hay que eliminarla.
-    </div>
-
-    <!-- Fines de semana -->
-    <p style="font-size: 13px; color: var(--muted); margin: 16px 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Fines de semana</p>
-
-    <div class="card">
-      <ul style="list-style: none; padding: 0;">
-        <li style="padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted);">🍽️ <strong>Si comes fuera en restaurante:</strong> cena B o E esa noche, sin negociar.</li>
-        <li style="padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted);">🥘 <strong>Paella del sábado</strong> (100 g arroz para dos): bien. No toques esa receta.</li>
-        <li style="padding: 8px 0; font-size: 13px; color: var(--muted);">🍔 <strong>Domingos fuera / burger:</strong> 1 burger con queso + salsa yogur. Está dentro del plan.</li>
-      </ul>
-    </div>
-
-    <p style="font-size: 13px; color: var(--muted); margin: 16px 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Casa familiar (madre / suegra)</p>
-
-    <div class="card">
-      <p style="font-size: 13px; color: var(--muted); margin-bottom: 10px;">No controlas ingredientes ni cantidades — no lo intentes. No es el momento ni el lugar. Lo que sí controlas es lo que haces antes y después.</p>
-      <ul style="list-style: none; padding: 0;">
-        <li style="padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted);">🌙 <strong>Por la noche, si llegas sin hambre:</strong> batido whey + agua antes de dormir. 120 kcal · 25 g proteína. Sin cenar nada más — no hace falta.</li>
-        <li style="padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted);">💪 <strong>Por qué el batido y no nada:</strong> el músculo no recibe proteína durante el ayuno nocturno. 25 g de whey lo evitan sin añadir volumen de comida.</li>
-        <li style="padding: 8px 0; font-size: 13px; color: var(--muted);">📅 <strong>El domingo:</strong> vuelta al tupper y a la estructura. La semana no la rompe un sábado en casa familiar — la rompe no recuperar el ritmo el lunes.</li>
-      </ul>
-    </div>
+    </details>
   </section>
 
   <!-- ╔══════════════════════════════╗ -->
@@ -370,50 +343,22 @@ function kcalColor(kcal: number) {
     </div>
 
     <!-- Bloque fuerza -->
-    <p style="font-size: 13px; color: var(--muted); margin: 0 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Bloque de fuerza</p>
+    <p style="font-size: 13px; color: var(--muted); margin: 0 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Protocolo de fuerza</p>
 
-    <div class="exercise-card">
-      <h3>🎯 Tirón en casa (barra alta) — 10 series · meta ~50 reps</h3>
-      <ul>
-        <li><strong>Bloque 1 — Pull-ups (5 series):</strong> serie 1 para 1–2 reps antes del fallo (ej. 8 si puedes 10) · series 2–5 al fallo · descanso 60–90 s</li>
-        <li><strong>Pausa 3 min</strong> entre bloques — cambio de agarre, tendones listos</li>
-        <li><strong>Bloque 2 — Chin-ups (5 series):</strong> todas al fallo · descanso 60–90 s</li>
-        <li>Patrón típico pull: 8-7-6-5-5 ≈ 31 reps + chin ≈ 20–25 = <strong>~50–55 reps</strong></li>
-        <li>Australianas solo en parque — bonus, no sustituto en casa</li>
+    <div class="card" style="margin-bottom: 10px;">
+      <h3 style="margin-bottom: 8px;">🎯 Tirón — 10 series · ~50 reps</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li style="font-size: 13px; color: var(--muted); padding: 5px 0; border-bottom: 1px solid var(--border);"><strong>Pull-ups 5 series:</strong> serie 1 → 1–2 reps antes del fallo · series 2–5 al fallo · 90 s descanso</li>
+        <li style="font-size: 13px; color: var(--muted); padding: 5px 0; border-bottom: 1px solid var(--border);"><strong>Pausa 3 min</strong> entre bloques</li>
+        <li style="font-size: 13px; color: var(--muted); padding: 5px 0;"><strong>Chin-ups 5 series:</strong> todas al fallo · 90 s descanso</li>
       </ul>
     </div>
 
-    <div class="exercise-card">
-      <h3>💥 Empuje en casa — meta ≥100 reps/sesión (push + pike)</h3>
-      <ul>
-        <li><strong>Mínimo:</strong> pushups 34+20+20 (74) + pike pushups 5×5 (25) = 99 reps</li>
-        <li><strong>Si hay tiempo:</strong> hasta 100 pushups + 5×5 pike pushups</li>
-        <li>Descanso 60 s entre series de pushups · 90 s en pike pushups</li>
-        <li>Calidad en pike: profundidad controlada, no contar reps sucias</li>
-      </ul>
-    </div>
-
-    <div class="exercise-card">
-      <h3>⚡ Circuito HIIT (45 s cada uno)</h3>
-      <ul>
-        <li>Jumping jacks</li>
-        <li>Burpee no-jump <em>(objetivo: 15 reps/ronda)</em></li>
-        <li>Rodillas a codos en plancha alta</li>
-        <li>Rodilla a codo mismo lado en plancha baja</li>
-        <li>Patadas de rana sentado</li>
-        <li>Elevaciones de rodilla</li>
-        <li>Sentadilla + lunge con salto</li>
-        <li>In and outs en plancha</li>
-      </ul>
-    </div>
-
-    <div class="exercise-card">
-      <h3>🌳 Parque de calistenia (cuando puedas)</h3>
-      <ul>
-        <li>Dips en paralelas — complemento al push</li>
-        <li>Dominadas australianas — tirón horizontal</li>
-        <li>Pino en pared 30 s — hombros y propiocepción</li>
-        <li>Muscle-up negatives — objetivo a medio plazo</li>
+    <div class="card" style="margin-bottom: 10px;">
+      <h3 style="margin-bottom: 8px;">💥 Empuje — ≥100 reps</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li style="font-size: 13px; color: var(--muted); padding: 5px 0; border-bottom: 1px solid var(--border);"><strong>Pushups:</strong> mínimo 34+20+20 · ampliar hasta 100 · 60 s descanso</li>
+        <li style="font-size: 13px; color: var(--muted); padding: 5px 0;"><strong>Pike pushups 5×5</strong> siempre al final · 90 s descanso</li>
       </ul>
     </div>
 
@@ -426,7 +371,7 @@ function kcalColor(kcal: number) {
     <p style="font-size: 13px; color: var(--muted); margin: 0 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">☀️ Plan semanal — modo verano (sin karate)</p>
 
     <div class="callout warning" style="margin-bottom: 12px;">
-      <strong>4 sesiones/semana en casa:</strong> 2 tirón + 2 empuje · 15–25 min cada una. Meta: 50 reps tirón · ≥100 reps empuje (push + pike). HIIT opcional. Bici Z2 aparte mientras estudias.
+      <strong>4 sesiones/semana en casa:</strong> 2 tirón + 2 empuje · 15–25 min cada una. Meta: 50 reps tirón · ≥100 reps empuje. Bici Z2 aparte mientras estudias.
     </div>
 
     <style>
@@ -530,8 +475,43 @@ function kcalColor(kcal: number) {
       </div>
     </div>
 
-    <div class="callout" style="margin-top: 12px;">
-      <strong>HIIT:</strong> resérvalo solo si quieres empujar capacidad aeróbica (pre-karate). Para recomposición, el déficit + proteína + fuerza al fallo es suficiente. Descansos de 60 s no impiden mantener músculo en déficit — la hipertrofia no es el objetivo ahora.
+    <!-- Progresión -->
+    <p style="font-size: 13px; color: var(--muted); margin: 20px 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Progresión</p>
+
+    <div class="card" style="margin-bottom: 10px;">
+      <h4>Tirón — últimas sesiones</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Fecha</th><th>Pull-ups</th><th>Chin-ups</th><th>Total</th></tr></thead>
+          <tbody>
+            {progTiron.map(s => (
+              <tr>
+                <td>{new Date(s.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}</td>
+                <td>{s.pullups ?? '—'}</td>
+                <td>{s.chinups ?? '—'}</td>
+                <td><strong>{s.pullups != null && s.chinups != null ? s.pullups + s.chinups : (s.pullups ?? s.chinups ?? '—')}</strong></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>Empuje — últimas sesiones</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Fecha</th><th>Pushups totales</th></tr></thead>
+          <tbody>
+            {progEmpuje.map(s => (
+              <tr>
+                <td>{new Date(s.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}</td>
+                <td><strong>{s.pushups ?? '—'}</strong></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -569,7 +549,7 @@ function kcalColor(kcal: number) {
       .log-nota { font-size: 12px; color: var(--muted); }
     </style>
 
-    {dias.map((d) => (
+    {diasRecientes.map((d) => (
       <div class="log-day">
         <div class="log-top">
           <span class="log-date">{new Date(d.fecha + 'T12:00:00').toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })}</span>
@@ -582,6 +562,25 @@ function kcalColor(kcal: number) {
         <div class="log-nota">{d.notas}</div>
       </div>
     ))}
+
+    {diasAnteriores.length > 0 && (
+      <details class="log-more">
+        <summary>Ver {diasAnteriores.length} días anteriores</summary>
+        {diasAnteriores.map((d) => (
+          <div class="log-day">
+            <div class="log-top">
+              <span class="log-date">{new Date(d.fecha + 'T12:00:00').toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })}</span>
+              <div class="log-macros">
+                <span class="log-prot">{d.proteina}g prot</span>
+                <span class="log-kcal" style={`color: ${kcalColor(d.kcal)}`}>{d.kcal} kcal</span>
+              </div>
+            </div>
+            {d.entreno && <div class="log-entreno">💪 {d.entreno}</div>}
+            <div class="log-nota">{d.notas}</div>
+          </div>
+        ))}
+      </details>
+    )}
 
     <p style="font-size: 13px; color: var(--muted); margin: 20px 0 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;">Métricas</p>
 

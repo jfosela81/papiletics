@@ -339,6 +339,23 @@ const { title = 'Papiletics', section = '' } = Astro.props;
     .milestone h4 { font-size: 15px; font-weight: 700; color: var(--accent); }
     .milestone p { font-size: 13px; color: var(--muted); }
 
+    /* Log "ver más" accordion */
+    details.log-more > summary {
+      list-style: none;
+      cursor: pointer;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      padding: 10px;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      margin: 8px 0;
+      user-select: none;
+    }
+    details.log-more > summary::-webkit-details-marker { display: none; }
+    details.log-more > summary:hover { color: var(--text); border-color: var(--muted); }
+    details.log-more[open] > summary { margin-bottom: 8px; }
+
     /* Recipe accordion (details/summary) */
     details.recipe-group {
       background: var(--surface);
