@@ -242,3 +242,26 @@ Puedes ampliar la sandía libremente — cada 100g extra solo son 30 kcal.
 | Vaso 400ml | ~120 kcal |
 
 Libre hasta 400–500ml en un día caluroso. El aceite es el único item relevante — no superar 25g.
+
+---
+
+## MERIENDA — Banana bread proteico (microondas)
+**~870 kcal batch · ~82g prot · 3 raciones (~290 kcal · ~27g prot c/u)**
+
+| Ingrediente | Cantidad | Nota |
+|---|---|---|
+| Plátano maduro | 120g | |
+| Yogur griego | 100g (4 cucharadas) | |
+| Claras de huevo | 120g (~4 claras) | mejor que huevo entero |
+| Whey proteína | 40g | no más — evita textura gomosa |
+| Harina de avena | 70g | compensa la whey reducida |
+| Cacao en polvo | 5g (1 cucharadita) | |
+| Levadura en polvo | 2g (1 toque) | |
+| Chocolate negro 85% | 20g (~2 onzas) | trocear, mezclar al final |
+
+**Preparación:** mezclar todo, trocear el chocolate y añadir al final. Microondas 3 min a potencia media-alta. Dejar reposar 2 min. Dividir en 3 porciones. Conservar en nevera hasta 3 días.
+
+| Raciones | Kcal | Prot |
+|---|---|---|
+| Ración (1/3) | ~290 kcal | ~27 g |
+| Ración (1/4) | ~218 kcal | ~20 g |
