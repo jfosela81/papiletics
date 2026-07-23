@@ -1,0 +1,640 @@
+---
+import WeightChart from '../components/WeightChart.astro';
+import metricsKetito from '../content/metrics-ketito.json';
+
+const latest = metricsKetito[0];
+const altura = 1.35;
+const imc = latest ? +(latest.peso / (altura * altura)).toFixed(1) : null;
+
+// IMC proyectado si mantiene el peso
+const proyecciones = [
+  { talla: 138, label: '138 cm (+3)' },
+  { talla: 140, label: '140 cm (+5)' },
+  { talla: 145, label: '145 cm (+10)' },
+];
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ketito — Seguimiento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0f1117;
+      --surface:  #1a1d27;
+      --surface2: #22263a;
+      --border:   #2e3347;
+      --accent:   #ff9f43;
+      --accent2:  #ff6584;
+      --green:    #43e97b;
+      --yellow:   #f9c74f;
+      --red:      #ff6584;
+      --text:     #e8eaf6;
+      --muted:    #8b92b8;
+      --radius:   12px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      padding-bottom: 40px;
+    }
+
+    .site-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .site-header .logo { font-size: 20px; }
+    .site-header h1 { font-size: 17px; font-weight: 700; color: var(--text); }
+    .site-header p { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+    main { max-width: 680px; margin: 0 auto; padding: 0; }
+
+    .section { padding: 24px 20px; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+    .section-title {
+      font-size: 13px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--accent); margin-bottom: 16px;
+    }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px; margin-bottom: 12px;
+    }
+    .card:last-child { margin-bottom: 0; }
+    .card h4 {
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+    .stats-3 { grid-template-columns: repeat(3, 1fr); }
+    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; text-align: center; }
+    .stat .val { font-size: 22px; font-weight: 700; color: var(--accent); line-height: 1.1; }
+    .stat .val.warn { color: var(--yellow); }
+    .stat .lbl { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+    .callout {
+      background: rgba(255,159,67,.08); border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 12px 14px; font-size: 13px; color: var(--muted); margin: 12px 0;
+    }
+    .callout.green  { background: rgba(67,233,123,.08); border-color: var(--green); }
+    .callout.yellow { background: rgba(249,199,79,.08);  border-color: var(--yellow); }
+    .callout.red    { background: rgba(255,101,132,.08); border-color: var(--red); }
+    .callout strong { color: var(--text); }
+    .callout:last-child { margin-bottom: 0; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { background: var(--surface2); color: var(--muted); font-weight: 600;
+         text-align: left; padding: 8px 10px; font-size: 11px;
+         text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 8px 10px; border-top: 1px solid var(--border); vertical-align: top; }
+    td strong { color: var(--accent); }
+    td.ok strong  { color: var(--green); }
+    td.fix strong { color: var(--yellow); }
+    td.bad strong { color: var(--red); }
+
+    .day-block { margin-bottom: 16px; }
+    .day-block:last-child { margin-bottom: 0; }
+    .day-header {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.8px;
+      margin-bottom: 6px;
+    }
+    .meal-row { display: flex; gap: 10px; padding: 6px 0; border-top: 1px solid var(--border); font-size: 13px; align-items: flex-start; }
+    .meal-row:first-child { border-top: none; }
+    .meal-label { color: var(--muted); min-width: 70px; font-size: 12px; padding-top: 1px; }
+    .meal-content { flex: 1; color: var(--text); }
+    .meal-content .change { color: var(--yellow); font-size: 11px; font-weight: 600; display: block; margin-top: 2px; }
+    .meal-content .ok-tag { color: var(--green); font-size: 11px; font-weight: 600; display: inline; }
+
+    .rule-list { list-style: none; }
+    .rule-list li {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 10px 0; border-top: 1px solid var(--border); font-size: 13px;
+    }
+    .rule-list li:first-child { border-top: none; padding-top: 0; }
+    .rule-icon { font-size: 16px; min-width: 22px; text-align: center; padding-top: 1px; }
+    .rule-text { flex: 1; color: var(--muted); }
+    .rule-text strong { color: var(--text); }
+
+    .proj-table td:first-child { color: var(--muted); }
+    .proj-table .imc-val { font-weight: 700; }
+    .imc-ok   { color: var(--green); }
+    .imc-warn { color: var(--yellow); }
+    .imc-high { color: var(--red); }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--muted); font-size: 13px; text-decoration: none;
+      padding: 20px 20px 0;
+    }
+    .back-link:hover { color: var(--text); }
+
+    strong { color: var(--text); font-weight: 600; }
+    .sep { color: var(--border); }
+
+    .badge {
+      display: inline-block; padding: 2px 7px; border-radius: 6px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .badge-ok  { background: rgba(67,233,123,.15); color: var(--green); }
+    .badge-fix { background: rgba(249,199,79,.15);  color: var(--yellow); }
+    .badge-out { background: rgba(255,101,132,.15); color: var(--red); }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <span class="logo">⭐</span>
+    <div>
+      <h1>Ketito</h1>
+      <p>Seguimiento · desde julio 2026</p>
+    </div>
+  </header>
+
+  <a href="/" class="back-link">← Plan de Jorge</a>
+
+  <main>
+
+    <!-- PERFIL -->
+    <section class="section">
+      <p class="section-title">Perfil actual</p>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="val">{latest?.peso ?? '—'} kg</div>
+          <div class="lbl">Peso actual</div>
+        </div>
+        <div class="stat">
+          <div class="val">135 cm</div>
+          <div class="lbl">Talla</div>
+        </div>
+        <div class="stat">
+          <div class="val">8 años</div>
+          <div class="lbl">Edad (oct 2017)</div>
+        </div>
+        <div class="stat">
+          <div class="val warn">{imc ?? '—'}</div>
+          <div class="lbl">IMC kg/m²</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>Contexto del IMC pediátrico</h4>
+        <table class="proj-table">
+          <thead>
+            <tr>
+              <th>Referencia</th>
+              <th>IMC ~8.75 años</th>
+              <th>Percentil</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Rango normal</td>
+              <td><span class="imc-val imc-ok">14.5 – 17.5</span></td>
+              <td style="color: var(--green)">P10–P50</td>
+            </tr>
+            <tr>
+              <td>Sobrepeso</td>
+              <td><span class="imc-val imc-warn">17.5 – 21.0</span></td>
+              <td style="color: var(--yellow)">P85–P95</td>
+            </tr>
+            <tr>
+              <td>Obesidad clínica</td>
+              <td><span class="imc-val imc-high">&gt; 21.0</span></td>
+              <td style="color: var(--red)">&gt; P95</td>
+            </tr>
+            <tr style="background: rgba(255,159,67,.06)">
+              <td><strong>Ketito hoy</strong></td>
+              <td><span class="imc-val" style="color: var(--accent)">{imc ?? '—'}</span></td>
+              <td style="color: var(--accent)">~P97</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout yellow">
+        <strong>Objetivo: no perder peso, sino no ganar más.</strong> Si mantiene ~41–42 kg mientras crece en altura, el IMC baja solo. El tiempo trabaja a favor.
+      </div>
+
+      <div class="card">
+        <h4>Proyección IMC si mantiene el peso actual</h4>
+        <table class="proj-table">
+          <thead>
+            <tr><th>Talla futura</th><th>IMC proyectado</th><th>Zona</th></tr>
+          </thead>
+          <tbody>
+            {proyecciones.map(p => {
+              const imcP = +(latest.peso / ((p.talla / 100) ** 2)).toFixed(1);
+              const cls = imcP > 21 ? 'imc-high' : imcP > 18 ? 'imc-warn' : 'imc-ok';
+              const zona = imcP > 21 ? 'Obesidad' : imcP > 18 ? 'Sobrepeso' : 'Normal';
+              return (
+                <tr>
+                  <td>{p.label}</td>
+                  <td><span class={`imc-val ${cls}`}>{imcP}</span></td>
+                  <td><span class={`imc-val ${cls}`}>{zona}</span></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout green">
+        <strong>Mecanismo oído:</strong> El tensor del velo del paladar abre la trompa de Eustaquio en cada deglución. Con frenillo corto + paladar cóncavo, ese músculo trabaja mal → el oído no ventila. La fisio y la ortodoncia palatina atacan la causa raíz. El peso es factor coadyuvante (inflamación, compresión perifaríngea), no la causa principal.
+      </div>
+    </section>
+
+    <!-- MENÚ OPTIMIZADO -->
+    <section class="section">
+      <p class="section-title">Menú semanal optimizado</p>
+
+      <div class="callout" style="margin-bottom: 16px; margin-top: 0;">
+        <strong>Código de cambios:</strong>
+        <span class="badge badge-ok" style="margin-left: 6px">MANTENER</span> está bien ·
+        <span class="badge badge-fix" style="margin-left: 4px">MEJORAR</span> cambio recomendado ·
+        <span class="badge badge-out" style="margin-left: 4px">CAMBIAR</span> eliminar o sustituir
+      </div>
+
+      <!-- DESAYUNOS -->
+      <div class="card">
+        <h4>Desayunos</h4>
+
+        <div class="day-block">
+          <div class="day-header">Lunes — Viernes</div>
+          <div class="meal-row">
+            <span class="meal-label">Leche</span>
+            <span class="meal-content">150 ml entera + 5 g Nesquick <span class="ok-tag">MANTENER</span></span>
+          </div>
+          <div class="meal-row">
+            <span class="meal-label">Sólido</span>
+            <span class="meal-content">
+              1 tostada pan integral (~30 g) + 2 lonchas pavo o jamón cocido
+              <span class="change">CAMBIAR: quitar las 5 galletas Tostarica → proteína = más saciedad hasta el almuerzo, menos antojo de chuches a las 10h</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Sábado — Domingo</div>
+          <div class="meal-row">
+            <span class="meal-label">Todo</span>
+            <span class="meal-content">Sandwich pavo (4 lonchas) + queso (1 loncha) + leche 150 ml + Nesquick <span class="ok-tag">MANTENER — es el mejor desayuno de la semana</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALMUERZOS -->
+      <div class="card">
+        <h4>Almuerzo (media mañana)</h4>
+        <div class="meal-row">
+          <span class="meal-label">Opción A</span>
+          <span class="meal-content">Fruta (plátano o manzana) + puñado frutos secos <span class="ok-tag">MANTENER</span></span>
+        </div>
+        <div class="meal-row">
+          <span class="meal-label">Opción B</span>
+          <span class="meal-content">
+            30 g pan integral + 2 lonchas pavo o jamón cocido
+            <span class="change">CAMBIAR: sustituir chorizo pamplona por pavo o jamón cocido</span>
+          </span>
+        </div>
+        <div class="meal-row">
+          <span class="meal-label">En verano</span>
+          <span class="meal-content">Si está entretenida y no pide, no hay almuerzo <span class="ok-tag">CORRECTO</span></span>
+        </div>
+      </div>
+
+      <!-- COMIDAS -->
+      <div class="card">
+        <h4>Comidas (mediodía)</h4>
+
+        <div class="day-block">
+          <div class="day-header">Lunes — Garbanzos</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">Garbanzos cocidos (120–130 g) + atún + aceitunas + vinagre <span class="ok-tag">MANTENER — perfecto</span></span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Martes — Pollo</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">
+              Pechuga especiada a la plancha (~150 g) + patatas al micro (150 g) <span class="ok-tag">PREFERIR sobre las alitas</span>
+              <span class="change">Si hay alitas: solo 3-4 alitas simples, sin muslo. La piel = mucha grasa.</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Miércoles — Arroz + salmón</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">40–50 g arroz (seco) + 80 g salmón + 50 g tomate frito <span class="ok-tag">MANTENER</span></span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Jueves — Proteína + patatas</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">
+              Lomo de cerdo a la plancha (100 g) + patatas al micro (150 g) + tomate frito
+              <span class="change">MEJORAR: las albóndigas de lata son muy procesadas. Si se usan: máx 3 y solo eventualmente. Lomo es la mejor alternativa.</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Viernes — Garbanzos (igual que lunes)</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">Igual que lunes <span class="ok-tag">MANTENER</span></span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Sábado</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">Arroz con brócoli / fideos a la cazuela <span class="ok-tag">MANTENER</span></span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Domingo</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">Burger de pollo (80 g) + patatas al micro <span class="ok-tag">MANTENER</span></span>
+          </div>
+        </div>
+
+        <div class="meal-row" style="border-top: 1px solid var(--border); margin-top: 4px; padding-top: 8px;">
+          <span class="meal-label">Postre</span>
+          <span class="meal-content">
+            Yogur natural (125 g) + cucharadita de miel
+            <span class="change">MEJORAR: pasar de yogures de sabores a natural poco a poco. Si no, mantener los del Lidl sin carmines.</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- CENAS -->
+      <div class="card">
+        <h4>Cenas</h4>
+
+        <div class="day-block">
+          <div class="day-header">Lunes — Merluza</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">Merluza al micro/horno + patatas al micro (100–150 g) <span class="ok-tag">MANTENER — muy buena cena</span></span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Martes — Puré</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">
+              Puré (zanahoria, cebolla, calabacín, patata) + 2 lonchas pavo
+              <span class="change">MEJORAR: quitar la nata de cocinar. Sustituir por 50 ml leche entera para cremosidad. Ahorra ~90–100 kcal por ración sin diferencia de sabor apreciable.</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Miércoles — Tortilla</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">Tortilla francesa (1 huevo + 1 clara) + 2 lonchas pavo + 30 g tomate frito <span class="ok-tag">MANTENER. Añadir clara suma proteína sin apenas calorías.</span></span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Jueves — Guisantes</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">
+              ½ lata guisantes + 2 lonchas jamón cocido o pavo troceado
+              <span class="change">MEJORAR: cambiar blister de bacon por jamón cocido. Misma comida, mucho menos procesado y menos sal.</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Viernes — Pollo casero al horno</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">
+              Pechuga troceada + pan rallado + spray aceite al horno + patatas al micro (100 g)
+              <span class="change">CAMBIAR: eliminar nuggets precongelados prefritos. Pechuga empanada casera al horno sabe igual o mejor y es comida real. Las patatas al micro caseras en vez de congeladas.</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Sábado</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">
+              2 huevos revueltos + 2 lonchas pavo + tostada integral (30 g)
+              <span class="change">CAMBIAR: eliminar salchichas Frankfurt. Nitritosy sal alta. Los huevos revueltos con pavo son más saciantes, proteicos y de calidad muy superior.</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Domingo — Sopa</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
+            <span class="meal-content">Sopa con fideos (40–50 g) <span class="ok-tag">MANTENER</span></span>
+          </div>
+        </div>
+
+        <div class="meal-row" style="border-top: 1px solid var(--border); margin-top: 4px; padding-top: 8px;">
+          <span class="meal-label">Lácteo noche</span>
+          <span class="meal-content">Si comió yogur: leche semidesnatada 150 ml (~65 kcal). Si no comió yogur: yogur natural 125 g.</span>
+        </div>
+      </div>
+
+      <!-- BEBIDAS -->
+      <div class="card">
+        <h4>Bebidas</h4>
+        <div class="meal-row">
+          <span class="meal-label">Norma</span>
+          <span class="meal-content">Agua siempre. <span class="ok-tag">BIEN</span></span>
+        </div>
+        <div class="meal-row">
+          <span class="meal-label">Aquarius</span>
+          <span class="meal-content">Solo Zero. Máximo 1 vez/día. Prefiere agua si ya ha pedido uno. <span class="ok-tag">BIEN — ella ya lo hace</span></span>
+        </div>
+        <div class="meal-row">
+          <span class="meal-label">Gazpacho</span>
+          <span class="meal-content">150 g en verano como entrante o snack <span class="ok-tag">GRAN HÁBITO — seguir potenciando</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGLAS DE LA CASA -->
+    <section class="section">
+      <p class="section-title">Reglas de la casa</p>
+
+      <ul class="rule-list">
+        <li>
+          <span class="rule-icon">🍭</span>
+          <span class="rule-text"><strong>Máximo 2 extras dulces por semana</strong> (contando helado, chuche, galleta o similar). Los fines de semana no son zona libre.</span>
+        </li>
+        <li>
+          <span class="rule-icon">🍦</span>
+          <span class="rule-text"><strong>Abuelos: polo de agua o fruta</strong> en vez de helado de corte o cucurucho. Enmarcarlo como indicación médica para el oído → los abuelos lo aceptan mejor. Si es un día especial: 1 helado "de verdad" está bien.</span>
+        </li>
+        <li>
+          <span class="rule-icon">🍫</span>
+          <span class="rule-text"><strong>Postre dulce en casa:</strong> 1 onza de chocolate 85% o 10 g de chocolate blanco. No negociar helado como alternativa si no está contemplado ese día.</span>
+        </li>
+        <li>
+          <span class="rule-icon">🍌</span>
+          <span class="rule-text"><strong>Truco nocilla+plátano:</strong> seguir usándolo. Mejor plátano con pizca de nocilla que pan con nocilla. Así también se trabaja la masticación que manda la fisio.</span>
+        </li>
+        <li>
+          <span class="rule-icon">🥤</span>
+          <span class="rule-text"><strong>Si tiene hambre entre horas:</strong> fruta (manzana, pera, mandarina) o puñado de frutos secos. No snacks de bolsa.</span>
+        </li>
+        <li>
+          <span class="rule-icon">🍽️</span>
+          <span class="rule-text"><strong>Masticación consciente:</strong> aprovechar los ejercicios de la fisio para reforzar el hábito de masticar despacio. No es solo para el frenillo — también mejora la saciedad.</span>
+        </li>
+        <li>
+          <span class="rule-icon">⚖️</span>
+          <span class="rule-text"><strong>Pesaje: una vez al mes</strong>, misma báscula, misma hora (mañana antes de desayunar). Sin obsesión semanal. El objetivo es ver la tendencia, no el número del día.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ACTIVIDAD FÍSICA -->
+    <section class="section">
+      <p class="section-title">Actividad física</p>
+
+      <div class="card">
+        <h4>Septiembre — Mayo (cole)</h4>
+        <table>
+          <tbody>
+            <tr><td>Balonmano</td><td><strong>2× / semana · 1h</strong> — alta intensidad</td></tr>
+            <tr><td>Karate</td><td><strong>2× / semana · 1h</strong> — fuerza + resistencia</td></tr>
+            <tr><td>Partido balonmano</td><td><strong>~3× / mes</strong> (nov–abr)</td></tr>
+            <tr><td>Patio + EF</td><td>diario</td></tr>
+            <tr><td>Parque post-cole</td><td>martes o jueves con Manza</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h4>Junio — Agosto (verano)</h4>
+        <div class="callout yellow" style="margin: 0 0 12px;">
+          <strong>Pierde ~4–5 h/semana de actividad intensa.</strong> Es el factor más determinante del verano junto con los extras en casa de los abuelos.
+        </div>
+        <table>
+          <tbody>
+            <tr><td>Piscina</td><td>Vale si <strong>nada activamente</strong> (larguras, juegos que impliquen nadar). No si solo chapotea.</td></tr>
+            <tr><td>Objetivo verano</td><td>30 min de actividad real al día como mínimo</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top: 12px;">
+          <div style="font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Ideas prácticas</div>
+          <ul class="rule-list">
+            <li>
+              <span class="rule-icon">🏊</span>
+              <span class="rule-text">Reto de larguras en la piscina: <strong>"¿cuántas larguras haces hoy?"</strong>. Los retos concretos funcionan muy bien.</span>
+            </li>
+            <li>
+              <span class="rule-icon">🚴</span>
+              <span class="rule-text">Salida en bici familiar 2–3 veces/semana aunque sea 20–30 min por el barrio.</span>
+            </li>
+            <li>
+              <span class="rule-icon">🏃</span>
+              <span class="rule-text">Pilla-pilla, escondite, bailar en casa. Cualquier cosa que active el cuerpo en vez de play o TV.</span>
+            </li>
+            <li>
+              <span class="rule-icon">📵</span>
+              <span class="rule-text">Limitar pantallas a por la tarde (después de actividad), no desde primera hora.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEGUIMIENTO PESO -->
+    <section class="section">
+      <p class="section-title">Seguimiento de peso</p>
+
+      <div class="callout" style="margin-bottom: 16px; margin-top: 0;">
+        Pesaje el <strong>primer día de cada mes</strong>, en ayunas, misma báscula que se use para Jorge. Anotar también la talla cada 3 meses.
+      </div>
+
+      <WeightChart metrics={metricsKetito} lineColor="var(--accent)" />
+
+      <div class="callout yellow" style="margin-top: 12px;">
+        <strong>Puede que el peso no baje.</strong> Si crece en altura, el IMC mejora aunque el peso se mantenga o suba ligeramente. Lo que importa es la <strong>tendencia de crecimiento</strong>, no el número en sí.
+      </div>
+
+      <div class="callout red">
+        <strong>Señal de alerta:</strong> si en 3 meses el peso sube más de 1.5–2 kg sin haber crecido en talla de forma visible, revisar el menú y los extras.
+      </div>
+    </section>
+
+    <!-- CONTEXTO OÍDO -->
+    <section class="section">
+      <p class="section-title">Contexto — El oído</p>
+
+      <div class="card">
+        <h4>Historial resumido</h4>
+        <table>
+          <tbody>
+            <tr><td>3 años</td><td>Primeras otitis recurrentes con catarros</td></tr>
+            <tr><td>5 años</td><td>Drenaje infantil oído derecho (otorrino 1)</td></tr>
+            <tr><td>6 años</td><td>Drenaje adulto → reacción a cuerpo extraño (otorrino 2)</td></tr>
+            <tr><td>7 años</td><td>Drenaje titanio → caída al mes. Instituto ORL Madrid → mismo resultado.</td></tr>
+            <tr><td>2026</td><td>Dentista detecta <strong>frenillo corto + paladar cóncavo</strong>. Fisio + logopeda confirman.</td></tr>
+            <tr><td>Jul 2026</td><td>Ejercicios fisio activos. Molde para aparato palatino. <strong>Camino más prometedor hasta la fecha.</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout green">
+        <strong>Hipótesis más sólida:</strong> frenillo corto → mala postura lingual → tensor del velo del paladar disfuncional → trompa de Eustaquio no ventila bien → acumulación de moco. Los drenajes tratan el síntoma; la fisio + ortodoncia atacan la causa.
+      </div>
+
+      <div class="callout">
+        <strong>Rol del peso:</strong> secundario pero real. La grasa perifaríngea puede comprimir estructuras. La dieta rica en azúcares y ultraprocesados tiene efecto proinflamatorio. Mejorar la alimentación suma, pero no es la palanca principal.
+      </div>
+    </section>
+
+  </main>
+
+  <p style="font-size: 11px; color: var(--muted); text-align: center; margin-top: 20px; padding-bottom: 8px;">
+    Seguimiento personal · Papiletics · desde julio 2026
+  </p>
+
+</body>
+</html>

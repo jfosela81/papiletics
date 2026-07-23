@@ -9,7 +9,7 @@ Este documento permite continuar el coaching nutricional/de fitness y mantener l
 
 ## 1. Qué es este proyecto
 
-**Papiletics** es un sitio estático (Astro) mobile-first con el plan personal de recomposición corporal de Jorge y el tracking diario de calorías/proteína de Jorge y su mujer Manza.
+**Papiletics** es un sitio estático (Astro) mobile-first con el plan personal de recomposición corporal de Jorge, el tracking de Manza, y el seguimiento pediátrico de su hija pequeña (Ketito).
 
 | Recurso | URL / ruta |
 |---|---|
@@ -17,6 +17,7 @@ Este documento permite continuar el coaching nutricional/de fitness y mantener l
 | Repo GitHub | https://github.com/jfosela81/papiletics |
 | Plan Jorge | `/` (index) |
 | Tracking Manza | `/manza` |
+| Seguimiento Ketito | `/ketito` |
 
 **Stack:** Astro (output static), JSON para datos, Vercel auto-deploy en push a `main`. Sin BD, sin login.
 
@@ -84,15 +85,19 @@ papiletics/
 ├── AGENT-HANDOFF.md          ← este archivo
 ├── src/
 │   ├── content/
-│   │   ├── tracking.json     ← diario Jorge (añadir entradas nuevas AL PRINCIPIO del array)
-│   │   └── tracking-manza.json
+│   │   ├── tracking.json          ← diario Jorge (nuevas entradas AL PRINCIPIO)
+│   │   ├── tracking-manza.json
+│   │   ├── metrics.json           ← peso/cintura Jorge (mensuales, al principio)
+│   │   ├── metrics-manza.json
+│   │   └── metrics-ketito.json    ← peso mensual Ketito (al principio)
 │   ├── components/
 │   │   └── WeeklyChart.astro ← gráfica balance semanal
 │   ├── utils/
 │   │   └── weeklyBalance.ts  ← agregación semanal
 │   ├── pages/
 │   │   ├── index.astro       ← plan completo + seguimiento Jorge
-│   │   └── manza.astro       ← perfil + tracking Manza
+│   │   ├── manza.astro       ← perfil + tracking Manza
+│   │   └── ketito.astro      ← seguimiento pediátrico hija pequeña
 │   └── layouts/Layout.astro
 ├── astro.config.mjs
 └── vercel.json
@@ -214,6 +219,39 @@ Si cena ensalada/tortilla sin llegar a 2.000 kcal, **subir con:** sandía, yogur
 | 2026-07-11 | 1715 | 65 |
 | 2026-07-10 | 1576 | 88 |
 | 2026-07-09 | 1166 | 58 |
+
+---
+
+---
+
+## 8b. Perfil Ketito (hija pequeña de Jorge)
+
+| Dato | Valor |
+|---|---|
+| Nombre | Ketito (apodo) |
+| Edad / nacimiento | ~8 años 9 meses · oct 2017 |
+| Peso actual | 41.6 kg (jul 2026) |
+| Talla | 135 cm |
+| IMC | 22.8 kg/m² (~P97 — zona obesidad pediátrica) |
+| Objetivo | Mantener ~41–42 kg mientras crece en talla → IMC baja solo |
+
+**Contexto médico:** otitis crónica recurrente + moco en oído derecho. Múltiples drenajes sin resultado. Diagnóstico actual: frenillo lingual corto + paladar cóncavo → disfunción del tensor del velo del paladar → trompa de Eustaquio no ventila. En tratamiento con fisioterapeuta infantil (ejercicios lengua) y dentista infantil (aparato palatino). El peso es factor coadyuvante, no causa raíz.
+
+**Tracking Ketito (`metrics-ketito.json`):**
+- Formato: `{ "fecha", "peso", "cintura": null, "notas" }` — mismo esquema que métricas de Jorge/Manza.
+- Pesaje **mensual** (primer día del mes, en ayunas). Anotar talla en `notas` cada 3 meses.
+- NO hacer tracking calórico diario para una niña — genera ansiedad.
+- **Añadir entradas AL PRINCIPIO del array** (igual que el resto de métricas).
+
+**Cambios clave del menú acordados:**
+1. Desayuno L-V: quitar galletas Tostarica → tostada integral + pavo/jamón cocido
+2. Viernes cena: eliminar nuggets prefritos → pechuga casera empanada al horno
+3. Sábado cena: eliminar frankfurt → 2 huevos revueltos + pavo + tostada
+4. Martes cena: quitar nata del puré → sustituir por 50 ml leche
+5. Jueves cena: bacon → jamón cocido en los guisantes
+6. Abuelos: máximo 1 dulce por visita, preferir polo de agua/fruta
+
+**Colores IMC proyectado:** <18 verde · 18-21 amarillo · >21 rojo
 
 ---
 
