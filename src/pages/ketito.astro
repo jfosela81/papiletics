@@ -270,10 +270,23 @@ const proyecciones = [
     <section class="section">
       <p class="section-title">Menú semanal optimizado</p>
 
+      <div class="card" style="margin-bottom: 16px;">
+        <h4>Balance estimado con menú confirmado</h4>
+        <table>
+          <tbody>
+            <tr><td>Menú casero diario (media)</td><td><strong>~1.250 kcal</strong></td></tr>
+            <tr><td>Extras abuelos (polo × 3/sem + 1 Maxibon/mes)</td><td><strong>+38 kcal/día</strong></td></tr>
+            <tr><td>TDEE estimado (verano, actividad baja)</td><td><strong>~1.500–1.600 kcal</strong></td></tr>
+            <tr style="background: rgba(67,233,123,.06)"><td><strong>Déficit estimado</strong></td><td><strong style="color: var(--green)">~210–310 kcal/día</strong></td></tr>
+          </tbody>
+        </table>
+        <div style="font-size: 12px; color: var(--muted); margin-top: 10px;">Resultado esperado: mantenimiento o bajada muy gradual (~0.5 kg en 2–3 meses) mientras crece en talla. No es pérdida agresiva — es exactamente lo que pide el pediatra.</div>
+      </div>
+
       <div class="callout" style="margin-bottom: 16px; margin-top: 0;">
         <strong>Código de cambios:</strong>
-        <span class="badge badge-ok" style="margin-left: 6px">MANTENER</span> está bien ·
-        <span class="badge badge-fix" style="margin-left: 4px">MEJORAR</span> cambio recomendado ·
+        <span class="badge badge-ok" style="margin-left: 6px">MANTENER / CONFIRMADO</span> acordado ·
+        <span class="badge badge-fix" style="margin-left: 4px">MEJORAR</span> cuando sea posible ·
         <span class="badge badge-out" style="margin-left: 4px">CAMBIAR</span> eliminar o sustituir
       </div>
 
@@ -435,32 +448,30 @@ const proyecciones = [
           <div class="day-header">Jueves — Guisantes</div>
           <div class="meal-row">
             <span class="meal-label">Plato</span>
+            <span class="meal-content">½ lata guisantes + lomo de cerdo a la plancha (~80 g) cortado en trozos <span class="ok-tag">CONFIRMADO — carne real, sin procesados, mismo sabor de fondo</span></span>
+          </div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-header">Viernes — Nuggets + patatas micro</div>
+          <div class="meal-row">
+            <span class="meal-label">Plato</span>
             <span class="meal-content">
-              ½ lata guisantes + 2 lonchas jamón cocido o pavo troceado
-              <span class="change">MEJORAR: cambiar blister de bacon por jamón cocido. Misma comida, mucho menos procesado y menos sal.</span>
+              5 nuggets al horno + patatas al microondas (100–125 g) <span class="ok-tag">CONFIRMADO — siempre patatas micro, nunca congeladas</span>
+              <span class="change">Alternativa cuando sea fácil: nuggets caseros (pechuga + pan rallado + spray aceite al horno) = igual de ricos, sin prefrito de fábrica.</span>
             </span>
           </div>
         </div>
 
         <div class="day-block">
-          <div class="day-header">Viernes — Pollo casero al horno</div>
+          <div class="day-header">Sábado — Tortilla de patatas</div>
           <div class="meal-row">
             <span class="meal-label">Plato</span>
-            <span class="meal-content">
-              Pechuga troceada + pan rallado + spray aceite al horno + patatas al micro (100 g)
-              <span class="change">CAMBIAR: eliminar nuggets precongelados prefritos. Pechuga empanada casera al horno sabe igual o mejor y es comida real. Las patatas al micro caseras en vez de congeladas.</span>
-            </span>
+            <span class="meal-content">¼ tortilla de patatas casera (~185–200 kcal) <span class="ok-tag">CONFIRMADO — el cambio con mayor impacto calórico de la semana</span></span>
           </div>
-        </div>
-
-        <div class="day-block">
-          <div class="day-header">Sábado</div>
           <div class="meal-row">
-            <span class="meal-label">Plato</span>
-            <span class="meal-content">
-              2 huevos revueltos + 2 lonchas pavo + tostada integral (30 g)
-              <span class="change">CAMBIAR: eliminar salchichas Frankfurt. Nitritosy sal alta. Los huevos revueltos con pavo son más saciantes, proteicos y de calidad muy superior.</span>
-            </span>
+            <span class="meal-label">Excepción</span>
+            <span class="meal-content">Perrito (2 Frankfurt + pan) → <strong>máximo 1 vez al mes</strong> cuando no hay otra opción.</span>
           </div>
         </div>
 
@@ -507,7 +518,7 @@ const proyecciones = [
         </li>
         <li>
           <span class="rule-icon">🍦</span>
-          <span class="rule-text"><strong>Abuelos: polo de agua o fruta</strong> en vez de helado de corte o cucurucho. Enmarcarlo como indicación médica para el oído → los abuelos lo aceptan mejor. Si es un día especial: 1 helado "de verdad" está bien.</span>
+          <span class="rule-text"><strong>Abuelos: polo de hielo siempre (~70 kcal) · 1 Mini Maxibon al mes (~230 kcal)</strong> como excepción especial. De Cornetto/Maxibon a polo = −160 kcal por visita. Si van 3 veces/semana, son −1.700 kcal/mes ahorradas. Enmarcarlo como indicación médica para el oído.</span>
         </li>
         <li>
           <span class="rule-icon">🍫</span>
