@@ -1,6 +1,7 @@
 ---
 import WeightChart from '../components/WeightChart.astro';
 import metricsKetito from '../content/metrics-ketito.json';
+import trackingKetito from '../content/tracking-ketito.json';
 
 const latest = metricsKetito[0];
 const altura = 1.35;
@@ -12,6 +13,31 @@ const proyecciones = [
   { talla: 140, label: '140 cm (+5)' },
   { talla: 145, label: '145 cm (+10)' },
 ];
+
+// Resumen mensual del diario
+type DiaryEntry = {
+  fecha: string;
+  cena_kcal: number | null;
+  abuelos: boolean;
+  extras: string | null;
+  notas: string;
+  semaforo: 'verde' | 'amarillo' | 'rojo';
+};
+
+const dias = [...(trackingKetito as DiaryEntry[])].sort((a, b) => b.fecha.localeCompare(a.fecha));
+
+function mesLabel(fecha: string): string {
+  return new Date(fecha + 'T12:00:00').toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+}
+
+// Agrupar por mes para el resumen
+const porMes: Record<string, DiaryEntry[]> = {};
+for (const d of dias) {
+  const mes = fecha => new Date(fecha + 'T12:00:00').toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+  const key = mes(d.fecha);
+  if (!porMes[key]) porMes[key] = [];
+  porMes[key].push(d);
+}
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -142,6 +168,33 @@ const proyecciones = [
     .imc-ok   { color: var(--green); }
     .imc-warn { color: var(--yellow); }
     .imc-high { color: var(--red); }
+
+    /* Diario */
+    .diary-day {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 12px 14px; margin-bottom: 8px;
+    }
+    .diary-day:last-child { margin-bottom: 0; }
+    .diary-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+    .diary-date { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .diary-right { display: flex; align-items: center; gap: 8px; }
+    .diary-kcal { font-size: 14px; font-weight: 700; color: var(--muted); }
+    .diary-tag { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .tag-abuelos { background: rgba(249,199,79,.15); color: var(--yellow); }
+    .tag-fuera   { background: rgba(255,159,67,.15);  color: var(--accent); }
+    .semaforo { font-size: 14px; }
+    .diary-nota { font-size: 12px; color: var(--muted); }
+    .diary-extras { font-size: 12px; margin-top: 3px; }
+    .diary-extras span { color: var(--yellow); }
+
+    .mes-summary {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      background: var(--surface2); border-radius: var(--radius);
+      padding: 10px 14px; margin-bottom: 14px; font-size: 12px;
+    }
+    .mes-summary .mes-title { color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; width: 100%; margin-bottom: 2px; font-size: 11px; }
+    .mes-stat { color: var(--muted); }
+    .mes-stat strong { color: var(--text); }
 
     .back-link {
       display: inline-flex; align-items: center; gap: 6px;
@@ -597,6 +650,58 @@ const proyecciones = [
           </ul>
         </div>
       </div>
+    </section>
+
+    <!-- DIARIO -->
+    <section class="section">
+      <p class="section-title">Diario</p>
+
+      <div class="callout" style="margin-bottom: 16px; margin-top: 0;">
+        No es un contador calórico estricto. Es el <strong>contexto del mes</strong>: si el peso sube, aquí se ve dónde estuvo el desvío. 🟢 día en plan · 🟡 extra controlado (polo, 1 chuche) · 🔴 desmadre (helado de corte, salida sin control, varios extras).
+      </div>
+
+      {dias.length === 0 ? (
+        <div style="text-align:center; padding: 32px 20px; color: var(--muted); font-size: 13px;">
+          <div style="font-size: 32px; margin-bottom: 8px;">📋</div>
+          <p>El diario irá apareciendo aquí conforme Jorge registre los días.</p>
+        </div>
+      ) : (
+        <>
+          {Object.entries(porMes).map(([mes, entradas]) => {
+            const verdes   = entradas.filter(e => e.semaforo === 'verde').length;
+            const amarillos = entradas.filter(e => e.semaforo === 'amarillo').length;
+            const rojos    = entradas.filter(e => e.semaforo === 'rojo').length;
+            const nabue    = entradas.filter(e => e.abuelos).length;
+            return (
+              <>
+                <div class="mes-summary">
+                  <span class="mes-title">{mes}</span>
+                  <span class="mes-stat">🟢 <strong>{verdes}</strong> días plan</span>
+                  <span class="mes-stat">🟡 <strong>{amarillos}</strong> extras controlados</span>
+                  <span class="mes-stat">🔴 <strong>{rojos}</strong> desmadres</span>
+                  <span class="mes-stat">👴 <strong>{nabue}</strong> visitas abuelos</span>
+                </div>
+                {entradas.map((d: DiaryEntry) => (
+                  <div class="diary-day">
+                    <div class="diary-top">
+                      <span class="diary-date">
+                        {new Date(d.fecha + 'T12:00:00').toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })}
+                      </span>
+                      <div class="diary-right">
+                        {d.abuelos && <span class="diary-tag tag-abuelos">Abuelos</span>}
+                        {d.cena_kcal && <span class="diary-kcal">Cena ~{d.cena_kcal} kcal</span>}
+                        <span class="semaforo">{d.semaforo === 'verde' ? '🟢' : d.semaforo === 'amarillo' ? '🟡' : '🔴'}</span>
+                      </div>
+                    </div>
+                    {d.notas && <div class="diary-nota">{d.notas}</div>}
+                    {d.extras && <div class="diary-extras"><span>+ {d.extras}</span></div>}
+                  </div>
+                ))}
+              </>
+            );
+          })}
+        </>
+      )}
     </section>
 
     <!-- SEGUIMIENTO PESO -->
