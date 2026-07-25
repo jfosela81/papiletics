@@ -1,5 +1,13 @@
 [
   {
+    "fecha": "2026-07-24",
+    "cena_kcal": 210,
+    "abuelos": false,
+    "extras": null,
+    "notas": "Desayuno: sandwich pavo+queso+leche (~315). Comida: garbanzos 130g+atún 80g+aceitunas (~326). Cena: tortilla francesa+pavo+mozzarella+tomate frito. Día completo ~850 kcal.",
+    "semaforo": "verde"
+  },
+  {
     "fecha": "2026-07-23",
     "cena_kcal": 304,
     "abuelos": false,
