@@ -103,7 +103,14 @@ Preparar domingo. Refrigerar 3, congelar 2.
 | Clara extra | 1 |
 | Aceite en spray | máx. 1 cucharita café |
 
-**Versión proteica:** 3 huevos + 2 claras + 610g patata. +6g prot por ración.
+**Versión proteica (1 ración):** 3 huevos + 2 claras + 610g patata → tu mitad ~390 kcal · ~25g prot
+
+**Versión proteica familiar — "Tortillaca con nenas" (compartida):**
+- 4 huevos enteros + 2 claras + 800g patata al microondas + aceite spray
+- Ratio base mantenido: ~3 huevos/500g patata, claras añaden proteína sin perder cremosidad
+- Tortilla completa: ~960 kcal · ~53g prot
+- **Tu mitad: ~480 kcal · ~27g prot**
+- Nota: rebosa la sartén estándar — usa la más grande o divide en dos tandas
 
 ---
 
