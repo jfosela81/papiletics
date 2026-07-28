@@ -230,10 +230,10 @@ Si cena ensalada/tortilla sin llegar a 2.000 kcal, **subir con:** sandía, yogur
 |---|---|
 | Nombre | Ketito (apodo) |
 | Edad / nacimiento | ~8 años 9 meses · oct 2017 |
-| Peso actual | 41.6 kg (jul 2026) |
-| Talla | 135 cm |
-| IMC | 22.8 kg/m² (~P97 — zona obesidad pediátrica) |
-| Objetivo | Mantener ~41–42 kg mientras crece en talla → IMC baja solo |
+| Peso actual | 42.3 kg (pediatra 28 jul 2026) |
+| Talla | 137 cm (pediatra 28 jul 2026) |
+| IMC | 22.4 kg/m² (pediatra) · viene de 21.8 revisión anterior (~P97) |
+| Objetivo | Mantener ~42 kg mientras crece en talla → IMC baja solo |
 
 **Contexto médico:** otitis crónica recurrente + moco en oído derecho. Múltiples drenajes sin resultado. Diagnóstico actual: frenillo lingual corto + paladar cóncavo → disfunción del tensor del velo del paladar → trompa de Eustaquio no ventila. En tratamiento con fisioterapeuta infantil (ejercicios lengua) y dentista infantil (aparato palatino). El peso es factor coadyuvante, no causa raíz.
 

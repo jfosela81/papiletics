@@ -1,10 +1,18 @@
 [
   {
-    "fecha": "2026-07-26",
-    "cena_kcal": 175,
+    "fecha": "2026-07-28",
+    "cena_kcal": null,
+    "abuelos": false,
+    "extras": "Microhelado Mercadona 92g (~80 kcal) de postre comida",
+    "notas": "Desayuno: sandwich pavo+queso+leche (~315). Comida: entraña 75g plancha+patata micro 120g+microhelado (~350). Cena: pendiente (martes = puré verduras). Pediatra: 42.3 kg / 137 cm / IMC 22.4.",
+    "semaforo": "verde"
+  },
+  {
+    "fecha": "2026-07-27",
+    "cena_kcal": 245,
     "abuelos": true,
-    "extras": "Pollo empanado frito a tiras + patatas fritas en abuelos · 1.5 rebanadas pan molde con nocilla en tarde",
-    "notas": "Desayuno: sandwich pavo+queso+leche (~315). Comida abuelos: pollo empanado+patatas fritas+gazpacho 125ml (~730). Merienda: pan+nocilla (~255). Cena: 2 platitos sopa (~175). Total ~1.470 kcal. Sin helado.",
+    "extras": "Filete pollo empanado + patatas air fryer (abuelos) · 1 cookie (vs 4-5 semana anterior)",
+    "notas": "Desayuno: sandwich pavo+queso+leche (~315). Comida abuelos: pollo empanado+patatas air fryer+1 cookie (~645). Cena: puré verduras+pavo (~245). Total ~1.205 kcal sin merienda. Mejora notable vs semana anterior.",
     "semaforo": "amarillo"
   },
   {
@@ -24,11 +32,19 @@
     "semaforo": "verde"
   },
   {
+    "fecha": "2026-07-26",
+    "cena_kcal": 175,
+    "abuelos": true,
+    "extras": "Pollo empanado frito a tiras + patatas fritas en abuelos · 1.5 rebanadas pan molde con nocilla en tarde",
+    "notas": "Desayuno: sandwich pavo+queso+leche (~315). Comida abuelos: pollo empanado+patatas fritas+gazpacho 125ml (~730). Merienda: pan+nocilla (~255). Cena: 2 platitos sopa (~175). Total ~1.470 kcal. Sin helado.",
+    "semaforo": "amarillo"
+  },
+  {
     "fecha": "2026-07-23",
     "cena_kcal": 304,
     "abuelos": false,
     "extras": null,
-    "notas": "Guisantes 125g + lomo El Pozo 47g + gazpacho 250ml + tosta integral 10g + pavo 10g — sin postre, terminó satisfecha",
+    "notas": "Guisantes 125g + lomo El Pozo 47g + gazpacho 250ml + tosta integral 10g + loncha pavo 10g — sin postre, terminó satisfecha",
     "semaforo": "verde"
   }
 ]

@@ -1,9 +1,15 @@
 [
   {
+    "fecha": "2026-07-28",
+    "peso": 42.3,
+    "cintura": null,
+    "notas": "Revisión pediatra oficial. Talla: 137 cm · IMC 22.4 (pediatra) · viene de IMC 21.8 revisión anterior. Pediatra: moverse más. Objetivo: mantener peso mientras crece."
+  },
+  {
     "fecha": "2026-07-27",
     "peso": 42.2,
     "cintura": null,
-    "notas": "Peso intermedio — no lectura oficial. En ayunas pero día siguiente a domingo en abuelos (patatas fritas + nocilla + sopa). Retención de líquidos esperada. Mañana pediatra."
+    "notas": "Peso intermedio — no lectura oficial. En ayunas pero día siguiente a domingo en abuelos (patatas fritas + nocilla + sopa). Retención de líquidos esperada."
   },
   {
     "fecha": "2026-07-23",
