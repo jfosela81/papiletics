@@ -253,6 +253,30 @@ Libre hasta 400–500ml en un día caluroso. El aceite es el único item relevan
 
 ---
 
+## POLLO MECHADO CON SALSA PROTEICA
+**~490 kcal · ~90g prot (batch completo ~614g)**
+
+| Ingrediente | Cantidad |
+|---|---|
+| Pechuga de pollo (cocida en agua) | 340g cocinada (~520g cruda) |
+| Yogur griego (o queso fresco batido 0%) | 115g |
+| Queso fresco batido 0% (o yogur ligero) | 66g |
+| Mostaza | 30g |
+| Mayo ligera | 19g |
+| Queso cottage | 44g *(opcional, suma proteína)* |
+| Ajo en polvo + nuez moscada | al gusto |
+
+**Preparación:** cocer el pollo en agua hasta que esté tierno, mechar caliente con dos tenedores. Mezclar todos los ingredientes de la salsa y verter sobre el pollo caliente — absorbe mejor. Conservar en nevera hasta 3 días.
+
+**Sustituciones:** el yogur griego se puede cambiar por queso fresco batido 0% o yogur ligero sin cambiar significativamente los macros. El cottage es opcional pero suma proteína sin apenas calorías.
+
+| Ración | Kcal | Prot |
+|---|---|---|
+| 200g | ~160 kcal | ~29g |
+| 250g | ~200 kcal | ~37g |
+
+---
+
 ## MERIENDA — Banana bread proteico (microondas)
 **~870 kcal batch · ~82g prot · 3 raciones (~290 kcal · ~27g prot c/u)**
 
