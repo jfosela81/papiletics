@@ -1,10 +1,10 @@
 [
   {
     "fecha": "2026-07-28",
-    "cena_kcal": 173,
+    "cena_kcal": null,
     "abuelos": false,
     "extras": "Microhelado Mercadona 92g (~80 kcal) de postre comida",
-    "notas": "Desayuno: sandwich pavo+queso+leche (~315). Comida: entraña 75g plancha+patata micro 120g+microhelado (~350). Cena: puré verduras sin nata (50ml leche/9 raciones)+pavo (~173). Total ~838 kcal. Pediatra: 42.3 kg / 137 cm / IMC 22.4.",
+    "notas": "Desayuno: sandwich pavo+queso+leche (~315). Comida: entraña 75g plancha+patata micro 120g+microhelado (~350). Merienda y cena pendientes. Pediatra: 42.3 kg / 137 cm / IMC 22.4.",
     "semaforo": "verde"
   },
   {
@@ -12,7 +12,7 @@
     "cena_kcal": 245,
     "abuelos": true,
     "extras": "Filete pollo empanado + patatas air fryer (abuelos) · 1 cookie (vs 4-5 semana anterior)",
-    "notas": "Desayuno: sandwich pavo+queso+leche (~315). Comida abuelos: pollo empanado+patatas air fryer+1 cookie (~645). Cena: puré verduras+pavo (~245). Total ~1.205 kcal sin merienda. Mejora notable vs semana anterior.",
+    "notas": "Desayuno: sandwich pavo+queso+leche (~315). Comida abuelos: pollo empanado+patatas air fryer+1 cookie (~645). Cena: puré verduras sin nata (50ml leche/9 raciones)+pavo (~173). Total ~1.133 kcal sin merienda. Mejora notable vs semana anterior.",
     "semaforo": "amarillo"
   },
   {
