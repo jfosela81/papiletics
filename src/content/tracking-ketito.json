@@ -1,10 +1,18 @@
 [
   {
-    "fecha": "2026-07-28",
+    "fecha": "2026-07-29",
     "cena_kcal": null,
     "abuelos": false,
+    "extras": null,
+    "notas": "Desayuno: 5 Tostarica+leche 200ml+Nesquick (~249). Comida: salmón 60g+arroz 50g seco+tomate frito 30g (~321). Merienda y cena pendientes.",
+    "semaforo": "verde"
+  },
+  {
+    "fecha": "2026-07-28",
+    "cena_kcal": 246,
+    "abuelos": false,
     "extras": "Microhelado Mercadona 92g (~80 kcal) de postre comida",
-    "notas": "Desayuno: sandwich pavo+queso+leche (~315). Comida: entraña 75g plancha+patata micro 120g+microhelado (~350). Merienda y cena pendientes. Pediatra: 42.3 kg / 137 cm / IMC 22.4.",
+    "notas": "Desayuno: sandwich pavo+queso+leche (~315). Comida: entraña 75g plancha+patata micro 120g+microhelado (~350). Merienda: pan 45g+pavo+queso+pepinillos (~209). Cena: merluza congelada 85g+patatas micro 100g+yogur macedonia Lidl (~246). Total ~1.120 kcal.",
     "semaforo": "verde"
   },
   {
