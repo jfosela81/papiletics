@@ -253,6 +253,39 @@ Libre hasta 400–500ml en un día caluroso. El aceite es el único item relevan
 
 ---
 
+## CARRILLERAS DE CERDO AL PEDRO XIMÉNEZ
+**Batch completo ~1.738 kcal · ~110g prot (ración a calcular según peso final)**
+
+| Ingrediente | Cantidad |
+|---|---|
+| Carrillera de cerdo (crudo) | 650g (~4 piezas) |
+| Aceite de oliva (marcar) | 10g |
+| Cebolla | 1 unidad (~150g) |
+| Zanahoria | 1 unidad (~100g) |
+| Pimiento rojo | 1 unidad (~150g) |
+| Pedro Ximénez | 365ml (½ botella) |
+| Caldo de pollo | 750ml |
+
+**Preparación:**
+1. Calentar bien la olla express, echar 10g de aceite distribuido con papel. Marcar las carrilleras por todos los lados a fuego fuerte. Retirar.
+2. Pochar cebolla, zanahoria y pimiento rojo en la misma olla hasta que estén blandos.
+3. Añadir las carrilleras, verter el PX y el caldo hasta cubrir.
+4. Olla express: ~35-40 min desde que sube la presión.
+5. Retirar las carrilleras. Triturar las verduras con el caldo y el vino reducido. Reducir a fuego medio hasta obtener un demiglace.
+6. Servir las carrilleras con la salsa por encima.
+
+**Para calcular tu ración:**
+- Pesar carrilleras cocinadas totales → tu mitad en gramos
+- Pesar demiglace final → tu parte en gramos
+- *(pendiente de ajustar con datos reales)*
+
+| Componente | Kcal/100g | Prot/100g |
+|---|---|---|
+| Carrillera cocinada | ~180 kcal | ~21g |
+| Demiglace | ~95 kcal | ~3g |
+
+---
+
 ## POLLO MECHADO CON SALSA PROTEICA
 **~490 kcal · ~90g prot (batch completo ~614g)**
 
