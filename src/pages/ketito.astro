@@ -18,7 +18,7 @@ const proyecciones = [
 // Resumen mensual del diario
 type DiaryEntry = {
   fecha: string;
-  cena_kcal: number | null;
+  total_kcal: number | null;
   abuelos: boolean;
   extras: string | null;
   notas: string;
@@ -690,7 +690,7 @@ for (const d of dias) {
                       </span>
                       <div class="diary-right">
                         {d.abuelos && <span class="diary-tag tag-abuelos">Abuelos</span>}
-                        {d.cena_kcal && <span class="diary-kcal">Cena ~{d.cena_kcal} kcal</span>}
+                        {d.total_kcal && <span class="diary-kcal">~{d.total_kcal} kcal</span>}
                         <span class="semaforo">{d.semaforo === 'verde' ? '🟢' : d.semaforo === 'amarillo' ? '🟡' : '🔴'}</span>
                       </div>
                     </div>
