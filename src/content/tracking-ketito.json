@@ -1,10 +1,10 @@
 [
   {
     "fecha": "2026-07-30",
-    "total_kcal": 1155,
+    "total_kcal": 1100,
     "abuelos": true,
-    "extras": "Pasta a pelo en abuelos + cookie · merienda en casa amiguita: chorizo + 2 rebanadas pan molde",
-    "notas": "Desayuno: 5 Tostarica+leche+Nesquick (~249). Comida abuelos: pasta ~175g a pelo+cookie (~460). Merienda amiguita: pan molde 50g+chorizo ~35g (~263). Cena: guisantes 125g+lomo 47g (~183). Total ~1.155 kcal. Sin helado.",
+    "extras": "Pasta a pelo en abuelos + cookie DIA obrador (~105 kcal) · merienda en casa amiguita: chorizo + 2 rebanadas pan molde",
+    "notas": "Desayuno: 5 Tostarica+leche+Nesquick (~249). Comida abuelos: pasta ~175g a pelo+cookie DIA (~405). Merienda amiguita: pan molde 50g+chorizo ~35g (~263). Cena: guisantes 125g+lomo 47g (~183). Total ~1.100 kcal. Sin helado.",
     "semaforo": "verde"
   },
   {
@@ -25,10 +25,10 @@
   },
   {
     "fecha": "2026-07-27",
-    "total_kcal": 1133,
+    "total_kcal": 1078,
     "abuelos": true,
-    "extras": "Filete pollo empanado + patatas air fryer (abuelos) · 1 cookie (vs 4-5 semana anterior)",
-    "notas": "Desayuno: sandwich pavo+queso+leche (~315). Comida abuelos: pollo empanado+patatas air fryer+1 cookie (~645). Cena: puré verduras sin nata (50ml leche/9 raciones)+pavo (~173). Total ~1.133 kcal sin merienda. Mejora notable vs semana anterior.",
+    "extras": "Filete pollo empanado + patatas air fryer (abuelos) · 1 cookie DIA obrador (~105 kcal)",
+    "notas": "Desayuno: sandwich pavo+queso+leche (~315). Comida abuelos: pollo empanado+patatas air fryer+cookie DIA (~590). Cena: puré verduras sin nata+pavo (~173). Total ~1.078 kcal sin merienda. Mejora notable vs semana anterior.",
     "semaforo": "verde"
   },
   {
