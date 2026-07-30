@@ -1,0 +1,344 @@
+---
+import WeightChart from '../components/WeightChart.astro';
+import metricsCepor from '../content/metrics-cepor.json';
+import trackingCepor from '../content/tracking-cepor.json';
+
+const latest = metricsCepor[0];
+const altura = 1.43;
+const imc = latest ? +(latest.peso / (altura * altura)).toFixed(1) : null;
+
+const pesoRef = 38.0;
+const proyecciones = [
+  { talla: 147, label: '147 cm (+4)' },
+  { talla: 152, label: '152 cm (+9)' },
+  { talla: 157, label: '157 cm (+14)' },
+];
+
+type DiaryEntry = {
+  fecha: string;
+  total_kcal: number | null;
+  abuelos: boolean;
+  extras: string | null;
+  notas: string;
+  semaforo: 'verde' | 'amarillo' | 'rojo';
+};
+
+const dias = [...(trackingCepor as DiaryEntry[])].sort((a, b) => b.fecha.localeCompare(a.fecha));
+
+const porMes: Record<string, DiaryEntry[]> = {};
+for (const d of dias) {
+  const mes = (fecha: string) => new Date(fecha + 'T12:00:00').toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+  const key = mes(d.fecha);
+  if (!porMes[key]) porMes[key] = [];
+  porMes[key].push(d);
+}
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cepor — Seguimiento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0f1117;
+      --surface:  #1a1d27;
+      --surface2: #22263a;
+      --border:   #2e3347;
+      --accent:   #34d399;
+      --accent2:  #ff6584;
+      --green:    #43e97b;
+      --yellow:   #f9c74f;
+      --red:      #ff6584;
+      --text:     #e8eaf6;
+      --muted:    #8b92b8;
+      --radius:   12px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      padding-bottom: 40px;
+    }
+
+    .site-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .site-header .logo { font-size: 20px; }
+    .site-header h1 { font-size: 17px; font-weight: 700; color: var(--text); }
+    .site-header p { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+    main { max-width: 680px; margin: 0 auto; padding: 0; }
+
+    .section { padding: 24px 20px; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+    .section-title {
+      font-size: 13px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--accent); margin-bottom: 16px;
+    }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px; margin-bottom: 12px;
+    }
+    .card:last-child { margin-bottom: 0; }
+    .card h4 {
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; text-align: center; }
+    .stat .val { font-size: 22px; font-weight: 700; color: var(--accent); line-height: 1.1; }
+    .stat .lbl { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+    .callout {
+      background: rgba(52,211,153,.08); border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 12px 14px; font-size: 13px; color: var(--muted); margin: 12px 0;
+    }
+    .callout.yellow { background: rgba(249,199,79,.08); border-color: var(--yellow); }
+    .callout strong { color: var(--text); }
+    .callout:last-child { margin-bottom: 0; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { background: var(--surface2); color: var(--muted); font-weight: 600;
+         text-align: left; padding: 8px 10px; font-size: 11px;
+         text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 8px 10px; border-top: 1px solid var(--border); vertical-align: top; }
+    td strong { color: var(--accent); }
+
+    .imc-ok   { color: var(--green); font-weight: 700; }
+    .imc-warn { color: var(--yellow); font-weight: 700; }
+    .imc-high { color: var(--red); font-weight: 700; }
+
+    /* Diario */
+    .diary-day {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 12px 14px; margin-bottom: 8px;
+    }
+    .diary-day:last-child { margin-bottom: 0; }
+    .diary-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+    .diary-date { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .diary-right { display: flex; align-items: center; gap: 8px; }
+    .diary-kcal { font-size: 14px; font-weight: 700; color: var(--muted); }
+    .diary-tag { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .tag-abuelos { background: rgba(249,199,79,.15); color: var(--yellow); }
+    .semaforo { font-size: 14px; }
+    .diary-nota { font-size: 12px; color: var(--muted); }
+    .diary-extras { font-size: 12px; margin-top: 3px; }
+    .diary-extras span { color: var(--yellow); }
+
+    .mes-summary {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      background: var(--surface2); border-radius: var(--radius);
+      padding: 10px 14px; margin-bottom: 14px; font-size: 12px;
+    }
+    .mes-summary .mes-title { color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; width: 100%; margin-bottom: 2px; font-size: 11px; }
+    .mes-stat { color: var(--muted); }
+    .mes-stat strong { color: var(--text); }
+
+    .empty-state { text-align: center; padding: 32px 20px; color: var(--muted); font-size: 13px; }
+    .empty-state .icon { font-size: 32px; margin-bottom: 8px; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--muted); font-size: 13px; text-decoration: none;
+      padding: 20px 20px 0;
+    }
+    .back-link:hover { color: var(--text); }
+    strong { color: var(--text); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <span class="logo">🌿</span>
+    <div>
+      <h1>Cepor</h1>
+      <p>Seguimiento · desde julio 2026</p>
+    </div>
+  </header>
+
+  <a href="/" class="back-link">← Plan de Jorge</a>
+
+  <main>
+
+    <!-- PERFIL -->
+    <section class="section">
+      <p class="section-title">Perfil actual</p>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="val">{latest?.peso ?? '—'} kg</div>
+          <div class="lbl">Peso actual</div>
+        </div>
+        <div class="stat">
+          <div class="val">143 cm</div>
+          <div class="lbl">Talla (jul 2026)</div>
+        </div>
+        <div class="stat">
+          <div class="val">10 años</div>
+          <div class="lbl">Edad (mar 2016)</div>
+        </div>
+        <div class="stat">
+          <div class="val">{imc ?? '—'}</div>
+          <div class="lbl">IMC kg/m²</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>IMC en rango normal (~P75).</strong> El objetivo aquí es mantener buenos hábitos y que el IMC no suba con el crecimiento. Sin restricciones, sin déficit — solo seguimiento.
+      </div>
+
+      <div class="card">
+        <h4>Proyección IMC si mantiene el peso actual</h4>
+        <table>
+          <thead>
+            <tr><th>Talla futura</th><th>IMC proyectado</th><th>Zona</th></tr>
+          </thead>
+          <tbody>
+            {proyecciones.map(p => {
+              const imcP = +(pesoRef / ((p.talla / 100) ** 2)).toFixed(1);
+              const cls = imcP > 21 ? 'imc-high' : imcP > 18 ? 'imc-warn' : 'imc-ok';
+              const zona = imcP > 21 ? 'Sobrepeso' : imcP > 18 ? 'Normal alto' : 'Normal';
+              return (
+                <tr>
+                  <td>{p.label}</td>
+                  <td><span class={cls}>{imcP}</span></td>
+                  <td><span class={cls}>{zona}</span></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- HÁBITOS -->
+    <section class="section">
+      <p class="section-title">Hábitos clave</p>
+
+      <div class="card">
+        <h4>Lo que ya hace bien</h4>
+        <table>
+          <tbody>
+            <tr><td>Come despacio</td><td style="color: var(--green)">✓ Buena señal de saciedad</td></tr>
+            <tr><td>Para cuando no tiene hambre</td><td style="color: var(--green)">✓ Regulación interna correcta</td></tr>
+            <tr><td>Actividad física en cole</td><td style="color: var(--green)">✓ Balonmano + karate + patio</td></tr>
+            <tr><td>Bebe agua</td><td style="color: var(--green)">✓ Hábito bien establecido</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h4>Menú en casa (igual que hermana)</h4>
+        <table>
+          <tbody>
+            <tr><td>Lunes / Viernes</td><td>Garbanzos con atún y aceitunas</td></tr>
+            <tr><td>Martes</td><td>Pollo a la plancha + patatas micro</td></tr>
+            <tr><td>Miércoles</td><td>Arroz + salmón a la plancha</td></tr>
+            <tr><td>Jueves</td><td>Lomo de cerdo + guisantes</td></tr>
+            <tr><td>Sábado</td><td>Tortilla de patatas / pseudo pizza</td></tr>
+            <tr><td>Domingo</td><td>Sopa de fideos</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout yellow">
+        <strong>Abuelos:</strong> mismo criterio que su hermana — polo de hielo preferible a helado de corte. Un Maxibon al mes como excepción.
+      </div>
+    </section>
+
+    <!-- DIARIO -->
+    <section class="section">
+      <p class="section-title">Diario</p>
+
+      <div class="callout" style="margin-bottom: 16px; margin-top: 0;">
+        🟢 &lt;1.500 kcal — bien · 🟡 1.500–1.700 kcal — mantenimiento · 🔴 &gt;1.700 kcal — superávit. El tag <strong>Abuelos</strong> marca los días con visita.
+      </div>
+
+      {dias.length === 0 ? (
+        <div class="empty-state">
+          <div class="icon">📋</div>
+          <p>El diario irá apareciendo aquí conforme Jorge registre los días.</p>
+        </div>
+      ) : (
+        <>
+          {Object.entries(porMes).map(([mes, entradas]) => {
+            const verdes    = entradas.filter(e => e.semaforo === 'verde').length;
+            const amarillos = entradas.filter(e => e.semaforo === 'amarillo').length;
+            const rojos     = entradas.filter(e => e.semaforo === 'rojo').length;
+            const nabue     = entradas.filter(e => e.abuelos).length;
+            return (
+              <>
+                <div class="mes-summary">
+                  <span class="mes-title">{mes}</span>
+                  <span class="mes-stat">🟢 <strong>{verdes}</strong> días bien</span>
+                  <span class="mes-stat">🟡 <strong>{amarillos}</strong> mantenimiento</span>
+                  <span class="mes-stat">🔴 <strong>{rojos}</strong> superávit</span>
+                  <span class="mes-stat">👴 <strong>{nabue}</strong> visitas abuelos</span>
+                </div>
+                {entradas.map((d: DiaryEntry) => (
+                  <div class="diary-day">
+                    <div class="diary-top">
+                      <span class="diary-date">
+                        {new Date(d.fecha + 'T12:00:00').toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })}
+                      </span>
+                      <div class="diary-right">
+                        {d.abuelos && <span class="diary-tag tag-abuelos">Abuelos</span>}
+                        {d.total_kcal && <span class="diary-kcal">~{d.total_kcal} kcal</span>}
+                        <span class="semaforo">{d.semaforo === 'verde' ? '🟢' : d.semaforo === 'amarillo' ? '🟡' : '🔴'}</span>
+                      </div>
+                    </div>
+                    {d.notas && <div class="diary-nota">{d.notas}</div>}
+                    {d.extras && <div class="diary-extras"><span>+ {d.extras}</span></div>}
+                  </div>
+                ))}
+              </>
+            );
+          })}
+        </>
+      )}
+    </section>
+
+    <!-- SEGUIMIENTO PESO -->
+    <section class="section">
+      <p class="section-title">Seguimiento de peso</p>
+
+      <div class="callout" style="margin-bottom: 16px; margin-top: 0;">
+        Pesaje el <strong>primer día de cada mes</strong>, en ayunas. Anotar talla cada 3 meses.
+      </div>
+
+      <WeightChart metrics={metricsCepor} lineColor="var(--accent)" />
+
+      <div class="callout">
+        Con el crecimiento en altura el IMC baja de forma natural. La trayectoria actual es buena — el objetivo es que se mantenga así.
+      </div>
+    </section>
+
+  </main>
+
+  <p style="font-size: 11px; color: var(--muted); text-align: center; margin-top: 20px; padding-bottom: 8px;">
+    Seguimiento personal · Papiletics · desde julio 2026
+  </p>
+
+</body>
+</html>

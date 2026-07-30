@@ -18,6 +18,7 @@ Este documento permite continuar el coaching nutricional/de fitness y mantener l
 | Plan Jorge | `/` (index) |
 | Tracking Manza | `/manza` |
 | Seguimiento Ketito | `/ketito` |
+| Seguimiento Cepor | `/cepor` |
 
 **Stack:** Astro (output static), JSON para datos, Vercel auto-deploy en push a `main`. Sin BD, sin login.
 
