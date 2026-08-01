@@ -1,5 +1,21 @@
 [
   {
+    "fecha": "2026-08-01",
+    "total_kcal": null,
+    "abuelos": false,
+    "extras": null,
+    "notas": "Desayuno: pan molde 50g+pavo 4l+queso+leche 200ml+Nesquick 4g (~441). Comida prevista: arroz 40g+brócoli+tomate frito. Cena prevista: ¼ tortilla 4huevos+2claras+800g patata (~272).",
+    "semaforo": "verde"
+  },
+  {
+    "fecha": "2026-07-31",
+    "total_kcal": 1118,
+    "abuelos": false,
+    "extras": null,
+    "notas": "Desayuno: 5 Tostarica 30g+leche+Nesquick (~263). Comida: garbanzos ~100g+atún+aceitunas+onza choco 85% (~270). Merienda: pulga 45g+3 lonchas lomo embuchado (~185). Cena: 5 nuggets Lidl+patatas micro 100g+prueba kebab pollo (~400). Total ~1.118 kcal.",
+    "semaforo": "verde"
+  },
+  {
     "fecha": "2026-07-30",
     "total_kcal": 1210,
     "abuelos": true,
