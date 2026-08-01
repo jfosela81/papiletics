@@ -1,10 +1,10 @@
 [
   {
     "fecha": "2026-08-01",
-    "total_kcal": 1201,
-    "abuelos": false,
+    "total_kcal": 1215,
+    "abuelos": true,
     "extras": null,
-    "notas": "Desayuno: pan molde 58g (29g/rebanada)+pavo 48g (12g/loncha×4)+queso 19g+leche 200ml+Nesquick 4g (~399). Comida: arroz ~40g efectivos+brócoli+tomate frito+onza choco 85% (~294). Merienda: plátano 100g+pan molde+nocilla (~236). Cena: ¼ tortilla 4h+2cl+800g patata (~272). Total ~1.201 kcal.",
+    "notas": "Desayuno: pan molde 58g+pavo 48g+queso 19g+leche 200ml+Nesquick 4g (~399). Comida: arroz ~40g+brócoli+tomate frito+onza choco 85% (~294). Merienda: plátano 100g+pan molde+nocilla (~236). Cena BBQ abuelos: burger ternera 120g+patata brasa 50g (~286). Sin helado. Total ~1.215 kcal.",
     "semaforo": "verde"
   },
   {
