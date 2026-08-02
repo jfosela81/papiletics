@@ -1,5 +1,13 @@
 [
   {
+    "fecha": "2026-08-02",
+    "total_kcal": null,
+    "abuelos": false,
+    "extras": null,
+    "notas": "Desayuno: sandwich pavo 48g+queso 19g+pan molde 58g+leche 200ml+Nesquick 5g (~403). Resto pendiente.",
+    "semaforo": "verde"
+  },
+  {
     "fecha": "2026-08-01",
     "total_kcal": 1215,
     "abuelos": true,
