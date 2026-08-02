@@ -1,11 +1,11 @@
 [
   {
     "fecha": "2026-08-02",
-    "total_kcal": null,
-    "abuelos": false,
-    "extras": null,
-    "notas": "Desayuno: sandwich pavo 48g+queso 19g+pan molde 58g+leche 200ml+Nesquick 5g (~403). Resto pendiente.",
-    "semaforo": "verde"
+    "total_kcal": 1487,
+    "abuelos": true,
+    "extras": "Maxibon Hacendado clásico (~200 kcal) — excepción mensual acordada · merienda: pan+chorizo pamplona+galletitas saladas",
+    "notas": "Desayuno: sandwich pavo+queso+leche+Nesquick (~403). Comida abuelos: paella ~70g arroz seco (~370)+Maxibon (~200). Merienda: pan 45g+chorizo pamplona ~30g+4 galletitas (~299). Cena: sopa caldo brick+fideos 50g (~215). Total ~1.487 kcal.",
+    "semaforo": "amarillo"
   },
   {
     "fecha": "2026-08-01",
