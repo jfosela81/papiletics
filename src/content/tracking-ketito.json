@@ -1,5 +1,13 @@
 [
   {
+    "fecha": "2026-08-03",
+    "total_kcal": null,
+    "abuelos": false,
+    "extras": null,
+    "notas": "Desayuno: sandwich pavo+queso+leche+Nesquick (~400). Comida: arroz 50g seco+brócoli 120g+salmón 70g cocinado+AOVE 5g (~392). Parcial ~792 kcal. Merienda+cena pendientes.",
+    "semaforo": "verde"
+  },
+  {
     "fecha": "2026-08-02",
     "total_kcal": 1487,
     "abuelos": true,
