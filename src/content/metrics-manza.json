@@ -1,8 +1,16 @@
 [
   {
+    "fecha": "2026-08-31",
+    "peso": 64.6,
+    "cintura": null,
+    "cadera": null,
+    "notas": "Primera semana de seguimiento activo. +1.1 kg vs inicio (63.5 kg del 24 ago). Retención agua post-tarta queso domingo. Inicio real desde cero — próximo lunes dará la tendencia real."
+  },
+  {
     "fecha": "2026-08-24",
     "peso": 63.5,
     "cintura": null,
+    "cadera": null,
     "notas": "Primera medición oficial. Inicio seguimiento activo."
   }
 ]
