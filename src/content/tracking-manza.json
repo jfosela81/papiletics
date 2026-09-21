@@ -1,5 +1,13 @@
 [
   {
+    "fecha": "2026-09-21",
+    "kcal": 1133,
+    "proteina": 111,
+    "entreno": "Sin entreno registrado.",
+    "notas": "Desayuno: pan espelta 25g+jamón cocido 40g+queso fresco 60g+almendras 10g+huevo duro+café con leche 35ml. Comida: garbanzos 125g+queso fresco 0% 85g+mostaza 20g+cottage 70g+atún 70g+maíz 20g+aceitunas 35g+chorizo asturiano 12g. Bowl cierre: yogur griego 125g+soy 25g+frambuesas 40g+moras 30g+leche entera 30ml. Pesaje: 62.8 kg (−1.0 kg vs sem. ant.) · cintura 67cm (−2cm) · cadera 104cm (−1cm). Semana muy sólida.",
+    "medicion": { "peso": 62.8, "cintura": 67, "cadera": 104 }
+  },
+  {
     "fecha": "2026-09-20",
     "kcal": 959,
     "proteina": 69,
