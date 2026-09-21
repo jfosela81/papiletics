@@ -1,5 +1,13 @@
 [
   {
+    "fecha": "2026-09-21",
+    "kcal": 1477,
+    "proteina": 153,
+    "entreno": "Bici 7.8km 33min −187 kcal. Rehabilitación manguito rotador. Descanso total de fuerza.",
+    "notas": "IF hasta comida. Pre-comida: lomo embuchado 40g. Comida: ensalada judías blancas 200g+atún 100g+cottage 80g+maíz 40g+brotes verdes 66g+aceitunas 32g+queso fresco 0% 80g+mostaza 25g. Postre: chorizo asturiano 11g+jamón hueso 14g+lentejas 30g+caldo 270g+sobao 43g. Cena: wrap tortilla 39g+atún 66g+huevo 46g+salsa tomate 80g+pepinillos+queso crema light 30g+caldo verduras 250g. Bowl cierre: yogur 110g+avena 29g+whey 29g+leche desnatada 75g+arándanos 35g. Pesaje: 84.9 kg (−0.8 kg vs sem. ant.). Déficit ~920 kcal vs TDEE.",
+    "medicion": { "peso": 84.9 }
+  },
+  {
     "fecha": "2026-09-20",
     "kcal": 2061,
     "proteina": 135,
