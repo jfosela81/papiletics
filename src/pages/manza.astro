@@ -12,6 +12,18 @@ function kcalColor(kcal: number) {
   if (kcal <= 1450) return 'var(--green)';
   return 'var(--yellow)';
 }
+
+function cicloFase(dia: number | null): { label: string; color: string; nota: string } | null {
+  if (dia == null) return null;
+  if (dia <= 5)   return { label: `Menstruación · día ${dia}`, color: '#ff6584', nota: 'Retención mínima — peso más fiable' };
+  if (dia <= 13)  return { label: `Folicular · día ${dia}`,    color: '#43e97b', nota: 'Energía alta, metabolismo activo' };
+  if (dia === 14) return { label: `Ovulación · día 14`,        color: '#f9c74f', nota: 'Pico estrógenos — posible +0.5 kg agua' };
+  return               { label: `Lútea · día ${dia}`,          color: '#ff6b9d', nota: 'Progesterona — posible retención +1–2 kg' };
+}
+
+const metricsOrdenadas = [...metricsManza]
+  .sort((a: any, b: any) => b.fecha.localeCompare(a.fecha))
+  .filter((m: any) => m.peso != null);
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -292,65 +304,46 @@ function kcalColor(kcal: number) {
       <WeightChart metrics={metricsManza} lineColor="var(--accent)" />
 
       {/* Peso + Ciclo menstrual */}
-      {(() => {
-        function cicloFase(dia: number | null): { label: string; color: string; nota: string } | null {
-          if (dia == null) return null;
-          if (dia <= 5)  return { label: `Menstruación · día ${dia}`, color: '#ff6584', nota: 'Retención mínima — peso más fiable' };
-          if (dia <= 13) return { label: `Folicular · día ${dia}`,    color: '#43e97b', nota: 'Energía alta, metabolismo activo' };
-          if (dia === 14) return { label: `Ovulación · día 14`,       color: '#f9c74f', nota: 'Pico estrógenos — posible +0.5 kg agua' };
-          return              { label: `Lútea · día ${dia}`,          color: '#ff6b9d', nota: 'Progesterona — posible retención +1–2 kg' };
-        }
-
-        const entriesConCiclo = [...metricsManza]
-          .sort((a: any, b: any) => b.fecha.localeCompare(a.fecha))
-          .filter((m: any) => m.peso != null);
-
-        return (
-          <div class="ciclo-panel">
-            <p class="ciclo-title">Peso semanal + fase del ciclo</p>
-            <table class="ciclo-table">
-              <thead>
+      <div class="ciclo-panel">
+        <p class="ciclo-title">Peso semanal + fase del ciclo</p>
+        <table class="ciclo-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Peso</th>
+              <th>Fase</th>
+            </tr>
+          </thead>
+          <tbody>
+            {metricsOrdenadas.map((m: any) => {
+              const fase = cicloFase(m.dia_ciclo ?? null);
+              const d = new Date(m.fecha + 'T12:00:00');
+              const lbl = d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+              return (
                 <tr>
-                  <th>Fecha</th>
-                  <th>Peso</th>
-                  <th>Fase</th>
+                  <td>{lbl}</td>
+                  <td><strong>{m.peso.toFixed(1)} kg</strong></td>
+                  <td>
+                    {fase
+                      ? <span class="ciclo-badge" style={`background:${fase.color}22;color:${fase.color};border-color:${fase.color}44`} title={fase.nota}>{fase.label}</span>
+                      : <span class="ciclo-badge ciclo-badge--empty">—</span>
+                    }
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {entriesConCiclo.map((m: any) => {
-                  const fase = cicloFase(m.dia_ciclo ?? null);
-                  const d = new Date(m.fecha + 'T12:00:00');
-                  const label = d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
-                  return (
-                    <tr>
-                      <td>{label}</td>
-                      <td><strong>{m.peso.toFixed(1)} kg</strong></td>
-                      <td>
-                        {fase ? (
-                          <span class="ciclo-badge" style={`background: ${fase.color}22; color: ${fase.color}; border-color: ${fase.color}44`} title={fase.nota}>
-                            {fase.label}
-                          </span>
-                        ) : (
-                          <span class="ciclo-badge ciclo-badge--empty">—</span>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-            <p class="ciclo-legend">
-              <span style="color:#ff6584">● Menstruación</span>
-              <span style="color:#43e97b">● Folicular</span>
-              <span style="color:#f9c74f">● Ovulación</span>
-              <span style="color:#ff6b9d">● Lútea</span>
-            </p>
-            <div class="callout" style="margin-top:10px">
-              <strong>¿Por qué importa?</strong> En fase lútea (días 15–28) la progesterona puede añadir <strong>+1–2 kg de agua</strong> al peso — no es grasa. El peso más fiable es en fase folicular (días 6–13), cuando la retención es mínima.
-            </div>
-          </div>
-        );
-      })()}
+              );
+            })}
+          </tbody>
+        </table>
+        <p class="ciclo-legend">
+          <span style="color:#ff6584">● Menstruación</span>
+          <span style="color:#43e97b">● Folicular</span>
+          <span style="color:#f9c74f">● Ovulación</span>
+          <span style="color:#ff6b9d">● Lútea</span>
+        </p>
+        <div class="callout" style="margin-top:10px">
+          <strong>¿Por qué importa?</strong> En fase lútea (días 15–28) la progesterona puede añadir <strong>+1–2 kg de agua</strong> al peso — no es grasa. El peso más fiable es en fase folicular (días 6–13), cuando la retención es mínima.
+        </div>
+      </div>
 
       <div class="weekly-chart-spacer"></div>
 
