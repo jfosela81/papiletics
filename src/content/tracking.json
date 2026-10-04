@@ -1,5 +1,19 @@
 [
   {
+    "fecha": "2026-10-03",
+    "kcal": 2700,
+    "proteina": 80,
+    "entreno": "Sin entreno. Boda.",
+    "notas": "Boda — estimación ligero superávit (~+450 kcal vs TDEE). Cóctel controlado, sin abusar de pan. Dulces sí. Registro aproximado, no pesado. Sin alcohol."
+  },
+  {
+    "fecha": "2026-10-02",
+    "kcal": 2300,
+    "proteina": 120,
+    "entreno": "Bici ligera 10min 60kcal 2.5km.",
+    "notas": "Comida: ensalada garbanzos 130g+espinacas 70g+tomate 230g+cottage 80g+atún 100g+pavo 38g+falsonesa (yogur griego 120g+huevo duro+aceite 5g+ajo+pepinillos+aceitunas 4)+batido (leche desnatada 260g+whey 30g). Cena preboda: estimación neutra — priorizó proteína, controló pan, postres controlados. Sin alcohol. Registro aproximado."
+  },
+  {
     "fecha": "2026-10-01",
     "kcal": 1834,
     "proteina": 177,

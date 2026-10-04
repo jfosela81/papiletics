@@ -1,5 +1,19 @@
 [
   {
+    "fecha": "2026-10-03",
+    "kcal": 2200,
+    "proteina": 60,
+    "entreno": "Sin entreno. Boda.",
+    "notas": "Boda — estimación ligero superávit. Dulces, cóctel. Registro aproximado, no pesado."
+  },
+  {
+    "fecha": "2026-10-02",
+    "kcal": 1800,
+    "proteina": 80,
+    "entreno": "Sin entreno. Cena de preboda.",
+    "notas": "Cena preboda — estimación neutra. Registro aproximado, no pesado."
+  },
+  {
     "fecha": "2026-10-01",
     "kcal": 1265,
     "proteina": 116,
