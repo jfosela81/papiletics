@@ -1,6 +1,7 @@
 ---
 import {
   aggregateWeeklyBalance,
+  DEFAULT_TDEE_BASE,
   getChartMode,
   type TrackingEntry,
 } from '../utils/weeklyBalance';
@@ -31,6 +32,7 @@ const weeks = aggregateWeeklyBalance(entries, tdee);
 // Por defecto solo las últimas N semanas; el resto queda en "Ver histórico"
 const recent = weeks.slice(-recentWeeks);
 const hasHistory = weeks.length > recent.length;
+const usesExercise = entries.some((e) => typeof e.ejercicio_kcal === 'number');
 ---
 
 <div class="weekly-chart">
@@ -38,7 +40,10 @@ const hasHistory = weeks.length > recent.length;
     Balance semanal · {hasHistory ? `últimas ${recent.length} semanas` : 'todas las semanas'}
   </p>
   <p class="weekly-chart-sub">
-    TDEE estimado: {tdee.toLocaleString('es-ES')} kcal/día · verde = déficit · ámbar = superávit
+    {usesExercise
+      ? `Gasto = TDEE base ${DEFAULT_TDEE_BASE.toLocaleString('es-ES')} kcal + ejercicio registrado`
+      : `TDEE estimado: ${tdee.toLocaleString('es-ES')} kcal/día`}
+    {' '}· verde = déficit · ámbar = superávit
   </p>
 
   {mode === 'empty' ? (

@@ -4,6 +4,8 @@
     "kcal": 1737,
     "proteina": 191,
     "entreno": "Karate intenso ~125 kcal (5 Pinan suave y luego a ritmo, sin Gojushiho). GtG 5 series. Manguito ✓.",
+    "ejercicio_kcal": 125,
+    "tdee_base": 2150,
     "notas": "Desayuno: harina avena 30g+whey 30g+leche desnatada 60g+frutos rojos 37g+mango 45g. Comida: pechuga pollo (batch ~560g crudos: 460g + 2 solomillitos ~100g, a la plancha y terminada con agua+tomate concentrado y especias; comió el 60% = 300g de ~500g cocinados, ~336g crudos equivalentes)+verduras asadas 415g+patata cruda 75g+batido (leche desnatada 252g+whey 30g). Cena: pizza con tortilla de trigo 60g+tomate frito 50g (78kcal/100g)+mozzarella 90g+piquillo 40g+cottage 70g+muslito pollo 48g+naranja 130g. Déficit ~538 kcal con karate. Tres comidas bien saciantes, mejor día en adherencia y sensación. Hombro derecho: molestia leve en defensas/tsuki ayer, hoy sin molestias en el día a día."
   },
   {
@@ -11,6 +13,8 @@
     "kcal": 1743,
     "proteina": 155,
     "entreno": "Karate intenso ~140 kcal (2× Gojushiho lento, 5 Pinan a ritmo, 10 burpees; hombro derecho molesto, sin consecuencias). Paseo 30 min (no contado). GtG 4 series. Manguito ✓.",
+    "ejercicio_kcal": 140,
+    "tdee_base": 2150,
     "notas": "Desayuno: harina avena 30g+whey 30g+leche desnatada 75g+frutos rojos 50g. Comida: curry de garbanzos (batch 2000g sin pollo: garbanzos cocidos 400g+berenjena 300g+cebolla 200g+pimientos 100g+calabaza 150g+zanahoria 50g+leche evaporada 200ml+tomate concentrado 50g) — mitad (1000g)+muslo pollo 50g+batido postre (leche desnatada 244g+whey 31g). Cena: merluza 200g cruda+patata 300g cruda microondas+salsa (queso fresco batido 0% 100g+huevo duro+mayonesa 10g+aceite 3g)+mandarinas 110g. Sin tercer batido: proteína ya cubierta (155g, ~1,9 g/kg). Déficit ~547 kcal con karate. Día de peso/cintura (82,6 kg · 94,5 cm)."
   },
   {
@@ -18,6 +22,8 @@
     "kcal": 1963,
     "proteina": 128,
     "entreno": "Bici 36min 7,04km 170kcal (viendo el fútbol).",
+    "ejercicio_kcal": 170,
+    "tdee_base": 2150,
     "notas": "Domingo en casa. Desayuno: 1 porra+4 churros (150g masa frita ~430kcal/100g, sabor de familia)+batido (leche desnatada 250g+leche entera 60g+whey 35g). Comida: entraña 140g cruda+caldo de pollo 300g. Mandarinas 110g. Cena: ensalada de patata (patata cocida 250g+atún 93g+piquillo 52g+maíz 50g+pepinillos sabor anchoa 23g)+salsa (huevo duro+yogur griego 110g+mayonesa 15g (600kcal/100g)+aceite 2g)+caldo de pollo 700g (6kcal/100g). Cierre: mandarinas 110g. Sin batido de cena: proteína ya cubierta en la media semanal. Déficit ~357 kcal con bici. Los churros (~645 kcal) y la salsa con yogur+mayonesa fueron lo que más pesó."
   },
   {
@@ -25,6 +31,8 @@
     "kcal": 1775,
     "proteina": 157,
     "entreno": "Workout parque (dominadas 10-8-7-5-5, australianas pronas 7-7-7-6-5, australianas supinas 5-5-5-5-5, knee raises 10-10, dead hang 31s) + 40 min andando ~150 kcal. Bici 21min 2,95km 71kcal. Total: ~221 kcal.",
+    "ejercicio_kcal": 221,
+    "tdee_base": 2150,
     "notas": "Desayuno: harina avena 30g+whey 30g+frutos rojos 50g+leche desnatada 60g. Comida: lubina cocinada 350g+patata horno 211g+acelga cocinada con algo de patata 286g+aceite 5g. Merienda: mandarinas 110g. Cena: boquerones vinagre 35g+tortilla de patatas (patata 500g cruda microondas+aceite 8g+2 huevos 100g+claras 80g). Cierre: mandarinas 110g (sin batido). Déficit ~596 kcal con workout y bici. Día en casa, sin batido: la proteína ya estaba cubierta (157g)."
   },
   {
@@ -32,6 +40,8 @@
     "kcal": 2322,
     "proteina": 183,
     "entreno": "Bici 17min 2,55km 60kcal (post-comida) + bici 44min 7,50km 180kcal + bici 20min 2,9km 70kcal (antes de dormir). Total: 81min 12,95km 310kcal.",
+    "ejercicio_kcal": 310,
+    "tdee_base": 2150,
     "notas": "Desayuno: croissant 90g relleno de pavo 65g+havarti light 48g+batido (leche desnatada 260g+whey 31g). Comida lentejas Manza: lentejas cocidas 300g+caldo lentejas 250g+chorizo 30g+pan 30g+mandarinas 110g. Cena: boquerones vinagre 35g+pseudopizza (tortilla trigo 36g+tomate 43g+cherry 40g+mozzarella 60g+champiñones ajillo 50g+pavo 65g)+batido (leche desnatada 260g+whey 30g)+extra: havarti light 50g+pan 10g. Recena: patata cocida 120g+salsa ranchera Mercadona 15g+salsa barbacoa 15g (128kcal/100g). Caldo de verduras al final. Déficit ~138 kcal con bici. Desayuno extra con croissant fue lo que más pesó. Proteína 183g."
   },
   {
@@ -39,6 +49,8 @@
     "kcal": 1610,
     "proteina": 185,
     "entreno": "Sin entreno.",
+    "ejercicio_kcal": 0,
+    "tdee_base": 2150,
     "notas": "IF hasta comida. Comida: pechuga pollo 380g cruda plancha+patata 250g cruda microondas+aceite 2g+mandarinas 110g+batido (leche desnatada 262g+whey 35g). Cena: lechuga 80g+tomate 147g+atún 108g+cottage 53g+tortilla integral 36g+salsa (yogur griego 120g+mayonesa 15g+huevo duro+aceite 2g)+naranja ~150g. Sin ejercicio. Déficit ~540 kcal. Excelente día de proteína (185g)."
   },
   {
@@ -46,6 +58,8 @@
     "kcal": 2030,
     "proteina": 156,
     "entreno": "Karate ~100 kcal.",
+    "ejercicio_kcal": 100,
+    "tdee_base": 2150,
     "notas": "Desayuno: mandarinas 110g. Comida restos cocido viernes: sopa caldo 350g+fideos cocidos 160g+garbanzos 150g+patata cocida 350g+zanahoria 50g+muslo pollo 40g+puré verduras 250g+arroz cocido 20g+leche condensada 32g+batido (leche desnatada 275g+whey 35g). Cena: merluza 230g cruda plancha+patata 330g cruda+aceite 3g+batido (leche desnatada 250g+whey 30g). Déficit ~220 kcal con karate. Día dominado por hidratos del cocido — proteína ajustada (156g)."
   },
   {
@@ -53,6 +67,8 @@
     "kcal": 1792,
     "proteina": 192,
     "entreno": "Sin entreno.",
+    "ejercicio_kcal": 0,
+    "tdee_base": 2150,
     "notas": "Desayuno: mozzarella 20g+bollito proteico casero (clara+leche polvo desnatada+onza choco 85%). Comida batch pollo curry: pechuga 500g+champiñones portobello 250g+aguja cerdo 50g+crema cacahuete 25g+leche desnatada 300g+tomate triturado 50g — porción 60% (equiv. 300g pollo crudo)+batido (leche desnatada 255g+whey 35g)+2 dumplings caseros (masa 40g harina+cerdo aguja 40g). Cena: bowl (harina avena 30g+whey 30g+leche desnatada 60g+mango 75g)+mandarina 110g+sandwich (pan 52g+pavo 44g+havarti light 20g). Sin ejercicio. Déficit ~358 kcal. Proteína 192g — récord igualado del mes."
   },
   {
@@ -60,6 +76,8 @@
     "kcal": 2320,
     "proteina": 166,
     "entreno": "Sin entreno.",
+    "ejercicio_kcal": 0,
+    "tdee_base": 2150,
     "notas": "Desayuno bowl: harina avena 30g+whey 25g+leche desnatada 60g+mango 75g. Mediodía: 2 dumplings caseros (masa 40g harina+cerdo aguja 50g al vapor). Comida china: kubak con pollo 150g+2 rollitos légumes pequeños+pollo al limón 100g+fideos udon 150g+sopa agripicante 250g+salsa soja 30g+salsa agridulce 30g+leche condensada 30g+batido (leche desnatada 250g+whey 32g). Cena: 2 dumplings sobrantes nenas (masa 40g+cerdo 40g)+batido (leche desnatada 255g+whey 34g). Surplus ~170 kcal — día de comida china estimada. Proteína excelente (166g)."
   },
   {
@@ -67,6 +85,8 @@
     "kcal": 2215,
     "proteina": 163,
     "entreno": "Workout parque: australianas pronas 12-10-7-6-5 + dominadas 10-6-5-6-5 + australianas supinas 7-5-5-5-5 + knee raises 10-10 + dead hang 32s. ~150 kcal.",
+    "ejercicio_kcal": 150,
+    "tdee_base": 2150,
     "notas": "Desayuno bowl: harina avena 30g+whey 26g+frambuesas 50g+leche desnatada 80g. Comida casa yaya: pan 50g+4 calamares rebozados air fryer ~100g+ensalada+sopa+garbanzos 200g cocidos+patata cocida 200g+pollo 30g+chorizo 20g+hojaldre miel 60g (409kcal/100g). Cena: ensalada (lechuga 175g+atún 75g+huevo duro+cottage 53g+pavo 38g+yogur griego 120g+aceite 2g)+batido (leche desnatada 253g+whey 32g). Déficit ~85 kcal vs TDEE con workout. 3 de 7 días con comidas fuera — mantenidos todos sin surplus relevante."
   },
   {
@@ -74,6 +94,8 @@
     "kcal": 2935,
     "proteina": 193,
     "entreno": "Sin entreno (circuito manguito rotador — quemazón confirmada en hombros).",
+    "ejercicio_kcal": 0,
+    "tdee_base": 2150,
     "notas": "IF hasta mediodía. Desayuno bowl: harina avena 30g+whey 26g+frambuesas 50g+leche desnatada 150g. Comida arroz meloso: arroz 73g seco+caldo pescado 600g (7kcal/100g)+berenjena 300g+calabacín 225g+pimiento+cebolla+apio 200g+tomate triturado 50g+aceite 5g+gambas 95g+sepia 95g+boquerones vinagre 70g+batido (leche desnatada 260g+whey 30g). Tarde-noche visita amigos: takis 90g (~480kcal/100g)+escalofríos efervescente+2 caramelos. Cena BK: 2 Crispy Burger+5 nuggets pollo+ketchup 20g+agua. Surplus ~785 kcal. Mejor día de proteína del mes: 193g."
   },
   {
@@ -81,6 +103,8 @@
     "kcal": 2163,
     "proteina": 152,
     "entreno": "Sin entreno (ejercicios manguito rotador).",
+    "ejercicio_kcal": 0,
+    "tdee_base": 2150,
     "notas": "Desayuno bar con Manza: leche entera 180ml+pincho tortilla 125g+pan 50g+jamón serrano 10g. Batido en casa: leche desnatada 230g+whey 28g. Comida cocido Manza: sopa+fideos 1 plato+garbanzos 150g cocidos+patata cocida 120g+pollo trasero 60g+zanahoria 60g+chorizo 10g+pan 35g+4 guindillas. Merienda: turrón Suchard chocolate 13g. Cena (mucho hambre): 3 platos sopa+fideos+entraña 110g cruda plancha+ensalada (lechuga 135g+atún 70g+yogur griego 120g+huevo duro+aceite 3g+ranchera 10g+pan 46g). Día de mantenimiento (~0 déficit) — desayuno bar consumió el margen habitual del IF. Normal tras semana de déficit sostenido."
   },
   {
@@ -88,6 +112,8 @@
     "kcal": 1696,
     "proteina": 184,
     "entreno": "Bici nocturna 36:40min 6,05km 145kcal.",
+    "ejercicio_kcal": 145,
+    "tdee_base": 2150,
     "notas": "IF hasta comida. Comida: entraña 180g cruda plancha+ensalada (canónigos 57g+cottage 80g+atún 80g+aceitunas verdes 44g+aceite 3g+tomate 150g+cherry 73g)+batido (leche desnatada 250g+whey 30g). Merienda-puente: sopuré 1/3 olla (fideos ~53g secos+caldo verduras trituradas+mozzarella 30g). Cena: boquerones en vinagre ~100g+pseudo-pizza (tortilla integral 36g+mozzarella 40g+tomate albahaca 60g 35kcal/100g+muslito pollo lonchas 40g+tomate cherry 50g)+batido (leche desnatada 250g+whey 30g). Bici post-cena. Déficit ~599 kcal vs TDEE con bici. Mejor día de proteína del mes: 184g."
   },
   {
@@ -95,6 +121,8 @@
     "kcal": 1788,
     "proteina": 166,
     "entreno": "Karate ~75 kcal (katas Suparimpei, sesión personal — más técnica y charla que intensidad).",
+    "ejercicio_kcal": 75,
+    "tdee_base": 2150,
     "notas": "IF hasta comida. Picoteo: queso griego 60g (247kcal/100g)+bizcocho nenas 60g (293kcal/100g)+choco blanco 5g (liquidar antes de que se estropeen). Comida: salmón cocinado 153g+patata 339g crudo (70kcal/100g)+aceite 2g+batido (leche desnatada 260g+whey 30g). Cena: ensalada (canónigos 87g+queso griego 60g+mozzarella 20g+atún 100g+cebolla morada 75g+tomate 195g+aceite 2g+vinagre+sal)+batido (leche desnatada 297g+whey 40g). Sin sopuré (queda para mañana). Déficit ~437 kcal vs TDEE con karate. Proteína excelente pese al doble ración de queso griego."
   },
   {
@@ -102,6 +130,8 @@
     "kcal": 1623,
     "proteina": 164,
     "entreno": "Bici 25min 4,45km 107kcal + Karate ~75 kcal (baja intensidad). Total ejercicio: 182 kcal.",
+    "ejercicio_kcal": 182,
+    "tdee_base": 2150,
     "notas": "IF hasta las 13:00. Picoteo: jamón serrano 48g (235kcal/100g)+pan blanco 30g. Comida: perolo muslos pollo (pollo desmenuzado 122g+caldo verduras trituradas+fideos 1/3 olla ~53g secos)+pollo al curry 50g (salsa mantequilla cacahuete+leche evaporada+soja)+batido (leche desnatada 260g+whey 30g). Cena: sandwich (pan 48g+pollo braseado 25g+muslito pollo lonchas 25g+mozzarella 40g+salsa yogur 56g)+batido (leche desnatada 250g+whey 30g). Déficit ~709 kcal vs TDEE (2150+182 ejercicio). Hambre al cenar pero buena adherencia al plan."
   },
   {
@@ -109,6 +139,8 @@
     "kcal": 1927,
     "proteina": 177,
     "entreno": "Karate ~100 kcal (intensidad media).",
+    "ejercicio_kcal": 100,
+    "tdee_base": 2150,
     "notas": "Desayuno (rompe ayuno ~20h): tortilla bar 184g (~185kcal/100g)+batido (leche desnatada 250g+whey 31g). Comida: lentejas 220g+caldo 200g (~18kcal/100g)+chorizo asturiano 17g (474kcal/100g)+pan 25g+lomo cerdo 150g crudo+verduras asadas 300g sin patata+batido (leche desnatada 250g+whey 31g)+bizcocho nenas 33g. Cena: mandarinas 200g+merluza 167g cruda plancha+verduras 215g sin patata+tomate triturado 80g. Sin bici. Déficit ~323 kcal vs TDEE con karate."
   },
   {
@@ -116,6 +148,8 @@
     "kcal": 2076,
     "proteina": 97,
     "entreno": "Sin entreno.",
+    "ejercicio_kcal": 0,
+    "tdee_base": 2150,
     "notas": "Cumpleaños familiar. Sin cena por falta de hambre. Desayuno: tortilla patatas Manza 125g (~150kcal/100g más aceite). Comida: patata alioli 30g+mejillones escabeche casero ~80g+boquerones con aceitunas ~70g+pizza casera (~200g masa+tomate+mozzarella)+fabada casera (alubias ~250g+morcilla 20g+lacón 20g+chorizo 40g)+bizcocho nenas 70g+choco blanco 20g. Todo estimado. Mantenimiento (~74 kcal déficit). IF casi 24h hasta comida del lunes."
   },
   {
@@ -123,6 +157,8 @@
     "kcal": 1512,
     "proteina": 106,
     "entreno": "Paseo Faunia ~300 kcal (3-4h andando).",
+    "ejercicio_kcal": 300,
+    "tdee_base": 2150,
     "notas": "Día Faunia con familia. Comida: ñoquis 280g (~135kcal/100g)+lomo cerdo 75g crudo plancha+verduras asadas 300g sin aceite. Sin BK por la noche. Cena: 2 sandwiches (pan molde 113g+pechuga pavo 50g+muslito pollo 50g 122kcal/100g+mozzarella 60g+salsa mexicana 100g)+batido (leche entera 240g+whey 34g). Déficit ~938 kcal vs TDEE con paseo. Proteína baja (106g) por ñoquis sin proteína y cena sin batido limpio. Gran autocontrol: sin BK pese a estar fuera todo el día."
   },
   {
@@ -130,6 +166,8 @@
     "kcal": 2008,
     "proteina": 201,
     "entreno": "Sin entreno.",
+    "ejercicio_kcal": 0,
+    "tdee_base": 2150,
     "notas": "Desayuno IF roto: guisantes 110g salteados 1g aceite+jamón serrano 47g (235kcal/100g). Comida: pechuga pollo 214g (125kcal/100g)+verduras 300g+sriracha 20g+naranja 130g+batido (leche desnatada 266g+whey 37g). Cena partida: pan 140g (92g pesado+~48g mitad panini amigo)+mozzarella 55g+tomate 55g+cebolla 30g+pollo kebab 100g+salsa amigo 60g (yogur griego+mayo gordacos, ~184kcal/100g)+batido (leche desnatada 290g+whey 30g). Déficit ~142 kcal — mantenimiento. 201g prot segundo mejor día del mes."
   },
   {
@@ -137,6 +175,8 @@
     "kcal": 1999,
     "proteina": 190,
     "entreno": "Karate ~100 kcal (baja intensidad).",
+    "ejercicio_kcal": 100,
+    "tdee_base": 2150,
     "notas": "Mini almuerzo: pan 15g+atún 50g. Media mañana: 8 makis mixtos (pepino/atún/aguacate/salmón) bandeja super ~230kcal. Comida: mozzarella 40g+burger Angus carnicería 150g (~200kcal/100g)+verduras asadas+patata 380g+sriracha 10g+naranja 150g+batido (leche desnatada 270g+whey 38g). Cena: lomo cerdo 40g plancha+sandwich (pan molde 46g+pechuguita pollo horno 66g 125kcal/100g+havarti light 47g)+mandarinas 220g+batido (leche desnatada 253g+whey 39g). Déficit ~251 kcal vs TDEE 2250 (2150+karate). Mejor día de proteína del mes: 190g. Días con más hambre de lo habitual — posible efecto del karate intenso previo."
   },
   {
@@ -144,6 +184,8 @@
     "kcal": 1850,
     "proteina": 153,
     "entreno": "Karate ~125 kcal (intensidad media-alta, combate).",
+    "ejercicio_kcal": 125,
+    "tdee_base": 2150,
     "notas": "IF hasta comida. Pre-comida: mandarina 110g. Comida: arroz meloso (caldo paella 650g 19kcal/100g+arroz seco 80g+cebolla 100g+pimiento rojo 75g+tomate 120g+gamba 120g+calamar 200g 44kcal/100g)+mandarinas 220g+batido (leche desnatada 255g+whey 30g). Cena: arroz cocido 80g+salmón cocinado 100g+batido (leche desnatada 284g+whey 33g+manzana 164g)+caldo paella 400g+mozzarella 30g. Déficit ~425 kcal vs TDEE (2150 ajustado) con karate. Insight: arroz meloso necesita más volumen de calabacín/calabaza — el marisco da proteína pero el arroz consume el presupuesto calórico."
   },
   {
@@ -151,6 +193,8 @@
     "kcal": 1725,
     "proteina": 172,
     "entreno": "Karate ~75 kcal (baja intensidad).",
+    "ejercicio_kcal": 75,
+    "tdee_base": 2250,
     "notas": "IF hasta comida. Comida: frutos secos mix 20g (467kcal/100g)+patata cocida 300g+verduras asadas 300g (calabaza, calabacín, pimiento rojo/verde, cebolla)+alitas pollo 70g con piel+pollo cocinado 100g+batido (leche desnatada 260g+whey 33g). Cena: ensalada (lechuga iceberg 122g+atún 80g+huevo duro 50g+queso griego 30g 247kcal/100g+skyr 110g+salsa ranchera 25g 400kcal/100g)+pan molde blanco 50g+batido (leche desnatada 260g+whey 30g). Déficit ~600 kcal vs TDEE con karate."
   },
   {
@@ -158,6 +202,8 @@
     "kcal": 1789,
     "proteina": 174,
     "entreno": "Bici 62min 300kcal 12.5km (en reunión).",
+    "ejercicio_kcal": 300,
+    "tdee_base": 2250,
     "notas": "Lunes restos cumple. Comida: ensaladilla rusa 120g+puré copos 200g+verduras sábado 125g+feta 40g+carrillera 20g+batido (leche desnatada 250g+whey 30g). Cena: queso cabra 20g (385kcal/100g)+merluza 200g cruda plancha+patata cocida 100g+ensalada (garbanzos 100g+tomate 130g+cottage 60g+atún 54g+espinacas 70g+yogur griego 115g+mostaza 20g+mayo 15g 600kcal/100g)+batido (leche desnatada 260g+whey 30g). Déficit ~761 kcal vs TDEE con bici. Netas: 1489 kcal."
   },
   {
@@ -165,6 +211,8 @@
     "kcal": 1842,
     "proteina": 74,
     "entreno": "Bici nocturna 40min 220kcal 9.11km (viendo el Madrid).",
+    "ejercicio_kcal": 220,
+    "tdee_base": 2250,
     "notas": "Cumpleaños hija en casa (23 personas). IF hasta aperitivos. Aperitivos: patatas ali-oli 30g+tortilla patatas 30g+pizza 30g. Plato: 2 carrilleras al PX (~180g cocinadas+salsa PX ~40g)+puré de copos 100g (sin rebañar salsa con pan). Postre: bizcocho nenas 60g+chocolate blanco 20g+2.5 donuts chocolate+mix cacahuetes+quicos+pasas 50g. Todo estimado. Déficit ~628 kcal vs TDEE con bici — día de déficit pese al postre, gracias a plato principal moderado y aperitivos mínimos. Semana completa: −3867 kcal."
   },
   {
@@ -172,6 +220,8 @@
     "kcal": 1869,
     "proteina": 166,
     "entreno": "Calistenia parque ~210 kcal (australianas pronas: 12-9-8-6-5 + 6-5-5-5-5, dominadas: 11-6-5-6-5, knee raises: 10-8, caminata 40min).",
+    "ejercicio_kcal": 210,
+    "tdee_base": 2250,
     "notas": "IF hasta comida. Comida: vacuno 280g (200kcal/100g)+½ batch verduras asadas (patata 600g+calabaza 300g+cebolla 280g+pimiento rojo 130g+sriracha 10g total)+batido (leche desnatada 270g+whey 30g). Merienda: skyr 117g+leche 20g+whey 30g+harina avena 25g+tortitas arroz 56kcal+nocilla 10g. Cena: pan blanco 80g+tomate 30g+cherry 60g+mozzarella 50g+pavo 22g. Déficit ~591 kcal vs TDEE con entreno. 2 semanas sin parque — máximos mantenidos, sistema nervioso nota la pausa."
   },
   {
@@ -179,6 +229,8 @@
     "kcal": 1686,
     "proteina": 166,
     "entreno": "Sin entreno.",
+    "ejercicio_kcal": 0,
+    "tdee_base": 2250,
     "notas": "Viernes cumple hija. IF hasta comida. Comida: garbanzos 208g+espinacas 85g+pollo cocinado 108g+pimiento piquillo 45g+huevo duro 52g+queso fresco batido 0% 125g+aceite 5g+batido (leche desnatada 260g+whey 31g). Merienda: 10 gominolas coca-cola ~35g+tortilla patatas 50g. Cena: sandwich (pan molde blanco 70g+pavo 60g+havarti light 30g)+batido (leche desnatada 270g+soy 25g). Déficit ~564 kcal vs TDEE."
   },
   {
@@ -186,6 +238,8 @@
     "kcal": 1462,
     "proteina": 173,
     "entreno": "Karate ~100 kcal (core y golpeo de pierna contra planchas).",
+    "ejercicio_kcal": 100,
+    "tdee_base": 2250,
     "notas": "IF hasta comida. Comida: pollo cocinado 208g+verduras asadas ¼ batch ayer (~295g)+brócoli cocido 100g+salsa casera 100g (queso fresco 0% 117g+ketchup 34g+mostaza 22g+mayo ligera 10g, ~94kcal/100g)+postre (skyr 100g+whey 30g+harina avena 20g+arándanos 50g). Cena: sandwich (pan espelta 60g+muslo pollo 70g 122kcal/100g+havarti light 25g)+bowl (skyr 117g+soy 19g+leche desnatada 45g+frambuesas 50g+harina avena 16g). Déficit ~888 kcal vs TDEE con karate."
   },
   {
@@ -193,6 +247,8 @@
     "kcal": 1674,
     "proteina": 164,
     "entreno": "Bici 15min 71kcal 2.95km + Karate 150kcal (core, patadas, técnica kumite, combate 2min).",
+    "ejercicio_kcal": 221,
+    "tdee_base": 2250,
     "notas": "IF hasta comida. Comida: salmón cocinado 125g+pollo cocinado 100g+verduras+patata al horno (~550g del batch: berenjena 370g+calabacín 300g+cebolla 130g+pimiento 172g+patata 650g total, ~58kcal/100g). Cena: arroz cocido 95g+judías 135g+sardinas tomate 80g+atún 70g+feta 20g+mozzarella 20g+tomate albahaca 50g+huevo duro+bowl (skyr 100g+leche desnatada 150g+whey 30g+arándanos 66g). Déficit ~797 kcal vs TDEE con bici+karate."
   },
   {
@@ -200,6 +256,8 @@
     "kcal": 1394,
     "proteina": 138,
     "entreno": "Karate ~80 kcal (sesión light: core y piernas).",
+    "ejercicio_kcal": 80,
+    "tdee_base": 2250,
     "notas": "IF hasta comida. Comida: pollo cocinado 208g+verduras asadas (calabacín 300g+cebolla morada 120g+pimiento 120g)+patatas horno 50g+sriracha 15g+bizcocho nenas 60g+pistachos 15g. Cena: pizza (tortilla integral 36g+tomate 60g+mozzarella 40g+pechuga 45g)+batido (leche desnatada 262g+soy 28g)+queso cabra 45g. Déficit ~936 kcal vs TDEE con karate. Verduras asadas clave para volumen sin coste calórico — sin arroz ni pasta."
   },
   {
@@ -207,6 +265,8 @@
     "kcal": 2787,
     "proteina": 158,
     "entreno": "Sin entreno.",
+    "ejercicio_kcal": 0,
+    "tdee_base": 2250,
     "notas": "Snack mañana (cocinando): bizcocho 40g+cottage 40g+pistachos 5g. Comida casa yaya (estimaciones pesimistas): patatas ali-oli 300g+tomate bonito aceitunas 100g+pan candeal 40g+pasta carbonara 80g seco con nata bacon aceite+2 cintas lomo fritas empanadas+palmera mini 11g+piña 2 rodajas. Cena compensatoria: judías 115g+atún 90g+cottage 60g+zanahoria 40g+brotes 65g+aceitunas 29g+huevo duro+batido (leche desnatada 250g+whey 30g). Exceso estimado ~537 kcal vs TDEE — comida yaya sin control total, cena cargada de proteína para compensar. Cifras a ojo, impacto real visible fin de semana."
   },
   {
@@ -355,7 +415,9 @@
     "proteina": 153,
     "entreno": "Bici 7.8km 33min −187 kcal. Rehabilitación manguito rotador. Descanso total de fuerza.",
     "notas": "IF hasta comida. Pre-comida: lomo embuchado 40g. Comida: ensalada judías blancas 200g+atún 100g+cottage 80g+maíz 40g+brotes verdes 66g+aceitunas 32g+queso fresco 0% 80g+mostaza 25g. Postre: chorizo asturiano 11g+jamón hueso 14g+lentejas 30g+caldo 270g+sobao 43g. Cena: wrap tortilla 39g+atún 66g+huevo 46g+salsa tomate 80g+pepinillos+queso crema light 30g+caldo verduras 250g. Bowl cierre: yogur 110g+avena 29g+whey 29g+leche desnatada 75g+arándanos 35g. Pesaje: 84.9 kg (−0.8 kg vs sem. ant.). Déficit ~920 kcal vs TDEE.",
-    "medicion": { "peso": 84.9 }
+    "medicion": {
+      "peso": 84.9
+    }
   },
   {
     "fecha": "2026-09-20",

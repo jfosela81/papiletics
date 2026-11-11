@@ -3,7 +3,21 @@ export interface TrackingEntry {
   kcal: number;
   proteina: number;
   entreno?: string;
+  /** kcal gastadas en ejercicio ese día. Si existe, el día usa tdee_base + ejercicio. */
+  ejercicio_kcal?: number;
+  /** TDEE base del día (por defecto 2150). */
+  tdee_base?: number;
   notas?: string;
+}
+
+export const DEFAULT_TDEE_BASE = 2150;
+
+/** Gasto total del día: TDEE base + ejercicio si está registrado; si no, el TDEE heredado. */
+export function dayExpenditure(entry: TrackingEntry, legacyTdee: number): number {
+  if (typeof entry.ejercicio_kcal === 'number') {
+    return (entry.tdee_base ?? DEFAULT_TDEE_BASE) + entry.ejercicio_kcal;
+  }
+  return legacyTdee;
 }
 
 export interface WeeklyBalance {
@@ -62,7 +76,8 @@ export function aggregateWeeklyBalance(
     .map(([weekStart, days]) => {
       const totalKcal = days.reduce((sum, d) => sum + d.kcal, 0);
       const daysLogged = days.length;
-      const balance = tdee * daysLogged - totalKcal;
+      const totalExpenditure = days.reduce((sum, d) => sum + dayExpenditure(d, tdee), 0);
+      const balance = totalExpenditure - totalKcal;
       const incomplete =
         daysLogged < 7 || weekStart === currentWeekStart;
 
