@@ -4,6 +4,7 @@ import {
   getChartMode,
   type TrackingEntry,
 } from '../utils/weeklyBalance';
+import WeeklyBars from './WeeklyBars.astro';
 
 interface Props {
   entries: TrackingEntry[];
@@ -11,6 +12,7 @@ interface Props {
   accent?: string;
   deficitColor?: string;
   surplusColor?: string;
+  recentWeeks?: number;
 }
 
 const {
@@ -19,38 +21,22 @@ const {
   accent = 'var(--accent)',
   deficitColor = 'var(--green)',
   surplusColor = 'var(--yellow)',
+  recentWeeks = 4,
 } = Astro.props;
 
 const totalDays = entries.length;
 const mode = getChartMode(totalDays);
 const weeks = aggregateWeeklyBalance(entries, tdee);
 
-const maxAbs = weeks.length
-  ? Math.max(...weeks.map((w) => Math.abs(w.balance)), 500)
-  : 500;
-
-const chartH = 140;
-const labelPad = 16;
-const barW = 36;
-const gap = 16;
-const padX = 12;
-const zeroY = chartH / 2;
-const svgW = Math.max(weeks.length * (barW + gap) + padX * 2, 280);
-const scale = (zeroY - labelPad) / maxAbs;
-
-function barHeight(balance: number): number {
-  return Math.max(Math.abs(balance) * scale, balance !== 0 ? 4 : 0);
-}
-
-function formatBalance(n: number): string {
-  if (n === 0) return '0';
-  if (n > 0) return `−${Math.abs(n).toLocaleString('es-ES')}`;
-  return `+${Math.abs(n).toLocaleString('es-ES')}`;
-}
+// Por defecto solo las últimas N semanas; el resto queda en "Ver histórico"
+const recent = weeks.slice(-recentWeeks);
+const hasHistory = weeks.length > recent.length;
 ---
 
 <div class="weekly-chart">
-  <p class="weekly-chart-title">Balance semanal</p>
+  <p class="weekly-chart-title">
+    Balance semanal · {hasHistory ? `últimas ${recent.length} semanas` : 'todas las semanas'}
+  </p>
   <p class="weekly-chart-sub">
     TDEE estimado: {tdee.toLocaleString('es-ES')} kcal/día · verde = déficit · ámbar = superávit
   </p>
@@ -72,83 +58,12 @@ function formatBalance(n: number): string {
         </div>
       )}
 
-      <div class="weekly-chart-scroll">
-        <svg
-          viewBox={`0 0 ${svgW} ${chartH + 48}`}
-          width="100%"
-          height={chartH + 48}
-          role="img"
-          aria-label="Gráfica de balance calórico semanal"
-        >
-          <line
-            x1={padX}
-            y1={zeroY}
-            x2={svgW - padX}
-            y2={zeroY}
-            stroke="var(--border)"
-            stroke-width="1"
-          />
-
-          {weeks.map((week, i) => {
-            const x = padX + i * (barW + gap);
-            const h = barHeight(week.balance);
-            const isDeficit = week.balance >= 0;
-            const y = isDeficit ? zeroY - h : zeroY;
-            const color = isDeficit ? deficitColor : surplusColor;
-            const labelY = chartH + 18;
-            // Si la barra es muy alta, poner el número dentro; si no, fuera
-            const insideBar = h > 24;
-            const valueY = isDeficit
-              ? (insideBar ? y + 14 : y - 4)
-              : (insideBar ? y + h - 5 : y + h + 12);
-            const valueFill = insideBar ? 'var(--bg)' : color;
-
-            return (
-              <g key={week.weekStart}>
-                <rect
-                  x={x}
-                  y={y}
-                  width={barW}
-                  height={h}
-                  rx="4"
-                  fill={color}
-                  opacity={week.incomplete ? 0.45 : 1}
-                />
-                <text
-                  x={x + barW / 2}
-                  y={valueY}
-                  text-anchor="middle"
-                  fill={valueFill}
-                  font-size="10"
-                  font-weight="600"
-                >
-                  {formatBalance(week.balance)}
-                </text>
-                <text
-                  x={x + barW / 2}
-                  y={labelY}
-                  text-anchor="middle"
-                  fill="var(--muted)"
-                  font-size="9"
-                >
-                  {week.weekLabel}
-                </text>
-                {week.incomplete && (
-                  <text
-                    x={x + barW / 2}
-                    y={labelY + 11}
-                    text-anchor="middle"
-                    fill="var(--muted)"
-                    font-size="8"
-                  >
-                    {week.daysLogged}d{week.daysLogged < 7 ? '*' : ''}
-                  </text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-      </div>
+      <WeeklyBars
+        weeks={recent}
+        deficitColor={deficitColor}
+        surplusColor={surplusColor}
+        label={`Gráfica de balance calórico de las últimas ${recent.length} semanas`}
+      />
 
       {weeks.length > 0 && (
         <div class="weekly-chart-summary">
@@ -160,6 +75,18 @@ function formatBalance(n: number): string {
             {' '}({weeks[weeks.length - 1].daysLogged} días · media {weeks[weeks.length - 1].avgKcal} kcal/d)
           </span>
         </div>
+      )}
+
+      {hasHistory && (
+        <details class="weekly-history">
+          <summary>Ver histórico ({weeks.length} semanas)</summary>
+          <WeeklyBars
+            weeks={weeks}
+            deficitColor={deficitColor}
+            surplusColor={surplusColor}
+            label="Gráfica de balance calórico del histórico completo"
+          />
+        </details>
       )}
 
       <p class="weekly-chart-foot">* Semana incompleta o en curso</p>
@@ -211,17 +138,23 @@ function formatBalance(n: number): string {
     padding: 8px 10px;
     margin-bottom: 10px;
   }
-  .weekly-chart-scroll {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin: 0 -4px;
-    padding: 0 4px;
-  }
   .weekly-chart-summary {
     font-size: 12px;
     color: var(--muted);
     margin-top: 10px;
     line-height: 1.45;
+  }
+  .weekly-history {
+    margin-top: 12px;
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+  }
+  .weekly-history summary {
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 8px;
   }
   .weekly-chart-foot {
     font-size: 10px;
