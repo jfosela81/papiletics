@@ -1,5 +1,14 @@
 [
   {
+    "fecha": "2026-11-18",
+    "kcal": 1715,
+    "proteina": 178,
+    "entreno": "Bici 39 min 7,7 km ~185 kcal (estimación de máquina, posible sobrestimación). Karate moderado ~110 kcal. GtG 3 series. Manguito ✓ (circuito completo).",
+    "ejercicio_kcal": 295,
+    "tdee_base": 2150,
+    "notas": "IF toda la mañana. Comida: jamón serrano 50g+salmón plancha 75g+merluza plancha 60g+arroz cocido 150g+brócoli 125g+mandarinas 170g+batido (leche desnatada 266g+whey 34g). Cena: bizcocho nenas (versión ligera) 63g+merluza cruda a la plancha 223g+verduras asadas 250g+tomate triturado 200g+falsonesa (queso fresco batido 0% 100g+huevo duro+mayonesa 10g)+batido (~260g leche+30g whey, estimado). Déficit ~730 kcal (~700 si se cuenta la bici a ~150). Día de déficit alto por ejercicio extra, no por comer menos; proteína muy alta."
+  },
+  {
     "fecha": "2026-11-17",
     "kcal": 1670,
     "proteina": 133,
