@@ -1,5 +1,14 @@
 [
   {
+    "fecha": "2026-11-22",
+    "kcal": 2860,
+    "proteina": 112,
+    "entreno": "Sin entreno registrado. Sin bici.",
+    "ejercicio_kcal": 0,
+    "tdee_base": 2150,
+    "notas": "Escenario pesimista. Desayuno: bowl (harina avena 30g+whey 30g+leche 60g+manzana 93g). Comida: pizza casera (masa 750g harina+525g agua, 24 trozos, ~10 comidos; mozzarella ~300g en total; toppings pepperoni, pavo, mortadela; ~172 kcal/trozo; rango optimista 8 trozos ~1375 kcal). Postre: bizcocho casero 70g (yogur limón x2, aceite 125ml, azúcar 125g, harina de arroz 250g, harina de almendras 125g, 2-3 huevos; ~380 kcal/100g)+2 mielitos de hojaldre con miel ~90g (409 kcal/100g)+patata alioli Mercadona 50g+ensaladilla con surimi y salsa rosa 50g+encurtidos. Sin cena (solo agua). Balance ~+710 kcal (pesimista; optimista ~+365). Peso informal domingo (tras sodio del BK): 82,2 kg. Semana 16-22: déficit lunes-sábado ~2790 kcal."
+  },
+  {
     "fecha": "2026-11-21",
     "kcal": 1905,
     "proteina": 162,
